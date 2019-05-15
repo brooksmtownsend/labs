@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Installation on Critical Stack Labs</title>
-    <link>https://github.com/pages/criticalstack/labs/install/</link>
+    <link>https://criticalstack.github.io/labs/install/</link>
     <description>Recent content in Installation on Critical Stack Labs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 23 Apr 2019 09:43:37 -0400</lastBuildDate>
     
-	<atom:link href="https://github.com/pages/criticalstack/labs/install/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://criticalstack.github.io/labs/install/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

@@ -11,28 +11,28 @@ pre = "<i class='fas fa-user-circle'></i> "
 
 1.  Go to [AWS](aws.amazon.com) and register for a new free account.
 
-	![freeaccount](../../../images/install/awsaccount/free_account.png)
+	![freeaccount](../../images/install/awsaccount/free_account.png)
 	
 1.  Sign up for a new account:
 
-	![awsaccountcreation](../../../images/install/awsaccount/aws_creation.png)
+	![awsaccountcreation](../../images/install/awsaccount/aws_creation.png)
 
 1.  Fill our your information including **Payment Information** so that Amazon can verify your identity.
 
 1.  Verify your account:
 
-	![verifyaccount](../../../images/install/awsaccount/verify_account.png)
+	![verifyaccount](../../images/install/awsaccount/verify_account.png)
 	
 1.  Sign in to your account:
 
-	![awssignin](../../../images/install/awsaccount/aws_signin.png)
+	![awssignin](../../images/install/awsaccount/aws_signin.png)
 	
 
 ## Manage User Access 
 
 1.  From the **AWS Management Console** -> **Find Services** search for `IAM` (Manage User Access and Encryption Key).
 
-	![iam](../../../images/install/awsaccount/iam.png)
+	![iam](../../images/install/awsaccount/iam.png)
 
 
 
@@ -40,15 +40,15 @@ pre = "<i class='fas fa-user-circle'></i> "
 
 1.  It is recommended that you create a new limited access policy rather than giving a user `admin` access.  For the purpose of the Critical Stack install we will create a new **policy** with only the permissions needed to build the cluster.  Click **Create policy** .
 
-	![policies](../../../images/install/awsaccount/policies.png)
+	![policies](../../images/install/awsaccount/policies.png)
 	
 
 1.  In the new **Create policy** window you can create a new policy with the Visual editor or with JSON (JavaScript Object Notation).  Select **JSON**
 
-	![json](../../../images/install/awsaccount/json.png)
+	![json](../../images/install/awsaccount/json.png)
 	
 
-1.  You can use use this [sample json policy definition](../../../res/cs_minimum_policy_install.json) or copy the text below within the JSON editor window.
+1.  You can use use this [sample json policy definition](../../res/cs_minimum_policy_install.json) or copy the text below within the JSON editor window.
 
     ```json
     {
@@ -229,36 +229,36 @@ pre = "<i class='fas fa-user-circle'></i> "
 
 1.  Your policy should look something like this:
 
-	![jsonpolicy](../../../images/install/awsaccount/json_policy.png)
+	![jsonpolicy](../../images/install/awsaccount/json_policy.png)
 
 1.  Select **Review Policy**.
 2.  Give your policy a name and description and select **Create policy**.
 
-	![policyreview](../../../images/install/awsaccount//policy_review.png)
+	![policyreview](../../images/install/awsaccount//policy_review.png)
 
 	
 1. Click **Users** from the Navigation and **Add user**.
 
-	![newuser](../../../images/install/awsaccount/newuser.png)
+	![newuser](../../images/install/awsaccount/newuser.png)
 
 1.  Select `Programmatic access` for the **Access Type** and Click on **Next: Permission** at the bottom of the page.
 
-	![adduser](../../../images/install/awsaccount/add_user.png)
+	![adduser](../../images/install/awsaccount/add_user.png)
 
 1.  Create a new group for permissions by selecting **Create group**.
 
-	![newgroup](../../../images/install/awsaccount/new_group.png)
+	![newgroup](../../images/install/awsaccount/new_group.png)
 
 
  
 
 1. Click **Refresh** and search for the policy you just created `CS_Install_Policy`. Click the checkbox by the policy name and give your group a name.  Select **Create Group**.
 
-	![cs_install_group](../../../images/install/awsaccount/cs_install_group.png)
+	![cs_install_group](../../images/install/awsaccount/cs_install_group.png)
 	
 1. With group selected click **Next: Tags** from the Add user screen.
 
-	![usernext](../../../images/install/awsaccount/user_next.png)
+	![usernext](../../images/install/awsaccount/user_next.png)
 
 1. Add any optional tags and select **Next: Review**.
 
@@ -266,7 +266,7 @@ pre = "<i class='fas fa-user-circle'></i> "
 
 1. The `Access key ID` and `Secret access key` will be used for the CS Installer.  
 
-	![keyinfo](../../../images/install/awsaccount/keyinfo.png)
+	![keyinfo](../../images/install/awsaccount/keyinfo.png)
 
 
 		
