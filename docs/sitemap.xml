@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://github.com/pages/criticalstack/labs/install/awsaccount/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/pages/criticalstack/labs/featurelabs/node/deploystateless/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/pages/criticalstack/labs/faqs/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/pages/criticalstack/labs/featurelabs/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/pages/criticalstack/labs/install/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/pages/criticalstack/labs/featurelabs/node/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/pages/criticalstack/labs/install/aws_basic_cluster/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/pages/criticalstack/labs/featurelabs/node/updating/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/pages/criticalstack/labs/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://github.com/pages/criticalstack/labs/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://github.com/pages/criticalstack/labs/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

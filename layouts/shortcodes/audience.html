@@ -1,0 +1,3 @@
+{{ if eq (index .Params 0) $.Site.Params.audience }}
+{{ .Inner }}
+{{ end }}
