@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>NodeJS Labs on Critical Stack Labs</title>
-    <link>https://github.com/pages/criticalstack/labs/featurelabs/node/</link>
+    <link>https://criticalstack.github.io/labs/featurelabs/node/</link>
     <description>Recent content in NodeJS Labs on Critical Stack Labs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 23 Apr 2019 09:43:37 -0400</lastBuildDate>
     
-	<atom:link href="https://github.com/pages/criticalstack/labs/featurelabs/node/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://criticalstack.github.io/labs/featurelabs/node/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Deploying a Stateless App</title>
-      <link>https://github.com/pages/criticalstack/labs/featurelabs/node/deploystateless/</link>
+      <link>https://criticalstack.github.io/labs/featurelabs/node/deploystateless/</link>
       <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
       
-      <guid>https://github.com/pages/criticalstack/labs/featurelabs/node/deploystateless/</guid>
+      <guid>https://criticalstack.github.io/labs/featurelabs/node/deploystateless/</guid>
       <description>Using Critical Stack to deploy a stateless application Getting Started Pre-requisites: 1. Node JS (and npm) : Node.JS 1. Docker : Docker 1. Public container registry (Docker Hub is easiest, Artifactory works too) : Docker Hub
 Overview In this lab we will create a simple NodeJS application, deploy it via Critical Stack. and access it via a public URL.
 Steps  Open a terminal window. In your current working directory (we use the Development directory under the user&amp;rsquo;s home directory in this example), create a lab directory called node-lab and a subdirectory of that called app:</description>
@@ -24,10 +24,10 @@ Steps  Open a terminal window. In your current working directory (we use the Dev
     
     <item>
       <title>Updating an App</title>
-      <link>https://github.com/pages/criticalstack/labs/featurelabs/node/updating/</link>
+      <link>https://criticalstack.github.io/labs/featurelabs/node/updating/</link>
       <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
       
-      <guid>https://github.com/pages/criticalstack/labs/featurelabs/node/updating/</guid>
+      <guid>https://criticalstack.github.io/labs/featurelabs/node/updating/</guid>
       <description>Using Critical Stack to easily update a scalable, stateless application Getting Started Pre-requisites: Previous Node lab
 Overview In the previous lab we created a simple NodeJS application, packaged the application in a Docker image, pushed the Docker image to a public Docker Hub repository, pulled that Docker image into a Critical Stack deployment as a container instance, and accessed the application via a public URL.
 Now we will create more instances of the container, update the application to show bread crumbs of those instances, push that update to Docker Hub, and use the Critical Stack UI to instruct K8s to roll out the update while we refresh on the public URL to see the change deploy seamlessly.</description>
