@@ -1,0 +1,13 @@
+baseURL = "https://github.com/pages/criticalstack/labs"
+publishDir = "docs"
+languageCode = "en-us"
+title = "Critical Stack Labs"
+enableInlineShortcodes = true
+
+theme = "hugo-theme-learn"
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+[params]
+canonifyURLs = "true"
