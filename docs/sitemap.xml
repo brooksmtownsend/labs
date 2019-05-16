@@ -8,12 +8,17 @@
   </url>
   
   <url>
-    <loc>https://criticalstack.github.io/labs/featurelabs/node/deploystateless/</loc>
+    <loc>https://criticalstack.github.io/labs/featurelabs/go/hello/</loc>
     <lastmod>2019-04-23T09:43:37-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://criticalstack.github.io/labs/featurelabs/go/hello/</loc>
+    <loc>https://criticalstack.github.io/labs/featurelabs/go/hello&#43;rest/readme/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/featurelabs/node/deploystateless/</loc>
     <lastmod>2019-04-23T09:43:37-04:00</lastmod>
   </url>
   

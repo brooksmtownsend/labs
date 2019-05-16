@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/labs/images/favicon.png" type="image/png">
 
-    <title>Installation :: Critical Stack Labs</title>
+    <title>Deploying a Stateless Golang App with REST API :: Critical Stack Labs</title>
 
     
     <link href="/labs/css/nucleus.css?1558040262" rel="stylesheet">
@@ -35,7 +35,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/labs/install/">
+  <body class="" data-url="/labs/featurelabs/go/hello&#43;rest/readme/">
     <nav id="sidebar" class="">
 
 
@@ -102,7 +102,7 @@
   
     
     <li data-nav-id="/labs/featurelabs/" title="Feature Labs" class="dd-item 
-        
+        parent
         
         
         ">
@@ -201,7 +201,7 @@
   
     
     <li data-nav-id="/labs/featurelabs/go/" title="Go Labs" class="dd-item 
-        
+        parent
         
         
         ">
@@ -244,7 +244,7 @@
  
   
     
-      <li data-nav-id="/labs/featurelabs/go/hello&#43;rest/readme/" title="Deploying a Stateless Golang App with REST API" class="dd-item ">
+      <li data-nav-id="/labs/featurelabs/go/hello&#43;rest/readme/" title="Deploying a Stateless Golang App with REST API" class="dd-item active">
         <a href="/labs/featurelabs/go/hello&#43;rest/readme/">
         <i class='fas fa-flask'></i> Deploying a Stateless Golang App with REST API
         
@@ -280,8 +280,8 @@
   
     
     <li data-nav-id="/labs/install/" title="Installation" class="dd-item 
-        parent
-        active
+        
+        
         
         ">
       <a href="/labs/install/">
@@ -388,6 +388,8 @@
                         </a>
                     </span>
                   
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
                   <span class="links">
                  
                  
@@ -398,7 +400,19 @@
             
           
           
-            <a href='/labs/'></a> > Installation
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/labs/'></a> > <a href='/labs/featurelabs/'>Feature Labs</a> > <a href='/labs/featurelabs/go/'>Go Labs</a> > Deploying a Stateless Golang App with REST API
+          
+         
+          
+         
           
          
           
@@ -407,6 +421,31 @@
                   </span>
                 </div>
                 
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#deploying-a-stateless-golang-app-with-rest-api-in-critical-stack">Deploying a Stateless Golang App with REST API in Critical Stack</a>
+<ul>
+<li><a href="#getting-started">Getting Started</a></li>
+</ul></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#building-your-restful-hello-world-app">Building Your RESTful Hello World App</a></li>
+<li><a href="#testing-your-restful-hello-world-app">Testing your RESTful Hello World App</a></li>
+<li><a href="#tagging-and-pushing-your-image-to-a-container-registry">Tagging and pushing your image to a container registry</a>
+<ul>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#todo">TODO</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
               </div>
             </div>
             
@@ -414,9 +453,12 @@
         
         </div>
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>
+              
+              Deploying a Stateless Golang App with REST API
+            </h1>
           
 
         
@@ -424,22 +466,205 @@
 
 
 
-	
 
-<h1 id="installation-labs">Installation Labs</h1>
+<h2 id="deploying-a-stateless-golang-app-with-rest-api-in-critical-stack">Deploying a Stateless Golang App with REST API in Critical Stack</h2>
 
-<p>Labs that get your foundation set up so that you can continue on to the feature labs and other advanced topics.</p>
+<h3 id="getting-started">Getting Started</h3>
 
+<p>Pre-requisites:</p>
 
+<ol>
+<li><a href="https://golang.org/dl/">Go</a></li>
+<li><a href="https://code.visualstudio.com/download">Visual Studio Code</a></li>
+<li><code>curl</code> or some equivalent way to do <em><strong>GET</strong></em> and <em><strong>POST</strong></em></li>
+<li>If using <code>curl</code>, <code>python</code> to make <em><strong>JSON</strong></em> prettier</li>
+<li>Docker : <a href="https://www.docker.com/get-started">Docker</a></li>
+<li>Public container registry <a href="https://hub.docker.com">Docker Hub</a></li>
+<li><a href="../hello.md">Previous Go lab</a> for <strong>Docker registry</strong> and <strong>Load Balancer</strong> setup - this demo will just update the previous Docker image with new functionality</li>
+</ol>
 
+<h2 id="overview">Overview</h2>
+
+<p>Update <a href="../hello.md">previous lab</a> to introduce a REST API.</p>
+
+<p>Lifted from <a href="https://thenewstack.io/make-a-restful-json-api-go/">Making a RESTful JSON API in Go</a> and adapted to Critical Stack.  This is just example code and not intended to teach proper Go coding in any form.</p>
+
+<h2 id="building-your-restful-hello-world-app">Building Your RESTful Hello World App</h2>
+
+<ol>
+<li><p>Clone this repo if you haven&rsquo;t already and change directory to this lab so you can access the source code</p></li>
+
+<li><p>As with previous lab, compile the REST API example code into <code>hello-go</code>.</p>
+
+<pre><code class="language-console">$ CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags=&quot;-s -w&quot; -a -o hello-go .
+</code></pre>
+
+<ol>
+<li>As with previous lab, build a Docker image using the <code>Dockerfile</code>.
+
+<br /></li>
+</ol>
+
+<p><code>docker build -t hello-go -f Dockerfile .</code></p>
+
+<h2 id="testing-your-restful-hello-world-app">Testing your RESTful Hello World App</h2>
+
+<ol>
+<li><strong>Optional Step</strong>. If you want to test your new docker container locally and see if it behaves as expected you can run the following command:
+
+<br /></li>
+</ol>
+
+<p><code>docker run -e PORT=8080 -p 8080:8080 --rm -ti hello-go</code></p>
+
+<ol>
+<li>Verify the app works by using the following command in a <strong>new terminal window</strong>.  Alternatively, you could open a browser to <code>http://localhost:8080</code></li>
+</ol>
+
+<p>Basic test:
+<code>curl -s http://localhost:8080</code></p>
+
+<pre><code class="language-console">$ curl -s http://localhost:8080
+Welcome!
+</code></pre></li>
+
+<li><p>Show entries pre-inserted:
+<code>curl -s http://localhost:8080/todos | python -m json.tool</code></p>
+
+<pre><code class="language-console">$ curl -s http://localhost:8080/todos | python -m json.tool
+[
+    {
+        &quot;completed&quot;: false,
+        &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;Write presentation&quot;
+    },
+    {
+        &quot;completed&quot;: false,
+        &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+        &quot;id&quot;: 2,
+        &quot;name&quot;: &quot;Host meetup&quot;
+    }
+]
+</code></pre>
+
+<ol>
+<li>Show entry 1:
+<code>curl -s http://localhost:8080/todos/{1} | python -m json.tool</code>
+<br /></li>
+</ol>
+
+<pre><code class="language-console">curl -s http://localhost:8080/todos/{1} | python -m json.tool
+{
+    &quot;completed&quot;: false,
+    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;Write presentation&quot;
+}   
+</code></pre></li>
+
+<li><p>Insert New entry:</p>
+
+<pre><code class="language-console">curl -s -H &quot;Content-Type: application/json&quot; -d '{&quot;name&quot;:&quot;New Todo&quot;}' http://localhost:8080/todos`
+</code></pre>
+
+<pre><code class="language-console">$ curl -s -H &quot;Content-Type: application/json&quot; -d '{&quot;name&quot;:&quot;New Todo&quot;}' http://localhost:8080/todos
+{&quot;id&quot;:3,&quot;name&quot;:&quot;New Todo&quot;,&quot;completed&quot;:false,&quot;due&quot;:&quot;0001-01-01T00:00:00Z&quot;}
+$ 
+</code></pre></li>
+
+<li><p>Show entry 3:
+<code>curl -s http://localhost:8080/todos/{3} | python -m json.tool</code></p>
+
+<pre><code class="language-console">$ curl -s http://localhost:8080/todos/{3} | python -m json.tool
+{
+     &quot;completed&quot;: false,
+    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+    &quot;id&quot;: 3,
+    &quot;name&quot;: &quot;New Todo&quot;
+}
+</code></pre>
+
+<p>To stop the running container you can run</p>
+
+<pre><code class="language-console">docker stop $(docker ps -qf &quot;ancestor=hello-go&quot;)
+</code></pre></li>
+</ol>
+
+<h2 id="tagging-and-pushing-your-image-to-a-container-registry">Tagging and pushing your image to a container registry</h2>
+
+<ol>
+<li><p>Tag the new image with tag <code>0.0.2</code> using your image/repo/tag</p>
+
+<p><code>docker tag hello-go jabbottc1/hello-go:0.0.2</code></p></li>
+
+<li><p>Push to Docker registry</p>
+
+<p><code>docker push jabbottc1/hello-go:0.0.2</code></p>
+
+<pre><code class="language-console">$ docker push jabbottc1/hello-go:0.0.2
+The push refers to repository [docker.io/jabbottc1/hello-go]
+...
+</code></pre>
+
+<ol>
+<li>Edit your <code>hello-go-deployment</code> from the Critical Stack UI.  Update the image in the <em>Deployment</em> to pull <code>0.0.2</code>.  Then you can run the same tests as above but targeting the Load Balancer.</li>
+</ol>
+
+<pre><code class="language-yaml">      image: 'jabbottc1/hello-go:0.0.2'  # Change this tag
+</code></pre></li>
+
+<li><p><strong>Save</strong> your deployment and <strong>exit</strong></p></li>
+
+<li><p>Test your upgraded deployment.  Then you can run the same tests as above but targeting the Ingress host.</p>
+
+<pre><code class="language-console">$ curl -s -H &quot;Content-Type: application/json&quot; -d '{&quot;name&quot;:&quot;John Test&quot;}' https://&lt;URL_to_your_application&gt;/todos
+</code></pre>
+
+<pre><code class="language-console"> $ curl -s https://&lt;URL_to_your_application&gt;/todos | python -m json.tool
+[
+    {
+    &quot;completed&quot;: false,
+    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;Write presentation&quot;
+    },
+    {
+    &quot;completed&quot;: false,
+    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+    &quot;id&quot;: 2,
+    &quot;name&quot;: &quot;Host meetup&quot;
+    },
+    {
+    &quot;completed&quot;: false,
+    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+    &quot;id&quot;: 3,
+    &quot;name&quot;: &quot;John Test&quot;
+    }
+]
+</code></pre></li>
+</ol>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>You have successfully deployed a golang REST API application to Critical Stack.  But this application is flawed - it can&rsquo;t scale beyond 1 node and has no persistence.  So next we will deploy a <a href="../hello+REST+Persistence/">Go Application with a REST API and Persistence</a>.</p>
+
+<p>Note:  some bugs with <strong>DELETE</strong>!</p>
+
+<h3 id="todo">TODO</h3>
+
+<p>Show how to build with scripts</p>
+
+<ol>
+<li>sh build.sh -v 0.0.2</li>
+</ol>
 
 
 <footer class=" footline" >
 	
 </footer>
 
-        
-            </div> 
+
         
         </div> 
         
@@ -490,6 +715,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -505,53 +731,8 @@
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -596,6 +777,36 @@
             
         
                     
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
             
         
                     
@@ -610,6 +821,31 @@
 
                     
                     
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
                         
                     
                     
@@ -619,9 +855,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -662,10 +895,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/labs/featurelabs/go/hello&#43;rest/readme/" title="Deploying a Stateless Golang App with REST API"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/labs/featurelabs/go/hello/" title="Deploying a Stateless Golang App"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/labs/install/awsaccount/" title="AWS Account Setup" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/labs/install/" title="Installation" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -696,3 +929,4 @@
 
   </body>
 </html>
+
