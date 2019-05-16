@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/labs/images/favicon.png" type="image/png">
 
-    <title>Tags :: Critical Stack Labs</title>
+    <title>Deploying a Stateless Go App :: Critical Stack Labs</title>
 
     
     <link href="/labs/css/nucleus.css?1558036376" rel="stylesheet">
@@ -35,7 +35,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/labs/tags/">
+  <body class="" data-url="/labs/featurelabs/go/hello/">
     <nav id="sidebar" class="">
 
 
@@ -102,7 +102,7 @@
   
     
     <li data-nav-id="/labs/featurelabs/" title="Feature Labs" class="dd-item 
-        
+        parent
         
         
         ">
@@ -201,7 +201,7 @@
   
     
     <li data-nav-id="/labs/featurelabs/go/" title="Go Labs" class="dd-item 
-        
+        parent
         
         
         ">
@@ -225,7 +225,7 @@
  
   
     
-      <li data-nav-id="/labs/featurelabs/go/hello/" title="Deploying a Stateless Go App" class="dd-item ">
+      <li data-nav-id="/labs/featurelabs/go/hello/" title="Deploying a Stateless Go App" class="dd-item active">
         <a href="/labs/featurelabs/go/hello/">
         <i class='fas fa-flask'></i> Deploying a Stateless Go App
         
@@ -377,7 +377,25 @@
                     
           
           
-            Tags
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/labs/'></a> > <a href='/labs/featurelabs/'>Feature Labs</a> > <a href='/labs/featurelabs/go/'>Go Labs</a> > Deploying a Stateless Go App
+          
+         
+          
+         
+          
+         
           
         
                  
@@ -386,7 +404,26 @@
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#deploying-a-stateless-golang-app-in-critical-stack">Deploying a Stateless Golang App in Critical Stack</a>
+<ul>
+<li><a href="#getting-started">Getting Started</a></li>
+</ul></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#building-your-hello-world-app">Building your Hello World App</a></li>
+<li><a href="#testing-your-hello-world-app">Testing your Hello World App</a></li>
+<li><a href="#tagging-and-pushing-your-image-to-a-container-registry">Tagging and pushing your image to a container registry</a></li>
+<li><a href="#deploy-your-container-into-critical-stack">Deploy your container into Critical Stack</a>
+<ul>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#todo">TODO</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
     </div>
 </div>
 
@@ -402,7 +439,7 @@
           
             <h1>
               
-              Tags
+              Deploying a Stateless Go App
             </h1>
           
 
@@ -412,15 +449,232 @@
 
 
 
+<h2 id="deploying-a-stateless-golang-app-in-critical-stack">Deploying a Stateless Golang App in Critical Stack</h2>
 
-<ul>
-	
-</ul>
+<h3 id="getting-started">Getting Started</h3>
+
+<p>Pre-requisites:</p>
+
+<ol>
+<li><a href="https://golang.org/dl/">Go</a></li>
+<li><a href="https://code.visualstudio.com/download">Visual Studio Code</a></li>
+<li><code>curl</code> or some equivalent way to do <em><strong>GET</strong></em> and <em><strong>POST</strong></em></li>
+<li>If using <code>curl</code>, <code>python</code> to make <em><strong>JSON</strong></em> prettier</li>
+<li>Docker : <a href="https://www.docker.com/get-started">Docker</a></li>
+<li>Public container registry <a href="https://hub.docker.com">Docker Hub</a></li>
+<li>A <em><strong>Critical Stack</strong></em> deployment with a user account provisioned for you.  Note your <em><strong>namespace</strong></em> when you login.</li>
+</ol>
+
+<h2 id="overview">Overview</h2>
+
+<p>In this lab, you will deploy a simple <em><strong>Go</strong></em> <code>Hello World</code> application in <em><strong>Critical Stack</strong></em> and create <em><strong>Services</strong></em> to make it available externally.  We will then illustrate how upgrade the deployment by creating a new release of the application.</p>
+
+<p>Lifted from <a href="https://thenewstack.io/make-a-restful-json-api-go/">Making a RESTful JSON API in Go</a> and adapted to Critical Stack, this is just example code and not intended to teach proper Go coding in any form.</p>
+
+<h2 id="building-your-hello-world-app">Building your Hello World App</h2>
+
+<ol>
+<li><p>Create a working directory to build your <code>Hello World</code> application.  Open a terminal window.  In your current working directory (we will use the <code>Development</code> directory under the user&rsquo;s home directory in this example), create a lab directory called <code>go</code> and a subdirectory of that call &lsquo;app&rsquo;</p>
+
+<pre><code class="language-console">cd ~/Development
+mkdir -p go/app
+cd go/app
+</code></pre></li>
+
+<li><p>Using the editor of your choice, create a new file called <code>main.go</code> inside the <strong>app</strong> directory.</p>
+
+<pre><code class="language-console">vi hello-go.go
+</code></pre></li>
+
+<li><p>Add the following content to your new file and <strong>save</strong>:</p>
+
+<pre><code>package main
+ 
+import (
+      &quot;fmt&quot;
+      &quot;html&quot;
+      &quot;log&quot;
+      &quot;net/http&quot;
+)
+ 
+func main() {
+      http.HandleFunc(&quot;/&quot;, func(w http.ResponseWriter, r *http.Request) {
+          fmt.Fprintf(w, &quot;Hello, %q&quot;, html.EscapeString(r.URL.Path))
+      })
+ 
+      log.Fatal(http.ListenAndServe(&quot;:8080&quot;, nil))
+}
+</code></pre></li>
+
+<li><p>Compile an executable (in this example a GO executable) which properly targets a linux OS and is built statically with bare-minimum libs and dependencies. In this example we have decided to name the executable <code>hello-go</code>.</p>
+
+<pre><code class="language-console">$ CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags=&quot;-s -w&quot; -a -o hello-go .
+</code></pre></li>
+
+<li><p>A new file called <code>hello-go</code> will be created in the same directory.  This  will be referenced when we build our docker container.</p></li>
+
+<li><p>Create a new file in the same directory and name it <code>Dockerfile</code>.  This file could be named anything but for now we will just keep it simple.  Copy the following code into this file:</p>
+
+<pre><code># STEP 1 build directory / file layout
+
+FROM ubuntu:latest as layout
+RUN groupadd -g 1000 appuser
+RUN useradd -r -u 1000 -g appuser appuser
+
+RUN mkdir -p /app/data &amp;&amp; chmod -R 755 /app
+
+
+# STEP 2 debug if needed
+FROM busybox:latest as builder
+
+
+# STEP 3 build a small, non-root runtime image
+FROM scratch
+
+COPY --from=layout /etc/passwd /etc/passwd
+COPY --from=layout /etc/group /etc/group
+COPY --chown=appuser:appuser --from=layout /app/data /app/data
+
+# For debug
+COPY --from=builder /bin/busybox /bin/busybox
+COPY --from=builder /bin/sh /bin/sh
+
+WORKDIR /app
+USER appuser
+
+
+# STEP 4 add application
+ADD hello-go /app/hello-go
+
+EXPOSE 8080
+
+CMD [&quot;/app/hello-go&quot;]
+</code></pre></li>
+
+<li><p>Login to Docker registry</p>
+
+<p><code>docker login</code></p>
+
+<pre><code class="language-console">$ docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: jabbottc1
+Password:
+Login Succeeded
+</code></pre></li>
+
+<li><p>Build a Docker image using the <code>Dockerfile</code>.  Make sure to include the <code>.</code> at the end of the following command.  <strong>hello-go</strong> is the name of the image we are creating.</p>
+
+<p><code>docker build -t hello-go -f Dockerfile .</code></p></li>
+</ol>
+
+<h2 id="testing-your-hello-world-app">Testing your Hello World App</h2>
+
+<ol>
+<li><p><strong>Optional Step</strong>. If you want to test your new docker container locally and see if it behaves as expected you can run the following command:</p>
+
+<p><code>docker run -e PORT=8080 -p 8080:8080 --rm -ti hello-go</code></p></li>
+
+<li><p>Verify the app works by using the following command in a <strong>new terminal window</strong>.  Alternatively, you could open a browser to <code>http://localhost:8080</code></p>
+
+<p><code>curl http://localhost:8080</code></p>
+
+<p><strong>Note</strong>: to stop the running container run this command from the new terminal window (this uses <code>--filter</code> (<code>-f</code>) to find the container created from your <code>hello-go</code> image):</p>
+
+<p><code>docker stop $(docker ps -qf &quot;ancestor=hello-go&quot;)</code></p>
+
+<p>Another way to stop the <code>hello-go</code>container is to view all of the running docker containers and issue a command to stop it by the id</p>
+
+<pre><code class="language-console">$ docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                  PORTS                    NAMES
+6009be3dfae3        hello-go            &quot;/hello-go&quot;         5 seconds ago       Up 4 seconds            0.0.0.0:8080-&gt;8080/tcp   goofy_swanson
+</code></pre>
+
+<pre><code class="language-console">$ docker stop 6009be3dfae3 
+6009be3dfae3
+$ docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                  PORTS               NAMES
+</code></pre></li>
+</ol>
+
+<h2 id="tagging-and-pushing-your-image-to-a-container-registry">Tagging and pushing your image to a container registry</h2>
+
+<ol>
+<li><p>Now that we have an image we need to apply a <code>tag</code> and <code>push</code> it to a container registry.</p></li>
+
+<li><p>Docker Tags allow you to convey useful information about a specific image version/variant.  Rather than referring to your image by the <code>IMAGE ID</code> you can create an alias to your images.  Lets look at the list of images locally (your list might be different):</p>
+
+<p><code>docker images</code></p>
+
+<pre><code class="language-console">$ docker images
+REPOSITORY             TAG                 IMAGE ID            CREATED             
+hello-go               latest              56f2fefe6685        2 hours ago
+alpine                 latest              8cb3aa00f899        3 weeks ago         
+tomcat                 8.0                 ef6a7c98d192        6 months ago
+</code></pre></li>
+
+<li><p>We will <code>tag</code> your local image with your <strong>namespace/repo</strong></p>
+
+<p><code>docker tag hello-go &lt;your-registry-user-name&gt;/hello-go:0.0.1</code></p>
+
+<pre><code class="language-console">$ docker tag hello-go jabbottc1/hello-go:0.0.1
+</code></pre>
+
+<p><strong>Optional Step</strong> list your images and tags</p>
+
+<p><code>docker images</code></p>
+
+<pre><code class="language-console">$ docker images
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+jabbottc1/hello-go       0.0.1               511503f3b991        16 minutes ago      7.06MB
+hello-go                 latest              511503f3b991        16 minutes ago      7.06MB
+</code></pre></li>
+
+<li><p>Push the tagged image into your public container registry</p>
+
+<p><code>docker push jabbottc1/hello-go:0.0.1</code></p>
+
+<pre><code class="language-console">$ docker push jabbottc1/hello-go:0.0.1
+The push refers to repository [docker.io/jabbottc1/hello-go]
+1c82c58a49f6: Layer already exists
+d992cd40d944: Layer already exists
+e4ae77eef13a: Layer already exists
+8e3f00a45858: Layer already exists
+5483fef4153b: Layer already exists
+c1b4e3786f95: Layer already exists
+0.0.1: digest: sha256:385984109a3cf6b1a82dcebb1ee124a7172a5a81795bf8116f2cab6d7a09ca4e size: 1569
+</code></pre>
+
+<p>Your image digest and layer hashes will differ.</p></li>
+</ol>
+
+<h2 id="deploy-your-container-into-critical-stack">Deploy your container into Critical Stack</h2>
+
+<ol>
+<li><p>Follow <a href="../../node/deploystateless">deployment steps similar to Node lab</a> with appropriate substitutions.</p></li>
+
+<li><p>Navigate to your application host to see your <strong>Hello World</strong> message or run <code>curl</code> to verify that you application is running and exposed externally.  <strong>Note</strong> it may take a few minutes for this new cname to be created.</p>
+
+<p><code>curl -s http://&lt;URL_for_your_deployment&gt;</code></p>
+
+<pre><code class="language-console">$ curl http://...
+Hello, &quot;/&quot;$ 
+</code></pre></li>
+</ol>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>You have successfully deployed a golang application in Critical Stack.  But <em><strong>Hello World</strong></em> isn&rsquo;t enough, right?  Next we will deploy a <a href="../hello+REST">golang application with a REST API</a>.</p>
+
+<h3 id="todo">TODO</h3>
+
+<p>Show how to build with scripts
+1. sh build.sh -v 0.0.1</p>
 
 
 <footer class=" footline" >
 	
 </footer>
+
 
         
         </div> 
@@ -472,6 +726,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -487,53 +742,8 @@
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -559,6 +769,19 @@
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
             
         
                     
@@ -569,6 +792,46 @@
             
             
                 
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -624,8 +887,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="/labs/featurelabs/go/" title="Go Labs"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="/labs/faqs/" title="FAQ" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="/labs/install/" title="Installation" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -656,3 +921,4 @@
 
   </body>
 </html>
+

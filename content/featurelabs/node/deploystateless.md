@@ -6,9 +6,10 @@ chapter = false
 pre = "<i class='fab fa-node'></i> "
 +++
 
-## Using Critical Stack to deploy a stateless application
+## Deploying a Stateless Node App in Critical Stack
 ### Getting Started
 Pre-requisites:
+
 1. Node JS (and npm) : [Node.JS](https://nodejs.org/en/download/)
 1. Docker : [Docker](https://www.docker.com/get-started)
 1. Public container registry (Docker Hub is easiest, Artifactory works too) : [Docker Hub](https://hub.docker.com)
@@ -86,7 +87,7 @@ the following content:
 1. Create a `Dockerfile` to target _**node**_ and copy the necessary files into the Docker image (Note to instructor: explain _**base image**_ from which this image is derived). Expose the desired TCP port where the app will listen.
 
     Create a new file in your `node-lab` directory (not the _**app**_ directory) called `Dockerfile` and paste in the content below.
-    ```Dockerfile
+    ```
     FROM node:9
 
     # Make base directory

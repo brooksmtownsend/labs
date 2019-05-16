@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Go Labs on Critical Stack Labs</title>
+    <link>https://criticalstack.github.io/labs/featurelabs/go/</link>
+    <description>Recent content in Go Labs on Critical Stack Labs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Apr 2019 09:43:37 -0400</lastBuildDate>
+    
+	<atom:link href="https://criticalstack.github.io/labs/featurelabs/go/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Deploying a Stateless Go App</title>
+      <link>https://criticalstack.github.io/labs/featurelabs/go/hello/</link>
+      <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
+      
+      <guid>https://criticalstack.github.io/labs/featurelabs/go/hello/</guid>
+      <description>Deploying a Stateless Golang App in Critical Stack Getting Started Pre-requisites:
+ Go Visual Studio Code curl or some equivalent way to do GET and POST If using curl, python to make JSON prettier Docker : Docker Public container registry Docker Hub A Critical Stack deployment with a user account provisioned for you. Note your namespace when you login.  Overview In this lab, you will deploy a simple Go Hello World application in Critical Stack and create Services to make it available externally.</description>
+    </item>
+    
+  </channel>
+</rss>

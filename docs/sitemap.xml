@@ -13,6 +13,11 @@
   </url>
   
   <url>
+    <loc>https://criticalstack.github.io/labs/featurelabs/go/hello/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://criticalstack.github.io/labs/faqs/</loc>
     <lastmod>2019-04-23T09:43:37-04:00</lastmod>
   </url>
@@ -34,6 +39,11 @@
   
   <url>
     <loc>https://criticalstack.github.io/labs/install/aws_basic_cluster/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/featurelabs/go/</loc>
     <lastmod>2019-04-23T09:43:37-04:00</lastmod>
   </url>
   

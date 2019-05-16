@@ -1,14 +1,17 @@
 +++
-title = "Deploying a Stateless golang App"
+title = "Deploying a Stateless Go App"
 date = 2019-04-23T09:43:37-04:00
 weight = 5
 chapter = false
-pre = "<i class='fab fa-node'></i> "
+pre = "<i class='fas fa-flask'></i> "
 +++
 
-## Using Critical Stack to deploy a stateless golang application
+## Deploying a Stateless Golang App in Critical Stack
+
 ### Getting Started
+
 Pre-requisites:
+
 1. [Go](https://golang.org/dl/)
 1. [Visual Studio Code](https://code.visualstudio.com/download)
 1. `curl` or some equivalent way to do _**GET**_ and _**POST**_
@@ -19,9 +22,9 @@ Pre-requisites:
 
 ## Overview
 
-Deploy simple _**golang**_ `Hello World` application in _**Critical Stack**_ and create _**Services**_ to make it available externally.  We will then show to how upgrade the deployment by creating a new release of the application.
+In this lab, you will deploy a simple _**Go**_ `Hello World` application in _**Critical Stack**_ and create _**Services**_ to make it available externally.  We will then illustrate how upgrade the deployment by creating a new release of the application.
 
-Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-restful-json-api-go/) and adapted to Critical Stack.  This is just example code and not intended to teach proper Go coding in any form.
+Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-restful-json-api-go/) and adapted to Critical Stack, this is just example code and not intended to teach proper Go coding in any form.
 
 ## Building your Hello World App
 
@@ -39,7 +42,7 @@ Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-rest
 	```
 1.  Add the following content to your new file and **save**:
 
-	```go
+	```
 	package main
  
 	import (
@@ -67,7 +70,7 @@ Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-rest
 
 1.  Create a new file in the same directory and name it `Dockerfile`.  This file could be named anything but for now we will just keep it simple.  Copy the following code into this file:
 
-	```console
+	```
 	# STEP 1 build directory / file layout
 
 	FROM ubuntu:latest as layout
@@ -201,7 +204,7 @@ Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-rest
 
 ## Deploy your container into Critical Stack
 
-1. Follow [Deployment steps similar to Node lab](../../node/deploystateless.md#Deploying) with appropriate substitutions.
+1. Follow [deployment steps similar to Node lab](../../node/deploystateless) with appropriate substitutions.
 
 1.  Navigate to your application host to see your **Hello World** message or run `curl` to verify that you application is running and exposed externally.  **Note** it may take a few minutes for this new cname to be created.
 
