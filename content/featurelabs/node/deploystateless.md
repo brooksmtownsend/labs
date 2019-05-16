@@ -6,9 +6,10 @@ chapter = false
 pre = "<i class='fab fa-node'></i> "
 +++
 
-## Using Critical Stack to deploy a stateless application
+## Deploying a Stateless Node App in Critical Stack
 ### Getting Started
 Pre-requisites:
+
 1. Node JS (and npm) : [Node.JS](https://nodejs.org/en/download/)
 1. Docker : [Docker](https://www.docker.com/get-started)
 1. Public container registry (Docker Hub is easiest, Artifactory works too) : [Docker Hub](https://hub.docker.com)
@@ -17,6 +18,8 @@ Pre-requisites:
 In this lab we will create a simple NodeJS application, deploy it via Critical Stack. and access it via a public URL.
 
 ### Steps
+
+#### Building
 1. Open a terminal window.  In your current working directory (we use the `Development` directory under the user's home directory in this example),
 create a lab directory called `node-lab` and a subdirectory of that called `app`:
     ```console
@@ -84,7 +87,7 @@ the following content:
 1. Create a `Dockerfile` to target _**node**_ and copy the necessary files into the Docker image (Note to instructor: explain _**base image**_ from which this image is derived). Expose the desired TCP port where the app will listen.
 
     Create a new file in your `node-lab` directory (not the _**app**_ directory) called `Dockerfile` and paste in the content below.
-    ```Dockerfile
+    ```
     FROM node:9
 
     # Make base directory
@@ -181,6 +184,7 @@ the following content:
     ```
     Your image digest and layer hashes will differ.
 
+#### Deploying
 1. Login to Critical Stack.  Under _**Data Center > Workloads**_ select _**Deployments**_. Create a _**Simple**_ Deployment in Critical Stack.
 
     Call the app name whatever you like (in this example I used `my-first-deployment`).
@@ -244,4 +248,5 @@ the following content:
 ### Conclusion
 We created a simple NodeJS application, packaged the application in a Docker image, pushed the Docker image to a public Docker Hub repository, pulled that Docker image into a Critical Stack deployment as a container instance, and accessed the application via a public URL.
 
-To learn the basics of managing the lifecycle of an application, see the next lab.
+To learn the basics of managing the lifecycle of an application, see the [next lab](updating.md).
+

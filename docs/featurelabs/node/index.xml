@@ -17,9 +17,9 @@
       <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
       
       <guid>https://criticalstack.github.io/labs/featurelabs/node/deploystateless/</guid>
-      <description>Using Critical Stack to deploy a stateless application Getting Started Pre-requisites: 1. Node JS (and npm) : Node.JS 1. Docker : Docker 1. Public container registry (Docker Hub is easiest, Artifactory works too) : Docker Hub
-Overview In this lab we will create a simple NodeJS application, deploy it via Critical Stack. and access it via a public URL.
-Steps  Open a terminal window. In your current working directory (we use the Development directory under the user&amp;rsquo;s home directory in this example), create a lab directory called node-lab and a subdirectory of that called app:</description>
+      <description>Deploying a Stateless Node App in Critical Stack Getting Started Pre-requisites:
+ Node JS (and npm) : Node.JS Docker : Docker Public container registry (Docker Hub is easiest, Artifactory works too) : Docker Hub  Overview In this lab we will create a simple NodeJS application, deploy it via Critical Stack. and access it via a public URL.
+Steps Building  Open a terminal window. In your current working directory (we use the Development directory under the user&amp;rsquo;s home directory in this example), create a lab directory called node-lab and a subdirectory of that called app:</description>
     </item>
     
     <item>
