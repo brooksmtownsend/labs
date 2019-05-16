@@ -17,6 +17,8 @@ Pre-requisites:
 In this lab we will create a simple NodeJS application, deploy it via Critical Stack. and access it via a public URL.
 
 ### Steps
+
+#### Building
 1. Open a terminal window.  In your current working directory (we use the `Development` directory under the user's home directory in this example),
 create a lab directory called `node-lab` and a subdirectory of that called `app`:
     ```console
@@ -181,6 +183,7 @@ the following content:
     ```
     Your image digest and layer hashes will differ.
 
+#### Deploying
 1. Login to Critical Stack.  Under _**Data Center > Workloads**_ select _**Deployments**_. Create a _**Simple**_ Deployment in Critical Stack.
 
     Call the app name whatever you like (in this example I used `my-first-deployment`).
@@ -244,4 +247,5 @@ the following content:
 ### Conclusion
 We created a simple NodeJS application, packaged the application in a Docker image, pushed the Docker image to a public Docker Hub repository, pulled that Docker image into a Critical Stack deployment as a container instance, and accessed the application via a public URL.
 
-To learn the basics of managing the lifecycle of an application, see the next lab.
+To learn the basics of managing the lifecycle of an application, see the [next lab](updating.md).
+
