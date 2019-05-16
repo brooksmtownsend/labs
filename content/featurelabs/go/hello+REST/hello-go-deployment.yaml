@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-go-deployment
+  namespace: development
+spec:
+  selector:
+    matchLabels:
+      app: hello-go
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello-go
+    spec:
+      containers:
+      - name: hello-go
+        image: artifactory.cloud.capitalone.com/critical-stack-demos/hello-go:0.0.2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: hello-go-service
+  namespace: development
+spec:
+  selector:
+    app: hello-go
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hello-go-ingress
+  namespace: development
+spec:
+  rules:
+    -
+      host: cs-jabbott-hello-go.clouddqt.capitalone.com
+      http:
+        paths:
+          - backend:
+              serviceName: hello-go-service
+              servicePort: 80
+            path: /
+
+---
+

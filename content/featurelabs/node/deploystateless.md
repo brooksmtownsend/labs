@@ -1,12 +1,12 @@
 +++
-title = "Deploying a Stateless App"
+title = "Deploying a Stateless NodeJS App"
 date = 2019-04-23T09:43:37-04:00
 weight = 5
 chapter = false
 pre = "<i class='fab fa-node'></i> "
 +++
 
-## Deploying a Stateless Node App in Critical Stack
+## Deploying a Stateless NodeJS App in Critical Stack
 ### Getting Started
 Pre-requisites:
 
