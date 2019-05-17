@@ -1,5 +1,5 @@
 +++
-title = "Updating an App"
+title = "Updating a NodeJS App"
 date = 2019-04-23T09:43:37-04:00
 weight = 6
 chapter = false

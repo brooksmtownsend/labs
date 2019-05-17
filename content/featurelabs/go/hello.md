@@ -28,6 +28,8 @@ Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-rest
 
 ## Building your Hello World App
 
+Note:  all materials for this lab are also located in [Critical Stack Feature Lab repo](https://github.com/criticalstack/labs-code.git)
+
 1. Create a working directory to build your `Hello World` application.  Open a terminal window.  In your current working directory (we will use the `Development` directory under the user's home directory in this example), create a lab directory called `go` and a subdirectory of that call 'app'
 
 	```console
@@ -216,10 +218,11 @@ Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-rest
 	```
 
 ### Conclusion
-You have successfully deployed a golang application in Critical Stack.  But _**Hello World**_ isn't enough, right?  Next we will deploy a [golang application with a REST API](../hello+REST).
+You have successfully deployed a golang application in Critical Stack.  But _**Hello World**_ isn't enough, right?  Next we will deploy a [Deploying a Stateless RESTful Go App](../hello_rest).
 
 
 ### TODO
 Show how to build with scripts 
+
 1. sh build.sh -v 0.0.1
 
