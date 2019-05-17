@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.55.4" />
+    <meta name="generator" content="Hugo 0.55.5" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>Deploying a Stateless RESTful Go App :: Critical Stack Labs</title>
 
     
-    <link href="/labs/css/nucleus.css?1558101329" rel="stylesheet">
-    <link href="/labs/css/fontawesome-all.min.css?1558101329" rel="stylesheet">
-    <link href="/labs/css/hybrid.css?1558101329" rel="stylesheet">
-    <link href="/labs/css/featherlight.min.css?1558101329" rel="stylesheet">
-    <link href="/labs/css/perfect-scrollbar.min.css?1558101329" rel="stylesheet">
-    <link href="/labs/css/auto-complete.css?1558101329" rel="stylesheet">
-    <link href="/labs/css/atom-one-dark-reasonable.css?1558101329" rel="stylesheet">
-    <link href="/labs/css/theme.css?1558101329" rel="stylesheet">
-    <link href="/labs/css/hugo-theme.css?1558101329" rel="stylesheet">
+    <link href="/labs/css/nucleus.css?1558108383" rel="stylesheet">
+    <link href="/labs/css/fontawesome-all.min.css?1558108383" rel="stylesheet">
+    <link href="/labs/css/hybrid.css?1558108383" rel="stylesheet">
+    <link href="/labs/css/featherlight.min.css?1558108383" rel="stylesheet">
+    <link href="/labs/css/perfect-scrollbar.min.css?1558108383" rel="stylesheet">
+    <link href="/labs/css/auto-complete.css?1558108383" rel="stylesheet">
+    <link href="/labs/css/atom-one-dark-reasonable.css?1558108383" rel="stylesheet">
+    <link href="/labs/css/theme.css?1558108383" rel="stylesheet">
+    <link href="/labs/css/hugo-theme.css?1558108383" rel="stylesheet">
     
-      <link href="/labs/css/theme-cs.css?1558101329" rel="stylesheet">
+      <link href="/labs/css/theme-cs.css?1558108383" rel="stylesheet">
     
 
-    <script src="/labs/js/jquery-3.3.1.min.js?1558101329"></script>
+    <script src="/labs/js/jquery-3.3.1.min.js?1558108383"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -56,14 +56,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/labs/js/lunr.min.js?1558101329"></script>
-<script type="text/javascript" src="/labs/js/auto-complete.js?1558101329"></script>
+<script type="text/javascript" src="/labs/js/lunr.min.js?1558108383"></script>
+<script type="text/javascript" src="/labs/js/auto-complete.js?1558108383"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/criticalstack.github.io\/labs\/";
     
 </script>
-<script type="text/javascript" src="/labs/js/search.js?1558101329"></script>
+<script type="text/javascript" src="/labs/js/search.js?1558108383"></script>
 
     
   </div>
@@ -480,7 +480,7 @@
 <li>If using <code>curl</code>, <code>python</code> to make <em><strong>JSON</strong></em> prettier</li>
 <li>Docker : <a href="https://www.docker.com/get-started">Docker</a></li>
 <li>Public container registry <a href="https://hub.docker.com">Docker Hub</a></li>
-<li>Previous Go lab for <strong>Docker registry</strong> and <strong>Load Balancer</strong> setup - this demo will just update the previous Docker image with new functionality</li>
+<li><a href="../hello">Previous Go lab</a> for <strong>Docker registry</strong> and <strong>Load Balancer</strong> setup - this demo will just update the previous Docker image with new functionality</li>
 </ol>
 
 <h2 id="overview">Overview</h2>
@@ -492,26 +492,38 @@
 <h2 id="building-your-restful-hello-world-app">Building Your RESTful Hello World App</h2>
 
 <ol>
-<li><p>Clone this repo if you haven&rsquo;t already and change directory to this lab so you can access the source code</p></li>
+<li><p>Clone the accompanying <a href="https://github.com/criticalstack/labs-code.git">Critical Stack Feature Lab repo</a> if you haven&rsquo;t already and change directory to the <a href="https://github.com/criticalstack/labs-code/hello_rest/">hello_rest</a> directory so you can access the source code</p>
+
+<p><code>git clone https://github.com/criticalstack/labs-code.git</code></p>
+
+<p><code>cd labs-code/hello_rest</code></p></li>
 
 <li><p>As with previous lab, compile the REST API example code into <code>hello-go</code>.</p>
 
 <pre><code class="language-console">$ CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags=&quot;-s -w&quot; -a -o hello-go .
-</code></pre></li>
+</code></pre>
 
-<li><p>As with previous lab, build a Docker image using the <code>Dockerfile</code>.</p>
+<ol>
+<li>As with previous lab, build a Docker image using the <code>Dockerfile</code>.
 
-<p><code>docker build -t hello-go -f Dockerfile .</code></p></li>
+<br /></li>
 </ol>
+
+<p><code>docker build -t hello-go -f Dockerfile .</code></p>
 
 <h2 id="testing-your-restful-hello-world-app">Testing your RESTful Hello World App</h2>
 
 <ol>
-<li><p><strong>Optional Step</strong>. If you want to test your new docker container locally and see if it behaves as expected you can run the following command:</p>
+<li><strong>Optional Step</strong>. If you want to test your new docker container locally and see if it behaves as expected you can run the following command:
 
-<p><code>docker run -e PORT=8080 -p 8080:8080 --rm -ti hello-go</code></p></li>
+<br /></li>
+</ol>
 
-<li><p>Verify the app works by using the following command in a <strong>new terminal window</strong>.  Alternatively, you could open a browser to <code>http://localhost:8080</code></p>
+<p><code>docker run -e PORT=8080 -p 8080:8080 --rm -ti hello-go</code></p>
+
+<ol>
+<li>Verify the app works by using the following command in a <strong>new terminal window</strong>.  Alternatively, you could open a browser to <code>http://localhost:8080</code></li>
+</ol>
 
 <p>Basic test:
 <code>curl -s http://localhost:8080</code></p>
@@ -538,10 +550,13 @@ Welcome!
         &quot;name&quot;: &quot;Host meetup&quot;
     }
 ]
-</code></pre></li>
+</code></pre>
 
-<li><p>Show entry 1:
-<code>curl -s http://localhost:8080/todos/{1} | python -m json.tool</code></p>
+<ol>
+<li>Show entry 1:
+<code>curl -s http://localhost:8080/todos/{1} | python -m json.tool</code>
+<br /></li>
+</ol>
 
 <pre><code class="language-console">curl -s http://localhost:8080/todos/{1} | python -m json.tool
 {
@@ -594,9 +609,11 @@ $
 <pre><code class="language-console">$ docker push jabbottc1/hello-go:0.0.2
 The push refers to repository [docker.io/jabbottc1/hello-go]
 ...
-</code></pre></li>
+</code></pre>
 
-<li><p>Edit your <code>hello-go-deployment</code> from the Critical Stack UI.  Update the image in the <em>Deployment</em> to pull <code>0.0.2</code>.  Then you can run the same tests as above but targeting the Load Balancer.</p>
+<ol>
+<li>Edit your <code>hello-go-deployment</code> from the Critical Stack UI.  Update the image in the <em>Deployment</em> to pull <code>0.0.2</code>.  Then you can run the same tests as above but targeting the Load Balancer.</li>
+</ol>
 
 <pre><code class="language-yaml">      image: 'jabbottc1/hello-go:0.0.2'  # Change this tag
 </code></pre></li>
@@ -895,20 +912,20 @@ The push refers to repository [docker.io/jabbottc1/hello-go]
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/labs/js/clipboard.min.js?1558101329"></script>
-    <script src="/labs/js/perfect-scrollbar.min.js?1558101329"></script>
-    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558101329"></script>
-    <script src="/labs/js/jquery.sticky.js?1558101329"></script>
-    <script src="/labs/js/featherlight.min.js?1558101329"></script>
-    <script src="/labs/js/html5shiv-printshiv.min.js?1558101329"></script>
-    <script src="/labs/js/highlight.pack.js?1558101329"></script>
+    <script src="/labs/js/clipboard.min.js?1558108383"></script>
+    <script src="/labs/js/perfect-scrollbar.min.js?1558108383"></script>
+    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558108383"></script>
+    <script src="/labs/js/jquery.sticky.js?1558108383"></script>
+    <script src="/labs/js/featherlight.min.js?1558108383"></script>
+    <script src="/labs/js/html5shiv-printshiv.min.js?1558108383"></script>
+    <script src="/labs/js/highlight.pack.js?1558108383"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/labs/js/modernizr.custom-3.6.0.js?1558101329"></script>
-    <script src="/labs/js/learn.js?1558101329"></script>
-    <script src="/labs/js/hugo-learn.js?1558101329"></script>
+    <script src="/labs/js/modernizr.custom-3.6.0.js?1558108383"></script>
+    <script src="/labs/js/learn.js?1558108383"></script>
+    <script src="/labs/js/hugo-learn.js?1558108383"></script>
 
-    <link href="/labs/mermaid/mermaid.css?1558101329" type="text/css" rel="stylesheet" />
-    <script src="/labs/mermaid/mermaid.js?1558101329"></script>
+    <link href="/labs/mermaid/mermaid.css?1558108383" type="text/css" rel="stylesheet" />
+    <script src="/labs/mermaid/mermaid.js?1558108383"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

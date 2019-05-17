@@ -28,6 +28,8 @@ Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-rest
 
 ## Building your Hello World App
 
+Note:  all materials for this lab are also located in [Critical Stack Feature Lab repo](https://github.com/criticalstack/labs-code.git)
+
 1. Create a working directory to build your `Hello World` application.  Open a terminal window.  In your current working directory (we will use the `Development` directory under the user's home directory in this example), create a lab directory called `go` and a subdirectory of that call 'app'
 
 	```console

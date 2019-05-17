@@ -27,7 +27,11 @@ Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-rest
 
 ## Building Your RESTful Hello World App
 
-1. Clone this repo if you haven't already and change directory to this lab so you can access the source code
+1. Clone the accompanying [Critical Stack Feature Lab repo](https://github.com/criticalstack/labs-code.git) if you haven't already and change directory to the [hello_rest](https://github.com/criticalstack/labs-code/hello_rest/) directory so you can access the source code
+
+	`git clone https://github.com/criticalstack/labs-code.git`
+
+	`cd labs-code/hello_rest`
 
 1. As with previous lab, compile the REST API example code into `hello-go`.
 	
