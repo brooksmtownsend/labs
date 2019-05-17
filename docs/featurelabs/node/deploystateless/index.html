@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.55.4" />
+    <meta name="generator" content="Hugo 0.55.5" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>Deploying a Stateless App :: Critical Stack Labs</title>
 
     
-    <link href="/labs/css/nucleus.css?1558036376" rel="stylesheet">
-    <link href="/labs/css/fontawesome-all.min.css?1558036376" rel="stylesheet">
-    <link href="/labs/css/hybrid.css?1558036376" rel="stylesheet">
-    <link href="/labs/css/featherlight.min.css?1558036376" rel="stylesheet">
-    <link href="/labs/css/perfect-scrollbar.min.css?1558036376" rel="stylesheet">
-    <link href="/labs/css/auto-complete.css?1558036376" rel="stylesheet">
-    <link href="/labs/css/atom-one-dark-reasonable.css?1558036376" rel="stylesheet">
-    <link href="/labs/css/theme.css?1558036376" rel="stylesheet">
-    <link href="/labs/css/hugo-theme.css?1558036376" rel="stylesheet">
+    <link href="/labs/css/nucleus.css?1558122707" rel="stylesheet">
+    <link href="/labs/css/fontawesome-all.min.css?1558122707" rel="stylesheet">
+    <link href="/labs/css/hybrid.css?1558122707" rel="stylesheet">
+    <link href="/labs/css/featherlight.min.css?1558122707" rel="stylesheet">
+    <link href="/labs/css/perfect-scrollbar.min.css?1558122707" rel="stylesheet">
+    <link href="/labs/css/auto-complete.css?1558122707" rel="stylesheet">
+    <link href="/labs/css/atom-one-dark-reasonable.css?1558122707" rel="stylesheet">
+    <link href="/labs/css/theme.css?1558122707" rel="stylesheet">
+    <link href="/labs/css/hugo-theme.css?1558122707" rel="stylesheet">
     
-      <link href="/labs/css/theme-cs.css?1558036376" rel="stylesheet">
+      <link href="/labs/css/theme-cs.css?1558122707" rel="stylesheet">
     
 
-    <script src="/labs/js/jquery-3.3.1.min.js?1558036376"></script>
+    <script src="/labs/js/jquery-3.3.1.min.js?1558122707"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -56,14 +56,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/labs/js/lunr.min.js?1558036376"></script>
-<script type="text/javascript" src="/labs/js/auto-complete.js?1558036376"></script>
+<script type="text/javascript" src="/labs/js/lunr.min.js?1558122707"></script>
+<script type="text/javascript" src="/labs/js/auto-complete.js?1558122707"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/criticalstack.github.io\/labs\/";
     
 </script>
-<script type="text/javascript" src="/labs/js/search.js?1558036376"></script>
+<script type="text/javascript" src="/labs/js/search.js?1558122707"></script>
 
     
   </div>
@@ -475,20 +475,22 @@ create a lab directory called <code>node-lab</code> and a subdirectory of that c
 user@testhost Development$ cd node-lab
 user@testhost node-lab$ ls
 app
-</code></pre></li>
+</code></pre>
 
-<li><p>Using the editor of your choice, create a file called <code>index.js</code> inside the <em><strong>app</strong></em> directory (resulting in <em><strong>app/index.js</strong></em>) with
-the following content:</p>
+<ol>
+<li>Using the editor of your choice, create a file called <code>index.js</code> inside the <em><strong>app</strong></em> directory (resulting in <em><strong>app/index.js</strong></em>) with
+the following content:
+```js
+// Say hello from Node
+var http = require(&lsquo;http&rsquo;);</li>
+</ol>
 
-<pre><code class="language-js">// Say hello from Node
-var http = require('http');
-
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello from Node!\n');
-}).listen(3000, &quot;0.0.0.0&quot;);
-console.log('Server running on :3000');
-</code></pre></li>
+<p>http.createServer(function (req, res) {
+  res.writeHead(200, {&lsquo;Content-Type&rsquo;: &lsquo;text/plain&rsquo;});
+  res.end(&lsquo;Hello from Node!\n&rsquo;);
+}).listen(3000, &ldquo;0.0.0.0&rdquo;);
+console.log(&lsquo;Server running on :3000&rsquo;);
+```</p></li>
 
 <li><p>Build the app configuration with <em><strong>npm</strong></em> in your <code>node-lab</code> working directory (not the <em><strong>app</strong></em> directory, this is one level above <em><strong>app</strong></em>)</p>
 
@@ -517,9 +519,11 @@ keywords:
 author:
 license: (ISC)
 About to write to /Users/user/Development/node-lab/package.json:
-</code></pre></li>
+</code></pre>
 
-<li><p><em><strong>npm</strong></em> makes it easy for JavaScript developers to share and re-use code.  Install dependent packages shared by other developers by running this command:</p>
+<ol>
+<li><em><strong>npm</strong></em> makes it easy for JavaScript developers to share and re-use code.  Install dependent packages shared by other developers by running this command:</li>
+</ol>
 
 <p><code>npm install</code></p>
 
@@ -602,9 +606,11 @@ have a Docker ID, head over to https://hub.docker.com to create one.
 Username: &lt;your username here&gt; 
 Password:
 Login Succeeded
-</code></pre></li>
+</code></pre>
 
-<li><p>Add the <em><strong>tag</strong></em> to be used in the public container registry (Note to instructor: Advise on tag naming convention)</p>
+<ol>
+<li>Add the <em><strong>tag</strong></em> to be used in the public container registry (Note to instructor: Advise on tag naming convention)</li>
+</ol>
 
 <p><code>docker tag hello-node &lt;your-user-name&gt;/hello-node:0.0.1</code></p>
 
@@ -632,13 +638,13 @@ dd1eb1fd7e08: Mounted from library/node
 0.0.1: digest: sha256:e755e97b58a700207b2a9ba0deaa26927210b84f8d79618d1c4cd8f498b97373 size: 2834
 </code></pre>
 
-<p>Your image digest and layer hashes will differ.</p></li>
-</ol>
+<p>Your image digest and layer hashes will differ.</p>
 
 <h4 id="deploying">Deploying</h4>
 
 <ol>
-<li><p>Login to Critical Stack.  Under <em><strong>Data Center &gt; Workloads</strong></em> select <em><strong>Deployments</strong></em>. Create a <em><strong>Simple</strong></em> Deployment in Critical Stack.</p>
+<li>Login to Critical Stack.  Under <em><strong>Data Center &gt; Workloads</strong></em> select <em><strong>Deployments</strong></em>. Create a <em><strong>Simple</strong></em> Deployment in Critical Stack.</li>
+</ol>
 
 <p>Call the app name whatever you like (in this example I used <code>my-first-deployment</code>).</p>
 
@@ -646,13 +652,17 @@ dd1eb1fd7e08: Mounted from library/node
 
 <p>Leave the rest of the inputs at their defaults</p>
 
-<p><img src="../../../images/featurelabs/node/simple_deployment.png" alt="Simple deployment" title="Simple deployment" /></p></li>
+<p><img src="../../../images/featurelabs/node/simple_deployment.png" alt="Simple deployment" title="Simple deployment" /></p>
 
-<li><p>Under <em><strong>Data Center &gt; Workloads</strong></em> select <em><strong>Deployments</strong></em> and confirm that the deployment created in the previous step is <em><strong>Available</strong></em> (a non-zero number is visible in the <em><strong>Available</strong></em> column).</p>
+<ol>
+<li>Under <em><strong>Data Center &gt; Workloads</strong></em> select <em><strong>Deployments</strong></em> and confirm that the deployment created in the previous step is <em><strong>Available</strong></em> (a non-zero number is visible in the <em><strong>Available</strong></em> column).</li>
+</ol>
 
-<p><img src="../../../images/featurelabs/node/available.png" alt="Available" title="Available" /></p></li>
+<p><img src="../../../images/featurelabs/node/available.png" alt="Available" title="Available" /></p>
 
-<li><p>Under <em><strong>Data Center &gt; Services and Discovery</strong></em> select <em><strong>Services</strong></em>.  Create a <em><strong>Simple Service</strong></em> in Critical Stack.</p>
+<ol>
+<li>Under <em><strong>Data Center &gt; Services and Discovery</strong></em> select <em><strong>Services</strong></em>.  Create a <em><strong>Simple Service</strong></em> in Critical Stack.</li>
+</ol>
 
 <p>Call the service name whatever you like (in this example I used <code>my-first-deployment-svc</code>).</p>
 
@@ -668,42 +678,54 @@ dd1eb1fd7e08: Mounted from library/node
 
 <p>Under the <em><strong>Target Port</strong></em> field, enter the port number supported by your app and exposed in your <em><strong>Dockerfile</strong></em> (in this example, port <code>3000</code>)</p>
 
-<p><img src="../../../images/featurelabs/node//create_service.png" alt="Create service" title="Create service" /></p></li>
+<p><img src="../../../images/featurelabs/node//create_service.png" alt="Create service" title="Create service" /></p>
 
-<li><p>Under <em><strong>Data Center &gt; Services and Discovery</strong></em> select <em><strong>Services</strong></em>. Check the service listing and note the dynamic port which was assigned to it.  In this example it is port <em><strong>32151</strong></em></p>
+<ol>
+<li>Under <em><strong>Data Center &gt; Services and Discovery</strong></em> select <em><strong>Services</strong></em>. Check the service listing and note the dynamic port which was assigned to it.  In this example it is port <em><strong>32151</strong></em></li>
+</ol>
 
-<p><img src="../../../images/featurelabs/node/get_dynamic_port.png" alt="Get dynamic port" title="Get dynamic port" /></p></li>
+<p><img src="../../../images/featurelabs/node/get_dynamic_port.png" alt="Get dynamic port" title="Get dynamic port" /></p>
 
-<li><p>Under <em><strong>Data Center &gt; Services and Discovery</strong></em> select <em><strong>Endpoints</strong></em>.  Confirm that the service created has the just created listener configured to the port supported by the app and exposed in the <em><strong>Dockerfile</strong></em> (in this example, port <em><strong>3000</strong></em>).</p>
+<ol>
+<li>Under <em><strong>Data Center &gt; Services and Discovery</strong></em> select <em><strong>Endpoints</strong></em>.  Confirm that the service created has the just created listener configured to the port supported by the app and exposed in the <em><strong>Dockerfile</strong></em> (in this example, port <em><strong>3000</strong></em>).</li>
+</ol>
 
-<p><img src="../../../images/featurelabs/node/confirm_endpoint_configuration.png" alt="Confirm Endpoint configuration" title="Confirm Endpoint configuration" /></p></li>
+<p><img src="../../../images/featurelabs/node/confirm_endpoint_configuration.png" alt="Confirm Endpoint configuration" title="Confirm Endpoint configuration" /></p>
 
+<ol>
 <li><p>Log into the cloud provider console associated with this deployment of Critical Stack (note: we are running our Critical Stack cluster on AWS EC2. The steps which follow will be AWS-specific).</p></li>
 
-<li><p>Navigate to the <em><strong>Load Balancers</strong></em> section</p>
+<li><p>Navigate to the <em><strong>Load Balancers</strong></em> section</p></li>
+</ol>
 
-<p><img src="../../../images/featurelabs/node/load_balancers_section.png" alt="Load Balancers section" title="Load Balancers section" /></p></li>
+<p><img src="../../../images/featurelabs/node/load_balancers_section.png" alt="Load Balancers section" title="Load Balancers section" /></p>
 
-<li><p>Find the Load Balancer which was created by Critical Stack/Kubernetes during the creation of the Service in a previous step (step 12). To quickly find the relevant Load Balancer, enter <code>kubernetes.io/service-name</code> as the <em><strong>Tag Key</strong></em> in the Filter text box.</p>
+<ol>
+<li>Find the Load Balancer which was created by Critical Stack/Kubernetes during the creation of the Service in a previous step (step 12). To quickly find the relevant Load Balancer, enter <code>kubernetes.io/service-name</code> as the <em><strong>Tag Key</strong></em> in the Filter text box.</li>
+</ol>
 
 <p>For the <em><strong>Tag Value</strong></em>, enter in the name of the service created in the previous step. In this example, our service name is &lsquo;critical-stack/my-first-deployment-svc`.</p>
 
-<p><img src="../../../images/featurelabs/node/find_load_balancer.png" alt="Find Load Balancer" title="FInd Load Balancer" /></p></li>
+<p><img src="../../../images/featurelabs/node/find_load_balancer.png" alt="Find Load Balancer" title="FInd Load Balancer" /></p>
 
-<li><p>Click the Load Balancer found in the previous step. At the bottom of the screen you should see a tab called <em><strong>Description</strong></em>. Within the data displayed under that tab you should see <em><strong>DNS name</strong></em> under the <em><strong>Basic</strong></em> section. Copy this DNS value as it is the auto-generated, publicly facing domain name.</p>
-
-<p><img src="../../../images/featurelabs/node/find_public_URL.png" alt="Find public URL" title="Find public URL" /></p></li>
-
-<li><p>Paste the DNS value copied from a previous step into a browser. This confirms that the app we have deployed onto our Critical Stack cluster is fully &ldquo;live&rdquo; to the public internet.</p>
-
-<p><img src="../../../images/featurelabs/node/go_to_public_URL.png" alt="Go to public URL" title="Go to public URL" /></p></li>
+<ol>
+<li>Click the Load Balancer found in the previous step. At the bottom of the screen you should see a tab called <em><strong>Description</strong></em>. Within the data displayed under that tab you should see <em><strong>DNS name</strong></em> under the <em><strong>Basic</strong></em> section. Copy this DNS value as it is the auto-generated, publicly facing domain name.</li>
 </ol>
+
+<p><img src="../../../images/featurelabs/node/find_public_URL.png" alt="Find public URL" title="Find public URL" /></p>
+
+<ol>
+<li>Paste the DNS value copied from a previous step into a browser. This confirms that the app we have deployed onto our Critical Stack cluster is fully &ldquo;live&rdquo; to the public internet.</li>
+</ol>
+
+<p><img src="../../../images/featurelabs/node/go_to_public_URL.png" alt="Go to public URL" title="Go to public URL" /></p>
 
 <h3 id="conclusion">Conclusion</h3>
 
 <p>We created a simple NodeJS application, packaged the application in a Docker image, pushed the Docker image to a public Docker Hub repository, pulled that Docker image into a Critical Stack deployment as a container instance, and accessed the application via a public URL.</p>
 
-<p>To learn the basics of managing the lifecycle of an application, see the <a href="updating.md">next lab</a>.</p>
+<p>To learn the basics of managing the lifecycle of an application, see the <a href="updating.md">next lab</a>.</p></li>
+</ol>
 
 
 <footer class=" footline" >
@@ -932,20 +954,20 @@ dd1eb1fd7e08: Mounted from library/node
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/labs/js/clipboard.min.js?1558036376"></script>
-    <script src="/labs/js/perfect-scrollbar.min.js?1558036376"></script>
-    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558036376"></script>
-    <script src="/labs/js/jquery.sticky.js?1558036376"></script>
-    <script src="/labs/js/featherlight.min.js?1558036376"></script>
-    <script src="/labs/js/html5shiv-printshiv.min.js?1558036376"></script>
-    <script src="/labs/js/highlight.pack.js?1558036376"></script>
+    <script src="/labs/js/clipboard.min.js?1558122707"></script>
+    <script src="/labs/js/perfect-scrollbar.min.js?1558122707"></script>
+    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558122707"></script>
+    <script src="/labs/js/jquery.sticky.js?1558122707"></script>
+    <script src="/labs/js/featherlight.min.js?1558122707"></script>
+    <script src="/labs/js/html5shiv-printshiv.min.js?1558122707"></script>
+    <script src="/labs/js/highlight.pack.js?1558122707"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/labs/js/modernizr.custom-3.6.0.js?1558036376"></script>
-    <script src="/labs/js/learn.js?1558036376"></script>
-    <script src="/labs/js/hugo-learn.js?1558036376"></script>
+    <script src="/labs/js/modernizr.custom-3.6.0.js?1558122707"></script>
+    <script src="/labs/js/learn.js?1558122707"></script>
+    <script src="/labs/js/hugo-learn.js?1558122707"></script>
 
-    <link href="/labs/mermaid/mermaid.css?1558036376" type="text/css" rel="stylesheet" />
-    <script src="/labs/mermaid/mermaid.js?1558036376"></script>
+    <link href="/labs/mermaid/mermaid.css?1558122707" type="text/css" rel="stylesheet" />
+    <script src="/labs/mermaid/mermaid.js?1558122707"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.55.4" />
+    <meta name="generator" content="Hugo 0.55.5" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>AWS Basic Cluster :: Critical Stack Labs</title>
 
     
-    <link href="/labs/css/nucleus.css?1558036376" rel="stylesheet">
-    <link href="/labs/css/fontawesome-all.min.css?1558036376" rel="stylesheet">
-    <link href="/labs/css/hybrid.css?1558036376" rel="stylesheet">
-    <link href="/labs/css/featherlight.min.css?1558036376" rel="stylesheet">
-    <link href="/labs/css/perfect-scrollbar.min.css?1558036376" rel="stylesheet">
-    <link href="/labs/css/auto-complete.css?1558036376" rel="stylesheet">
-    <link href="/labs/css/atom-one-dark-reasonable.css?1558036376" rel="stylesheet">
-    <link href="/labs/css/theme.css?1558036376" rel="stylesheet">
-    <link href="/labs/css/hugo-theme.css?1558036376" rel="stylesheet">
+    <link href="/labs/css/nucleus.css?1558122707" rel="stylesheet">
+    <link href="/labs/css/fontawesome-all.min.css?1558122707" rel="stylesheet">
+    <link href="/labs/css/hybrid.css?1558122707" rel="stylesheet">
+    <link href="/labs/css/featherlight.min.css?1558122707" rel="stylesheet">
+    <link href="/labs/css/perfect-scrollbar.min.css?1558122707" rel="stylesheet">
+    <link href="/labs/css/auto-complete.css?1558122707" rel="stylesheet">
+    <link href="/labs/css/atom-one-dark-reasonable.css?1558122707" rel="stylesheet">
+    <link href="/labs/css/theme.css?1558122707" rel="stylesheet">
+    <link href="/labs/css/hugo-theme.css?1558122707" rel="stylesheet">
     
-      <link href="/labs/css/theme-cs.css?1558036376" rel="stylesheet">
+      <link href="/labs/css/theme-cs.css?1558122707" rel="stylesheet">
     
 
-    <script src="/labs/js/jquery-3.3.1.min.js?1558036376"></script>
+    <script src="/labs/js/jquery-3.3.1.min.js?1558122707"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -56,14 +56,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/labs/js/lunr.min.js?1558036376"></script>
-<script type="text/javascript" src="/labs/js/auto-complete.js?1558036376"></script>
+<script type="text/javascript" src="/labs/js/lunr.min.js?1558122707"></script>
+<script type="text/javascript" src="/labs/js/auto-complete.js?1558122707"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/criticalstack.github.io\/labs\/";
     
 </script>
-<script type="text/javascript" src="/labs/js/search.js?1558036376"></script>
+<script type="text/javascript" src="/labs/js/search.js?1558122707"></script>
 
     
   </div>
@@ -442,7 +442,7 @@
 
 <li><p>After you fill our your user information click <strong>Register</strong>, you will receive a Welcome Email and a link to confirm your email.</p></li>
 
-<li><p>Login to your account at <a href="https://portal.criticalstack.com">Critical Stack Developer Portal</a>.  In the <strong>Key Generator</strong> section, click <strong>Generate License</strong> button to produce a valid license key.  Select <code>Cloud</code> as the License Type since we are installing into AWS.</p>
+<li><p>Login to your account at <a href="https://portal.criticalstack.com">Critical Stack Developer Portal</a>.  In the <strong>Key Generator</strong> section, click <strong>Generate License</strong> button to produce a valid license key.  Select <strong>Cloud</strong> as the *<em>License Type</em> since we are installing into <strong>AWS</strong>.</p>
 
 <p><img src="../../images/install/aws_basic_cluster/license_type.png" alt="licensetype" /></p></li>
 
@@ -452,13 +452,13 @@
 <h2 id="installation">Installation</h2>
 
 <ol>
-<li><p>There are two types of installations: Cloud and Local.  For this walkthrough, we will be installing in AWS so select <code>Cloud</code> and your license key and click <strong>Proceed</strong>.</p>
+<li><p>There are two types of installations: <strong>Cloud</strong> and <strong>Local</strong>.  For this walkthrough, we will be installing to <strong>AWS</strong> so select <strong>Cloud</strong> and your license key and click <strong>Proceed</strong>.</p>
 
 <p><img src="../../images/install/aws_basic_cluster/installation_type.png" alt="installation_type" /></p></li>
 
-<li><p>Select your Cloud provider, <code>AWS</code></p></li>
+<li><p>Select your Cloud provider, <strong>AWS</strong></p></li>
 
-<li><p>Enter your AWS Credentials to create and configure the required resources.  It is strongly recommended you create a limited access role.  You can use this <a href="../../res/cs_minimum_policy_install.json">sample json definition</a> to create a policy for your user/group.  Additional information for creating IAM Policies and generating keys can be found <a href="../awsaccount">here</a></p></li>
+<li><p>Enter your AWS Credentials to create and configure the required resources.  It is strongly recommended you create a limited access role.  You can use this <a href="../../res/cs_minimum_policy_install.json">sample JSON definition</a> to create a policy for your user/group.  Additional information for creating IAM Policies and generating keys can be found <a href="../awsaccount">here</a></p></li>
 
 <li><p>Select your AWS Region for this cluster and click <strong>Proceed</strong>.</p>
 
@@ -466,17 +466,17 @@
 
 <li><p>You may add any optional <strong>Cluster Tags</strong> and click <strong>Proceed</strong>.</p></li>
 
-<li><p>If you want to customize the network settings you can add your own <strong>VPC CIDR</strong> and <strong>Subnets</strong> or use the default.  Click on <strong>Proceed</strong>.   Additional details on VPCs and Subnets can be found <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#vpc-sizing-ipv4">here</a></p></li>
+<li><p>If you want to customize the network settings you can add your own <strong>VPC CIDR</strong> and <strong>Subnets</strong> or use the default.  Click on <strong>Proceed</strong>.   Additional details on VPCs and Subnets can be found <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#vpc-sizing-ipv4">here</a>.</p></li>
 
-<li><p>Choose what <strong>Instance Type</strong> you want for your Master Node. For detailed comparison ECS instance types this <a href="https://aws.amazon.com/ec2/instance-types">guide</a> is very helpful.</p></li>
+<li><p>Choose what <strong>Instance Type</strong> you want for your master node. For detailed comparison ECS instance types this <a href="https://aws.amazon.com/ec2/instance-types">guide</a> is very helpful.</p></li>
 
-<li><p>Choose <code>Public</code> for the subnet type unless you are connecting to a private subnet with a VPN.</p></li>
+<li><p>Choose <strong>Public</strong> for the subnet type unless you are connecting to a private subnet with a VPN.</p></li>
 
 <li><p>Choose what type of Storage you want to use, either <code>gp2</code> General Purpose SSD volume (balance of price and performance) or <code>io1</code> Highest-Performance SSD volume (low-latency / high throughput workloads) and the <strong>storage size</strong>.  Select <strong>Proceed</strong>.</p>
 
 <p><img src="../../images/install/aws_basic_cluster/instance_type.png" alt="instancetype" /></p></li>
 
-<li><p>Review the cluster settings.  If you need to make any changes you can use the <strong>Go Back</strong> button or click on a section header in the sidebar to make the desired changes.  <strong>Note</strong> The <code>access_key_id</code> and <code>secret_access_key</code> will not be stored and is only showed for you convenience to verify.  If everything looks correct, click on <strong>Create Cluster</strong>
+<li><p>Review the cluster settings.  If you need to make any changes you can use the <strong>Go Back</strong> button or click on a section header in the sidebar to make the desired changes.  <strong>Note</strong> the <strong>access_key_id</strong> and <strong>secret_access_key</strong> will not be stored and is only showed for you convenience to verify.  If everything looks correct, click <strong>CREATE CLUSTER</strong>.
 <img src="../../images/install/aws_basic_cluster/create_cluster.png" alt="createcluster" /></p></li>
 
 <li><p>When you cluster is ready, select <strong>Download Assets</strong> to get the details about your environment.<br />
@@ -485,13 +485,19 @@
 
 <h2 id="cluster-assets">Cluster Assets</h2>
 
-<p>The <strong>Cluster Assets</strong> page lists the <code>Cluster information</code>, <code>PEM Key</code>, and and <code>Cluster Link</code>.  If you plan to <code>ssh</code> into the cluster nodes, you should download they PEM Key.  You can come back to this page at any time if you need to access the cluster information.</p>
+<p>The <strong>Cluster Assets</strong> page lists the <strong>Cluster information</strong>, <strong>PEM Key</strong>, and and <strong>Cluster Link</strong>.  If you plan to <code>ssh</code> into the cluster nodes, you must download the <strong>PEM Key</strong>.  You can come back to this page at any time if you need to access the cluster information.<br />
+    <img src="../../images/install/aws_basic_cluster/assets.png" alt="assets" /></p>
 
 <ol>
-<li>To access the Critical Stack cluster click the <strong>Go To Cluster</strong> button or copy the url provided in the Cluster Link section.</li>
-</ol>
+<li><p>Create a <strong>cluster administrator</strong> login by clicking on the <strong>CREATE ADMIN</strong> button.  You must complete this step to access the cluster, and this step can be completed only one time so note the password you choose.
+<img src="../../images/install/aws_basic_cluster/admin.png" alt="admin" /></p></li>
 
-<h2 id="todo-add-login-info-after-may-15">TODO -  Add login info after May 15</h2>
+<li><p>To access the Critical Stack cluster click the <strong>GO TO CLUSTER</strong> button or copy the url provided in the <strong>Cluster Link</strong> section.
+<img src="../../images/install/aws_basic_cluster/cluster_login.png" alt="cluster_login" /></p></li>
+
+<li><p>The Secure Orchestration Platform for the Enterprise
+<img src="../../images/install/aws_basic_cluster/critical_stack_cluster.png" alt="critical_stack_cluster" /></p></li>
+</ol>
 
 
 
@@ -723,20 +729,20 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/labs/js/clipboard.min.js?1558036376"></script>
-    <script src="/labs/js/perfect-scrollbar.min.js?1558036376"></script>
-    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558036376"></script>
-    <script src="/labs/js/jquery.sticky.js?1558036376"></script>
-    <script src="/labs/js/featherlight.min.js?1558036376"></script>
-    <script src="/labs/js/html5shiv-printshiv.min.js?1558036376"></script>
-    <script src="/labs/js/highlight.pack.js?1558036376"></script>
+    <script src="/labs/js/clipboard.min.js?1558122707"></script>
+    <script src="/labs/js/perfect-scrollbar.min.js?1558122707"></script>
+    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558122707"></script>
+    <script src="/labs/js/jquery.sticky.js?1558122707"></script>
+    <script src="/labs/js/featherlight.min.js?1558122707"></script>
+    <script src="/labs/js/html5shiv-printshiv.min.js?1558122707"></script>
+    <script src="/labs/js/highlight.pack.js?1558122707"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/labs/js/modernizr.custom-3.6.0.js?1558036376"></script>
-    <script src="/labs/js/learn.js?1558036376"></script>
-    <script src="/labs/js/hugo-learn.js?1558036376"></script>
+    <script src="/labs/js/modernizr.custom-3.6.0.js?1558122707"></script>
+    <script src="/labs/js/learn.js?1558122707"></script>
+    <script src="/labs/js/hugo-learn.js?1558122707"></script>
 
-    <link href="/labs/mermaid/mermaid.css?1558036376" type="text/css" rel="stylesheet" />
-    <script src="/labs/mermaid/mermaid.js?1558036376"></script>
+    <link href="/labs/mermaid/mermaid.css?1558122707" type="text/css" rel="stylesheet" />
+    <script src="/labs/mermaid/mermaid.js?1558122707"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
