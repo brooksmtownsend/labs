@@ -39,7 +39,7 @@ The Go code was lifted from [Making a RESTful JSON API in Go](https://thenewstac
 	$ CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -a -o hello-go .
 	```
 
-1.  As with previous lab, build a Docker image using the `Dockerfile`.
+1.  As with previous lab, build a Docker image using the **Dockerfile**.
 
 	
 	`docker build -t hello-go -f Dockerfile .`
@@ -133,40 +133,40 @@ _**Optional Step**_: If you want to test your new docker container locally and s
 	```
 
 
-1.  Edit your `hello-go-deployment` from the Critical Stack UI.  Update the image in the _**Deployment**_ to pull `0.0.2`.  Then you can run the same tests as above but targeting the Load Balancer.
+1.  Edit your **hello-go-deployment** from the Critical Stack UI.  Update the image in the **Deployment** to pull `0.0.2`.
 
 	```
           image: 'jabbottc1/hello-go:0.0.2'  # Change this tag
     ```
 
-1.  **Save** your deployment and **exit**
+1.  **Save** your deployment and **Exit**
 
-1.  Test your upgraded deployment.  Then you can run the same tests as above but targeting the ingress host.
+1.  Test your upgraded deployment.  You can run the same tests as above but targeting the Load Balancer.
 	```terminal
 	$ curl -s -H "Content-Type: application/json" -d '{"name":"John Test"}' https://<URL_to_your_application>/todos
 	```
 	
 	```terminal
-	 $ curl -s https://<URL_to_your_application>/todos | python -m json.tool
+	$ curl -s https://<URL_to_your_application>/todos | python -m json.tool
 	[
-	    {
-        "completed": false,
-        "due": "0001-01-01T00:00:00Z",
-        "id": 1,
-        "name": "Write presentation"
-        },
-    	{
-        "completed": false,
-        "due": "0001-01-01T00:00:00Z",
-        "id": 2,
-        "name": "Host meetup"
-    	},
-    	{
-        "completed": false,
-        "due": "0001-01-01T00:00:00Z",
-        "id": 3,
-        "name": "John Test"
-    	}
+		{
+			"completed": false,
+			"due": "0001-01-01T00:00:00Z",
+			"id": 1,
+			"name": "Write presentation"
+		},
+		{
+			"completed": false,
+			"due": "0001-01-01T00:00:00Z",
+			"id": 2,
+			"name": "Host meetup"
+		},
+		{
+			"completed": false,
+			"due": "0001-01-01T00:00:00Z",
+			"id": 3,
+			"name": "John Test"
+		}
 	]
 	```
 	
@@ -175,7 +175,7 @@ _**Optional Step**_: If you want to test your new docker container locally and s
 
 
 ## Conclusion
-You have successfully deployed a RESTful Go application to Critical Stack.  But this application is flawed - it can't scale beyond 1 node and has no persistence!  So next we will deploy a Go Application with a REST API and Persistence.
+You have successfully deployed a RESTful Go application to Critical Stack.  But this application is flawed - it can't scale beyond 1 node and has no persistence!  So next we will update the application with persistence and scale the deployment to multiple instances.
 
 Note:  some bugs with **DELETE**!
 

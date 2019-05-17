@@ -35,14 +35,14 @@ Note: all source materials for this lab can be found in the [Critical Stack Feat
 1. Create a working directory to build your "Hello World" application.  
 
 	1. Open a terminal window.  
-	1. In your current working directory (we will use the `Development` directory under the user's home directory in this example), create a lab directory called `go` and a subdirectory of that called 'app'
+	1. In your current working directory (we will use the **Development** directory under the user's home directory in this example), create a lab directory called **go** and a subdirectory of that called **app**
 
 	```terminal
 	cd ~/Development
 	mkdir -p go/app
 	cd go/app
 	```
-2.  Using the editor of your choice, create a new file called `main.go` inside the **app** directory.
+2.  Using the editor of your choice, create a new file called **main.go** inside the **app** directory.
 
 	```terminal
 	vi hello-go.go
@@ -67,15 +67,15 @@ Note: all source materials for this lab can be found in the [Critical Stack Feat
           log.Fatal(http.ListenAndServe(":8080", nil))
 	}
 	```
-1. Compile your Go executable so it properly targets a linux OS and is built statically with minimal dependencies. In this example we have decided to name the executable `hello-go`:
+1. Compile your Go executable so it properly targets a linux OS and is built statically with minimal dependencies. In this example we have decided to name the executable **hello-go**:
 	
 	```terminal
 	$ CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -a -o hello-go .
 	```
 	
-1.  A new executable binary called `hello-go` will be created in the same directory.  This will be referenced when we build our docker container.
+1.  A new executable binary called **hello-go** will be created in the same directory.  This will be referenced when we build our docker container.
 
-1.  Create a new file in the same directory and name it `Dockerfile`.  This file could be named anything, but common convention is to use this filename.  Copy the following code into this file:
+1.  Create a new file in the same directory and name it **Dockerfile**.  This file could be named anything, but common convention is to use this filename.  Copy the following code into this file:
 
 	```
 	# STEP 1 build directory / file layout
@@ -124,7 +124,7 @@ Note: all source materials for this lab can be found in the [Critical Stack Feat
 	Login Succeeded
 	```
 
-1.  Build a Docker image using the `Dockerfile`.  Make sure to include the `.` at the end of the following command. The name of the image we're creating is **hello-go**:
+1.  Build a Docker image using the **Dockerfile**.  Make sure to include the **.** at the end of the following command. The name of the image we're creating is **hello-go**:
 
 	`docker build -t hello-go -f Dockerfile .`
 
@@ -141,11 +141,11 @@ _Optional_ - if you want to test your docker image locally to see if it behaves 
 	$ curl http://localhost:8080
 	```
 	
-	**Note**: to stop the running container run this command from the new terminal window (this uses `--filter` (`-f`) to find the container created from your `hello-go` image):
+	**Note**: to stop the running container run this command from the new terminal window (this uses **--filter** (**-f**) to find the container created from your **hello-go** image):
 
 	`docker stop $(docker ps -qf "ancestor=hello-go")`
 
-	Another way to stop the `hello-go`container is to view all of the running docker containers and issue a command to stop it by the ID:
+	Another way to stop the **hello-go** container is to view all of the running docker containers and issue a command to stop it by the ID:
 
 	```terminal
    $ docker container ls
@@ -161,9 +161,9 @@ _Optional_ - if you want to test your docker image locally to see if it behaves 
 
 ## Tagging and Pushing your Image to a Registry
 
-Now that we have an image we need to apply a `tag` and `push` it to a container registry.
+Now that we have an image we need to apply a **tag** and **push** it to a container registry.
 
-1. Docker tags allow you to convey useful information about a specific image version or variant.  Rather than referring to your image by the `IMAGE ID` you can create aliases for your images.  Lets look at the list of images locally (your list might be different):
+1. Docker tags allow you to convey useful information about a specific image version or variant.  Rather than referring to your image by the **IMAGE ID** you can create aliases for your images.  Lets look at the list of images locally (your list might be different):
 		
 	```terminal
 	$ docker images
@@ -172,7 +172,7 @@ Now that we have an image we need to apply a `tag` and `push` it to a container 
 	alpine                 latest              8cb3aa00f899        3 weeks ago         
 	tomcat                 8.0                 ef6a7c98d192        6 months ago
 	```
-1.  We will `tag` your local image with your **namespace/repository** using the following command: `docker tag hello-go <your-registry-user-name>/hello-go:0.0.1`
+1.  We will **tag** your local image with your **namespace/repository** using the following command: `docker tag hello-go <your-registry-user-name>/hello-go:0.0.1`
 	
 	```terminal
 	$ docker tag hello-go jabbottc1/hello-go:0.0.1
@@ -206,7 +206,7 @@ Now that we have an image we need to apply a `tag` and `push` it to a container 
 ## Deploy your container into Critical Stack
 Deploying your container is as simple as following the [deployment steps in the Node lab](../../node/deploystateless/#deploying), but change the docker image name and other parameters as appropriate.
 
-1. Navigate to your application host to see your **Hello World** message or run `curl` to verify that you application is running and exposed externally.  **Note** it may take a few minutes for this new **cname** to be created.
+1. Navigate to the application Load Balancer URL to see your **Hello World** message or run `curl` to verify that you application is running and exposed externally.  **Note** it may take a few minutes for the **Load Balancer** to be created.
 
 	`curl -s http://<URL_for_your_deployment>`
 	
@@ -216,7 +216,7 @@ Deploying your container is as simple as following the [deployment steps in the 
 	```
 
 ### Conclusion
-You have now successfully deployed a Go application in Critical Stack.  But _**Hello World**_ isn't enough, right?  Next we will deploy a [Stateless RESTful Go App](../hello_rest).
+You have now successfully deployed a Go application in Critical Stack.  But **Hello World** isn't enough, right?  Next we will deploy a [Stateless RESTful Go App](../hello_rest).
 
 
 ### TODO

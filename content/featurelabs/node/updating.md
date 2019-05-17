@@ -23,7 +23,7 @@ push that update to Docker Hub,
 and use the Critical Stack UI to instruct Kubernetes to roll out the update while we refresh the public URL. This will let us observe that a seamless rolling update is done with zero downtime.
 
 ### Steps
-1. Edit `app/index.js` (in your `node-lab` directory) and replace the source code with the following:
+1. Edit **app/index.js** (in your **node-lab** directory) and replace the source code with the following:
     ```
     // Load the http module to create an http server.
     var http = require('http');
@@ -63,7 +63,7 @@ and use the Critical Stack UI to instruct Kubernetes to roll out the update whil
     console.log("Server running at http://0.0.0.0:3000/");
     ```
 
-1. Increment the application version number in your `package.json` file and re-run `npm install` to update the `package-lock.json` file.
+1. Increment the application version number in your **package.json** file and re-run `npm install` to update the **package-lock.json** file.
 
     ```terminal
     user@testhost node-lab$ cat package.json
@@ -146,7 +146,7 @@ and use the Critical Stack UI to instruct Kubernetes to roll out the update whil
 
     ![Rolling update](../../../images/featurelabs/node/RollingUpdate.png "Rolling update")
 
-1. Click on the gear icon again, and select _**Edit**_.  On line 36, change the Docker image tag from `0.0.1` to `0.0.2`. For example: `image: 'docker.io/jabbottc1/hello-node:0.0.1'` becomes `image: 'docker.io/jabbottc1/hello-node:0.0.2'`.  Next click _**Save**_ and then _**Exit**_.
+1. Click on the gear icon again, and select _**Edit**_.  On line 36, change the Docker image tag from `0.0.1` to `0.0.2`. For example: image: '`docker.io/jabbottc1/hello-node:0.0.1`' becomes image: '`docker.io/jabbottc1/hello-node:0.0.2`'.  Next click _**Save**_ and then _**Exit**_.
 
     ![Use application v2](../../../images/featurelabs/node/UseApplicationv2.png "Use application v2")
 
