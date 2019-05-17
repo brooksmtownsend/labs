@@ -1,5 +1,5 @@
 +++
-title = "Deploying a Stateless Golang App"
+title = "Deploying a Stateless Go App"
 date = 2019-04-23T09:43:37-04:00
 weight = 5
 chapter = false

@@ -12,23 +12,13 @@
     
     
     <item>
-      <title>Deploying a Stateless Golang App</title>
+      <title>Deploying a Stateless Go App</title>
       <link>https://criticalstack.github.io/labs/featurelabs/go/hello/</link>
       <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
       
       <guid>https://criticalstack.github.io/labs/featurelabs/go/hello/</guid>
       <description>Deploying a Stateless Golang App in Critical Stack Getting Started Pre-requisites:
  Go Visual Studio Code curl or some equivalent way to do GET and POST If using curl, python to make JSON prettier Docker : Docker Public container registry Docker Hub A Critical Stack deployment with a user account provisioned for you. Note your namespace when you login.  Overview In this lab, you will deploy a simple Go Hello World application in Critical Stack and create Services to make it available externally.</description>
-    </item>
-    
-    <item>
-      <title>Deploying a Stateless Golang App with REST API</title>
-      <link>https://criticalstack.github.io/labs/featurelabs/go/hello&#43;rest/readme/</link>
-      <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
-      
-      <guid>https://criticalstack.github.io/labs/featurelabs/go/hello&#43;rest/readme/</guid>
-      <description>Deploying a Stateless Golang App with REST API in Critical Stack Getting Started Pre-requisites:
- Go Visual Studio Code curl or some equivalent way to do GET and POST If using curl, python to make JSON prettier Docker : Docker Public container registry Docker Hub Previous Go lab for Docker registry and Load Balancer setup - this demo will just update the previous Docker image with new functionality  Overview Update previous lab to introduce a REST API.</description>
     </item>
     
     <item>
@@ -40,6 +30,16 @@
       <description>Deploying a Stateless NodeJS App in Critical Stack Getting Started Pre-requisites:
  Node JS (and npm) : Node.JS Docker : Docker Public container registry (Docker Hub is easiest, Artifactory works too) : Docker Hub  Overview In this lab we will create a simple NodeJS application, deploy it via Critical Stack. and access it via a public URL.
 Steps Building  Open a terminal window. In your current working directory (we use the Development directory under the user&amp;rsquo;s home directory in this example), create a lab directory called node-lab and a subdirectory of that called app:</description>
+    </item>
+    
+    <item>
+      <title>Deploying a Stateless RESTful Go App</title>
+      <link>https://criticalstack.github.io/labs/featurelabs/go/hello_rest/</link>
+      <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
+      
+      <guid>https://criticalstack.github.io/labs/featurelabs/go/hello_rest/</guid>
+      <description>Deploying a Stateless Golang App with REST API in Critical Stack Getting Started Pre-requisites:
+ Go Visual Studio Code curl or some equivalent way to do GET and POST If using curl, python to make JSON prettier Docker : Docker Public container registry Docker Hub Previous Go lab for Docker registry and Load Balancer setup - this demo will just update the previous Docker image with new functionality  Overview Update previous lab to introduce a REST API.</description>
     </item>
     
     <item>

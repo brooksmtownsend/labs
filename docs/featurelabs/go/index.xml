@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>Deploying a Stateless Golang App</title>
+      <title>Deploying a Stateless Go App</title>
       <link>https://criticalstack.github.io/labs/featurelabs/go/hello/</link>
       <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
       
@@ -22,11 +22,11 @@
     </item>
     
     <item>
-      <title>Deploying a Stateless Golang App with REST API</title>
-      <link>https://criticalstack.github.io/labs/featurelabs/go/hello&#43;rest/readme/</link>
+      <title>Deploying a Stateless RESTful Go App</title>
+      <link>https://criticalstack.github.io/labs/featurelabs/go/hello_rest/</link>
       <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
       
-      <guid>https://criticalstack.github.io/labs/featurelabs/go/hello&#43;rest/readme/</guid>
+      <guid>https://criticalstack.github.io/labs/featurelabs/go/hello_rest/</guid>
       <description>Deploying a Stateless Golang App with REST API in Critical Stack Getting Started Pre-requisites:
  Go Visual Studio Code curl or some equivalent way to do GET and POST If using curl, python to make JSON prettier Docker : Docker Public container registry Docker Hub Previous Go lab for Docker registry and Load Balancer setup - this demo will just update the previous Docker image with new functionality  Overview Update previous lab to introduce a REST API.</description>
     </item>

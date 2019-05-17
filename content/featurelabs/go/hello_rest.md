@@ -1,7 +1,7 @@
 +++
-title = "Deploying a Stateless Golang App with REST API"
+title = "Deploying a Stateless RESTful Go App"
 date = 2019-04-23T09:43:37-04:00
-weight = 5
+weight = 6
 chapter = false
 pre = "<i class='fas fa-flask'></i> "
 +++
@@ -182,7 +182,7 @@ Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-rest
 
 
 ### Conclusion
-You have successfully deployed a golang REST API application to Critical Stack.  But this application is flawed - it can't scale beyond 1 node and has no persistence.  So next we will deploy a [Go Application with a REST API and Persistence](../hello+REST+Persistence/).
+You have successfully deployed a golang REST API application to Critical Stack.  But this application is flawed - it can't scale beyond 1 node and has no persistence.  So next we will deploy a Go Application with a REST API and Persistence.
 
 Note:  some bugs with **DELETE**!
 

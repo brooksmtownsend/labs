@@ -3,29 +3,29 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.55.5" />
+    <meta name="generator" content="Hugo 0.55.4" />
     <meta name="description" content="">
 
 
     <link rel="icon" href="/labs/images/favicon.png" type="image/png">
 
-    <title>Deploying a Stateless Golang App :: Critical Stack Labs</title>
+    <title>Deploying a Stateless Go App :: Critical Stack Labs</title>
 
     
-    <link href="/labs/css/nucleus.css?1558040262" rel="stylesheet">
-    <link href="/labs/css/fontawesome-all.min.css?1558040262" rel="stylesheet">
-    <link href="/labs/css/hybrid.css?1558040262" rel="stylesheet">
-    <link href="/labs/css/featherlight.min.css?1558040262" rel="stylesheet">
-    <link href="/labs/css/perfect-scrollbar.min.css?1558040262" rel="stylesheet">
-    <link href="/labs/css/auto-complete.css?1558040262" rel="stylesheet">
-    <link href="/labs/css/atom-one-dark-reasonable.css?1558040262" rel="stylesheet">
-    <link href="/labs/css/theme.css?1558040262" rel="stylesheet">
-    <link href="/labs/css/hugo-theme.css?1558040262" rel="stylesheet">
+    <link href="/labs/css/nucleus.css?1558101203" rel="stylesheet">
+    <link href="/labs/css/fontawesome-all.min.css?1558101203" rel="stylesheet">
+    <link href="/labs/css/hybrid.css?1558101203" rel="stylesheet">
+    <link href="/labs/css/featherlight.min.css?1558101203" rel="stylesheet">
+    <link href="/labs/css/perfect-scrollbar.min.css?1558101203" rel="stylesheet">
+    <link href="/labs/css/auto-complete.css?1558101203" rel="stylesheet">
+    <link href="/labs/css/atom-one-dark-reasonable.css?1558101203" rel="stylesheet">
+    <link href="/labs/css/theme.css?1558101203" rel="stylesheet">
+    <link href="/labs/css/hugo-theme.css?1558101203" rel="stylesheet">
     
-      <link href="/labs/css/theme-cs.css?1558040262" rel="stylesheet">
+      <link href="/labs/css/theme-cs.css?1558101203" rel="stylesheet">
     
 
-    <script src="/labs/js/jquery-3.3.1.min.js?1558040262"></script>
+    <script src="/labs/js/jquery-3.3.1.min.js?1558101203"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -56,14 +56,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/labs/js/lunr.min.js?1558040262"></script>
-<script type="text/javascript" src="/labs/js/auto-complete.js?1558040262"></script>
+<script type="text/javascript" src="/labs/js/lunr.min.js?1558101203"></script>
+<script type="text/javascript" src="/labs/js/auto-complete.js?1558101203"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/criticalstack.github.io\/labs\/";
     
 </script>
-<script type="text/javascript" src="/labs/js/search.js?1558040262"></script>
+<script type="text/javascript" src="/labs/js/search.js?1558101203"></script>
 
     
   </div>
@@ -225,9 +225,9 @@
  
   
     
-      <li data-nav-id="/labs/featurelabs/go/hello/" title="Deploying a Stateless Golang App" class="dd-item active">
+      <li data-nav-id="/labs/featurelabs/go/hello/" title="Deploying a Stateless Go App" class="dd-item active">
         <a href="/labs/featurelabs/go/hello/">
-        <i class='fas fa-flask'></i> Deploying a Stateless Golang App
+        <i class='fas fa-flask'></i> Deploying a Stateless Go App
         
         </a>
     </li>
@@ -244,9 +244,9 @@
  
   
     
-      <li data-nav-id="/labs/featurelabs/go/hello&#43;rest/readme/" title="Deploying a Stateless Golang App with REST API" class="dd-item ">
-        <a href="/labs/featurelabs/go/hello&#43;rest/readme/">
-        <i class='fas fa-flask'></i> Deploying a Stateless Golang App with REST API
+      <li data-nav-id="/labs/featurelabs/go/hello_rest/" title="Deploying a Stateless RESTful Go App" class="dd-item ">
+        <a href="/labs/featurelabs/go/hello_rest/">
+        <i class='fas fa-flask'></i> Deploying a Stateless RESTful Go App
         
         </a>
     </li>
@@ -408,7 +408,7 @@
             
           
           
-            <a href='/labs/'></a> > <a href='/labs/featurelabs/'>Feature Labs</a> > <a href='/labs/featurelabs/go/'>Go Labs</a> > Deploying a Stateless Golang App
+            <a href='/labs/'></a> > <a href='/labs/featurelabs/'>Feature Labs</a> > <a href='/labs/featurelabs/go/'>Go Labs</a> > Deploying a Stateless Go App
           
          
           
@@ -458,7 +458,7 @@
           
             <h1>
               
-              Deploying a Stateless Golang App
+              Deploying a Stateless Go App
             </h1>
           
 
@@ -498,11 +498,9 @@
 <pre><code class="language-console">cd ~/Development
 mkdir -p go/app
 cd go/app
-</code></pre>
+</code></pre></li>
 
-<ol>
-<li>Using the editor of your choice, create a new file called <code>main.go</code> inside the <strong>app</strong> directory.</li>
-</ol>
+<li><p>Using the editor of your choice, create a new file called <code>main.go</code> inside the <strong>app</strong> directory.</p>
 
 <pre><code class="language-console">vi hello-go.go
 </code></pre></li>
@@ -530,9 +528,8 @@ func main() {
 <li><p>Compile an executable (in this example a GO executable) which properly targets a linux OS and is built statically with bare-minimum libs and dependencies. In this example we have decided to name the executable <code>hello-go</code>.</p>
 
 <pre><code class="language-console">$ CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags=&quot;-s -w&quot; -a -o hello-go .
-</code></pre>
+</code></pre></li>
 
-<ol>
 <li><p>A new file called <code>hello-go</code> will be created in the same directory.  This  will be referenced when we build our docker container.</p></li>
 
 <li><p>Create a new file in the same directory and name it <code>Dockerfile</code>.  This file could be named anything but for now we will just keep it simple.  Copy the following code into this file:</p>
@@ -573,8 +570,7 @@ EXPOSE 8080
 CMD [&quot;/app/hello-go&quot;]
 </code></pre></li>
 
-<li><p>Login to Docker registry</p></li>
-</ol>
+<li><p>Login to Docker registry</p>
 
 <p><code>docker login</code></p>
 
@@ -633,11 +629,9 @@ REPOSITORY             TAG                 IMAGE ID            CREATED
 hello-go               latest              56f2fefe6685        2 hours ago
 alpine                 latest              8cb3aa00f899        3 weeks ago         
 tomcat                 8.0                 ef6a7c98d192        6 months ago
-</code></pre>
+</code></pre></li>
 
-<ol>
-<li>We will <code>tag</code> your local image with your <strong>namespace/repo</strong></li>
-</ol>
+<li><p>We will <code>tag</code> your local image with your <strong>namespace/repo</strong></p>
 
 <p><code>docker tag hello-go &lt;your-registry-user-name&gt;/hello-go:0.0.1</code></p>
 
@@ -652,11 +646,9 @@ tomcat                 8.0                 ef6a7c98d192        6 months ago
 REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
 jabbottc1/hello-go       0.0.1               511503f3b991        16 minutes ago      7.06MB
 hello-go                 latest              511503f3b991        16 minutes ago      7.06MB
-</code></pre>
+</code></pre></li>
 
-<ol>
-<li>Push the tagged image into your public container registry</li>
-</ol>
+<li><p>Push the tagged image into your public container registry</p>
 
 <p><code>docker push jabbottc1/hello-go:0.0.1</code></p>
 
@@ -685,7 +677,8 @@ c1b4e3786f95: Layer already exists
 
 <pre><code class="language-console">$ curl http://...
 Hello, &quot;/&quot;$ 
-</code></pre>
+</code></pre></li>
+</ol>
 
 <h3 id="conclusion">Conclusion</h3>
 
@@ -697,7 +690,6 @@ Hello, &quot;/&quot;$
 
 <ol>
 <li>sh build.sh -v 0.0.1</li>
-</ol></li>
 </ol>
 
 
@@ -936,7 +928,7 @@ Hello, &quot;/&quot;$
 			<a class="nav nav-prev" href="/labs/featurelabs/go/" title="Go Labs"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/labs/featurelabs/go/hello&#43;rest/readme/" title="Deploying a Stateless Golang App with REST API" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/labs/featurelabs/go/hello_rest/" title="Deploying a Stateless RESTful Go App" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -946,20 +938,20 @@ Hello, &quot;/&quot;$
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/labs/js/clipboard.min.js?1558040262"></script>
-    <script src="/labs/js/perfect-scrollbar.min.js?1558040262"></script>
-    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558040262"></script>
-    <script src="/labs/js/jquery.sticky.js?1558040262"></script>
-    <script src="/labs/js/featherlight.min.js?1558040262"></script>
-    <script src="/labs/js/html5shiv-printshiv.min.js?1558040262"></script>
-    <script src="/labs/js/highlight.pack.js?1558040262"></script>
+    <script src="/labs/js/clipboard.min.js?1558101203"></script>
+    <script src="/labs/js/perfect-scrollbar.min.js?1558101203"></script>
+    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558101203"></script>
+    <script src="/labs/js/jquery.sticky.js?1558101203"></script>
+    <script src="/labs/js/featherlight.min.js?1558101203"></script>
+    <script src="/labs/js/html5shiv-printshiv.min.js?1558101203"></script>
+    <script src="/labs/js/highlight.pack.js?1558101203"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/labs/js/modernizr.custom-3.6.0.js?1558040262"></script>
-    <script src="/labs/js/learn.js?1558040262"></script>
-    <script src="/labs/js/hugo-learn.js?1558040262"></script>
+    <script src="/labs/js/modernizr.custom-3.6.0.js?1558101203"></script>
+    <script src="/labs/js/learn.js?1558101203"></script>
+    <script src="/labs/js/hugo-learn.js?1558101203"></script>
 
-    <link href="/labs/mermaid/mermaid.css?1558040262" type="text/css" rel="stylesheet" />
-    <script src="/labs/mermaid/mermaid.js?1558040262"></script>
+    <link href="/labs/mermaid/mermaid.css?1558101203" type="text/css" rel="stylesheet" />
+    <script src="/labs/mermaid/mermaid.js?1558101203"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

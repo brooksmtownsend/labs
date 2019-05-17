@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/labs/images/favicon.png" type="image/png">
 
-    <title>FAQ :: Critical Stack Labs</title>
+    <title>Deploying a Stateless RESTful Go App :: Critical Stack Labs</title>
 
     
     <link href="/labs/css/nucleus.css?1558101203" rel="stylesheet">
@@ -35,7 +35,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/labs/faqs/">
+  <body class="" data-url="/labs/featurelabs/go/hello_rest/">
     <nav id="sidebar" class="">
 
 
@@ -80,8 +80,8 @@
   
     
     <li data-nav-id="/labs/faqs/" title="FAQ" class="dd-item 
-        parent
-        active
+        
+        
         
         ">
       <a href="/labs/faqs/">
@@ -102,7 +102,7 @@
   
     
     <li data-nav-id="/labs/featurelabs/" title="Feature Labs" class="dd-item 
-        
+        parent
         
         
         ">
@@ -201,7 +201,7 @@
   
     
     <li data-nav-id="/labs/featurelabs/go/" title="Go Labs" class="dd-item 
-        
+        parent
         
         
         ">
@@ -244,7 +244,7 @@
  
   
     
-      <li data-nav-id="/labs/featurelabs/go/hello_rest/" title="Deploying a Stateless RESTful Go App" class="dd-item ">
+      <li data-nav-id="/labs/featurelabs/go/hello_rest/" title="Deploying a Stateless RESTful Go App" class="dd-item active">
         <a href="/labs/featurelabs/go/hello_rest/">
         <i class='fas fa-flask'></i> Deploying a Stateless RESTful Go App
         
@@ -388,6 +388,8 @@
                         </a>
                     </span>
                   
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
                   <span class="links">
                  
                  
@@ -398,7 +400,19 @@
             
           
           
-            <a href='/labs/'></a> > FAQ
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/labs/'></a> > <a href='/labs/featurelabs/'>Feature Labs</a> > <a href='/labs/featurelabs/go/'>Go Labs</a> > Deploying a Stateless RESTful Go App
+          
+         
+          
+         
           
          
           
@@ -407,6 +421,31 @@
                   </span>
                 </div>
                 
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#deploying-a-stateless-golang-app-with-rest-api-in-critical-stack">Deploying a Stateless Golang App with REST API in Critical Stack</a>
+<ul>
+<li><a href="#getting-started">Getting Started</a></li>
+</ul></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#building-your-restful-hello-world-app">Building Your RESTful Hello World App</a></li>
+<li><a href="#testing-your-restful-hello-world-app">Testing your RESTful Hello World App</a></li>
+<li><a href="#tagging-and-pushing-your-image-to-a-container-registry">Tagging and pushing your image to a container registry</a>
+<ul>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#todo">TODO</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
               </div>
             </div>
             
@@ -414,9 +453,12 @@
         
         </div>
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>
+              
+              Deploying a Stateless RESTful Go App
+            </h1>
           
 
         
@@ -424,129 +466,192 @@
 
 
 
-	
 
-<h2 id="what-is-critical-stack">What is Critical Stack?</h2>
+<h2 id="deploying-a-stateless-golang-app-with-rest-api-in-critical-stack">Deploying a Stateless Golang App with REST API in Critical Stack</h2>
 
-<p>Critical Stack is the secure container orchestration platform for the enterprise. Critical Stack allows you to enforce security, compliance, and regulatory controls for your business while optimizing the efficiency, scalability, resilience of your environment. The Critical Stack orchestration platform is the secure, automated and simple way to manage your infrastructure and deploy containerized workloads on which your company depends.</p>
+<h3 id="getting-started">Getting Started</h3>
 
-<h2 id="what-is-critical-stack-s-relationship-with-kubernetes">What Is Critical Stack&rsquo;s Relationship With Kubernetes?</h2>
+<p>Pre-requisites:</p>
 
-<p>While Kubernetes is a scalable, resilient, and low-latency container orchestration platform, it does not offer an easy-to-use interface or security and compliance configurations that highly regulated enterprises expect. In response to this need, Critical Stack built a robust set of features that enable enterprises to more easily adopt and secure containerized infrastructure at scale.</p>
+<ol>
+<li><a href="https://golang.org/dl/">Go</a></li>
+<li><a href="https://code.visualstudio.com/download">Visual Studio Code</a></li>
+<li><code>curl</code> or some equivalent way to do <em><strong>GET</strong></em> and <em><strong>POST</strong></em></li>
+<li>If using <code>curl</code>, <code>python</code> to make <em><strong>JSON</strong></em> prettier</li>
+<li>Docker : <a href="https://www.docker.com/get-started">Docker</a></li>
+<li>Public container registry <a href="https://hub.docker.com">Docker Hub</a></li>
+<li><a href="../hello.md">Previous Go lab</a> for <strong>Docker registry</strong> and <strong>Load Balancer</strong> setup - this demo will just update the previous Docker image with new functionality</li>
+</ol>
 
-<p>Critical Stack does not fork the Kubernetes source code and we do not do anything proprietary to YAML-based configurations used in Kubernetes. Critical Stack starts with Kubernetes and add our internal standards around regression testing, security, or performance.</p>
+<h2 id="overview">Overview</h2>
 
-<h2 id="how-much-does-critical-stack-cost">How much does Critical Stack cost?</h2>
+<p>Update <a href="../hello.md">previous lab</a> to introduce a REST API.</p>
 
-<p>Developers can utilize Critical Stack for free, up to 5 nodes (cloud resources) within a Critical Stack cluster per month.  Should an environment require more than 5 nodes within a cluster, you can add your credit card information via the Account Management page to upgrade your license to Premium, which charges $5/month for each additional node spun up within that month.  Your monthly bill will be calculated based on the total number of new nodes spun up in a calendar month, not the number of nodes active at any given time.  For example, if a customer with 5 nodes in February spins up 2 additional nodes in March and then deactivated 1 prior to the end of the billing cycle, they will be charged $10 at the end of March.</p>
+<p>Lifted from <a href="https://thenewstack.io/make-a-restful-json-api-go/">Making a RESTful JSON API in Go</a> and adapted to Critical Stack.  This is just example code and not intended to teach proper Go coding in any form.</p>
 
-<p>Please note that AWS costs for any nodes spun up within the Critical Stack product are not included in Critical Stack’s pricing/billing. It is your responsibility to pay your cloud provider directly.</p>
+<h2 id="building-your-restful-hello-world-app">Building Your RESTful Hello World App</h2>
 
-<p>In the future, Critical Stack plans to offer an enhanced, enterprise tier of its software that addresses more complex environments. More information will be released on that offering at a later date.</p>
+<ol>
+<li><p>Clone this repo if you haven&rsquo;t already and change directory to this lab so you can access the source code</p></li>
 
-<h2 id="what-are-critical-stack-s-most-distinguishing-features-and-architecture">What Are Critical Stack&rsquo;s Most Distinguishing Features And Architecture?</h2>
+<li><p>As with previous lab, compile the REST API example code into <code>hello-go</code>.</p>
 
-<h3 id="opinionated-choices-about-kubernetes">Opinionated Choices About Kubernetes</h3>
+<pre><code class="language-console">$ CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags=&quot;-s -w&quot; -a -o hello-go .
+</code></pre></li>
 
-<p>Critical Stack’s opinionated implementation of Kubernetes is designed to increase security, improve performance, and make Kubernetes more user-friendly.</p>
+<li><p>As with previous lab, build a Docker image using the <code>Dockerfile</code>.</p>
 
-<p>In every Critical Stack cluster, we configure the kernel to reflect our opinions on security and performance down to the lowest levels of the cluster. An example of an opinionated choice related to security is that each Critical Stack cluster is configured with Security-Enhanced Linux (SELinux) to support granular access control security policies.</p>
+<p><code>docker build -t hello-go -f Dockerfile .</code></p></li>
+</ol>
 
-<p>As another example, Critical Stack chooses to use a Container Network Interface (CNI) called Cilium, which offers performance enhancements through the use of Berkeley Packet Filtering (BPF). In addition to performance, Cilium also gives us security features such as the ability to configure Network Security Policies at the layer 7 protocol level.</p>
+<h2 id="testing-your-restful-hello-world-app">Testing your RESTful Hello World App</h2>
 
-<h3 id="security-features">Security Features</h3>
+<ol>
+<li><p><strong>Optional Step</strong>. If you want to test your new docker container locally and see if it behaves as expected you can run the following command:</p>
 
-<p>Critical Stack includes the following features:</p>
+<p><code>docker run -e PORT=8080 -p 8080:8080 --rm -ti hello-go</code></p></li>
 
-<ul>
-<li>Executing processes can be secured through Critical Stack using container aware SELinux Policies.</li>
-<li>Intra-namespace and Inter-namespace communications can be secured with orchestration aware layer 3 and 4 policies.</li>
-<li>Layer 7 protocol analyzers allow the enforcement of granular API security.</li>
-<li>Admission controllers can be used to ensure executing services comply with all required organizational policy.</li>
-<li>The Critical Stack API and User Interface (UI) use JSON Web Tokens for authentication and authorization (a popular authentication mechanism for web interchange).</li>
-</ul>
+<li><p>Verify the app works by using the following command in a <strong>new terminal window</strong>.  Alternatively, you could open a browser to <code>http://localhost:8080</code></p>
 
-<p>In the future, real-time dynamic risk scoring will allow organizations to measure and react to a dynamic risk environment.</p>
+<p>Basic test:
+<code>curl -s http://localhost:8080</code></p>
 
-<h3 id="user-interface">User Interface</h3>
+<pre><code class="language-console">$ curl -s http://localhost:8080
+Welcome!
+</code></pre></li>
 
-<p>The Critical Stack User Interface allows for immediate monitoring of the nodes and the containers and pods within in the cluster. Creating new components within the cluster is very easy with the simple wizards, and the advanced editors that provide yaml editing and formatting.</p>
+<li><p>Show entries pre-inserted:
+<code>curl -s http://localhost:8080/todos | python -m json.tool</code></p>
 
-<h3 id="restful-api">RESTful API</h3>
+<pre><code class="language-console">$ curl -s http://localhost:8080/todos | python -m json.tool
+[
+    {
+        &quot;completed&quot;: false,
+        &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;Write presentation&quot;
+    },
+    {
+        &quot;completed&quot;: false,
+        &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+        &quot;id&quot;: 2,
+        &quot;name&quot;: &quot;Host meetup&quot;
+    }
+]
+</code></pre></li>
 
-<p>While the UI is easy to use, the API allows for automation to be built into your CI/CD pipeline.  Every functionality the UI provides is exposed through the API.</p>
+<li><p>Show entry 1:
+<code>curl -s http://localhost:8080/todos/{1} | python -m json.tool</code></p>
 
-<h3 id="marketplace">Marketplace</h3>
+<pre><code class="language-console">curl -s http://localhost:8080/todos/{1} | python -m json.tool
+{
+    &quot;completed&quot;: false,
+    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;Write presentation&quot;
+}   
+</code></pre></li>
 
-<p>Besides keeping your container cluster secure, another prominent feature Critical Stack offers is its Marketplace. The Critical Stack Marketplace provides a public repository that houses published, pre-configured stacks (app specs) that Critical Stack users can replicate/install into their clusters.</p>
+<li><p>Insert New entry:</p>
 
-<p>In the future, the Marketplace will allow Critical Stack customers to submit their own app specs to the Critical Stack Marketplace for review, vetting, and (if accepted) publication into the public Marketplace.  Additionally, Critical Stack will soon support companies publishing to their own private marketplaces, enabling developers within their organization to share app specs across clusters and teams.</p>
+<pre><code class="language-console">curl -s -H &quot;Content-Type: application/json&quot; -d '{&quot;name&quot;:&quot;New Todo&quot;}' http://localhost:8080/todos`
+</code></pre>
 
-<h3 id="installer">Installer</h3>
+<pre><code class="language-console">$ curl -s -H &quot;Content-Type: application/json&quot; -d '{&quot;name&quot;:&quot;New Todo&quot;}' http://localhost:8080/todos
+{&quot;id&quot;:3,&quot;name&quot;:&quot;New Todo&quot;,&quot;completed&quot;:false,&quot;due&quot;:&quot;0001-01-01T00:00:00Z&quot;}
+$ 
+</code></pre></li>
 
-<p>Critical Stack has a click-through installer that enables installation of Critical Stack into a new VPC within your AWS account in a matter of minutes.</p>
+<li><p>Show entry 3:
+<code>curl -s http://localhost:8080/todos/{3} | python -m json.tool</code></p>
 
-<h2 id="how-does-critical-stack-compare-to-other-alternatives">How Does Critical Stack Compare To Other Alternatives?</h2>
+<pre><code class="language-console">$ curl -s http://localhost:8080/todos/{3} | python -m json.tool
+{
+     &quot;completed&quot;: false,
+    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+    &quot;id&quot;: 3,
+    &quot;name&quot;: &quot;New Todo&quot;
+}
+</code></pre>
 
-<p>When comparing containerization to non-containerized workloads,containerization reduces the attack surface, while also providing security, portability, and efficiency.</p>
+<p>To stop the running container you can run</p>
 
-<p>When comparing Critical Stack to other container orchestration solutions, Critical Stack offers a container orchestration solution that is “by the enterprise, for the enterprise”. Critical Stack is engineered for complex, regulated environments (like Capital One) with a focus on providing a container orchestration solution that can truly address all the jobs to be done at the enterprise level.</p>
+<pre><code class="language-console">docker stop $(docker ps -qf &quot;ancestor=hello-go&quot;)
+</code></pre></li>
+</ol>
 
-<p>Lastly, for those who are interested in or using serverless computing, while a serverless architecture may work for many workloads, most serverless solutions available in the industry today are not as portable as containerized solutions.  Given containerization (and Critical Stack) do not rigidly lock in customers to a specific architecture or product, customers can get all of the benefits of containerization (and most of the benefits of serverless) without handcuffing themselves to the solution.</p>
+<h2 id="tagging-and-pushing-your-image-to-a-container-registry">Tagging and pushing your image to a container registry</h2>
 
-<h2 id="does-how-does-critical-stack-integrate-with-an-aspect-of-my-existing-solution">Does/How-Does Critical Stack Integrate With An Aspect Of My Existing Solution?</h2>
+<ol>
+<li><p>Tag the new image with tag <code>0.0.2</code> using your image/repo/tag</p>
 
-<p>Critical Stack is enterprise software, not SaaS. This means that Critical Stack installs into your AWS cloud environment. Once the Critical Stack software is installed, you will have the ability to manage your infrastructure and deploy workloads within the software.</p>
+<p><code>docker tag hello-go jabbottc1/hello-go:0.0.2</code></p></li>
 
-<p>As an example, within Capital One’s enterprise environment, Critical Stack has integrated with (or is in the process of integrating with) standard patterns and practices such as (but not limited to):</p>
+<li><p>Push to Docker registry</p>
 
-<ul>
-<li>Building Containerized Microservices</li>
-<li>Transforming Monoliths into Containerized Microservices</li>
-<li>CI/CD Pipelines</li>
-<li>Metrics Collection/Aggregation</li>
-<li>Log Aggregation</li>
-<li>Monitoring</li>
-<li>Audit Logging</li>
-<li>Open Policy Agent (OPA)</li>
-<li>High Availability</li>
-<li>Autoscaling</li>
-<li>Vault/Secrets Integration</li>
-<li>Single Sign On (SSO)</li>
-</ul>
+<p><code>docker push jabbottc1/hello-go:0.0.2</code></p>
 
-<p>The Critical Stack team is working to publish share-able content for these Patterns &amp; Practices on Critical Stack.</p>
+<pre><code class="language-console">$ docker push jabbottc1/hello-go:0.0.2
+The push refers to repository [docker.io/jabbottc1/hello-go]
+...
+</code></pre></li>
 
-<h2 id="how-does-critical-stack-support-and-integrate-with-the-cloud">How Does Critical Stack Support And Integrate With The Cloud?</h2>
+<li><p>Edit your <code>hello-go-deployment</code> from the Critical Stack UI.  Update the image in the <em>Deployment</em> to pull <code>0.0.2</code>.  Then you can run the same tests as above but targeting the Load Balancer.</p>
 
-<p>Critical Stack is installable within all US Amazon Web Services (AWS) regions, with all standard functionality and cloud resources available to workloads running on Critical Stack.</p>
+<pre><code class="language-yaml">      image: 'jabbottc1/hello-go:0.0.2'  # Change this tag
+</code></pre></li>
 
-<p>As part of our future roadmap, we plan to make Critical Stack compatible with other cloud providers such as Azure, GCP and Digital Ocean.</p>
+<li><p><strong>Save</strong> your deployment and <strong>exit</strong></p></li>
 
-<h2 id="can-i-use-critical-stack-on-premises">Can I Use Critical Stack On-Premises?</h2>
+<li><p>Test your upgraded deployment.  Then you can run the same tests as above but targeting the Ingress host.</p>
 
-<p>Critical Stack does not have an on-prem solution available today. As part of our future roadmap, we will look at producing an on-prem solution.  Please submit any on-premise feature requests and suggestions to support@criticalstack.com.</p>
+<pre><code class="language-console">$ curl -s -H &quot;Content-Type: application/json&quot; -d '{&quot;name&quot;:&quot;John Test&quot;}' https://&lt;URL_to_your_application&gt;/todos
+</code></pre>
 
-<h2 id="i-m-not-that-familiar-with-containers-or-container-orchestration-where-can-i-go-to-learn-more">I&rsquo;m Not That Familiar with Containers Or Container Orchestration Where Can I Go To Learn More</h2>
+<pre><code class="language-console"> $ curl -s https://&lt;URL_to_your_application&gt;/todos | python -m json.tool
+[
+    {
+    &quot;completed&quot;: false,
+    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;Write presentation&quot;
+    },
+    {
+    &quot;completed&quot;: false,
+    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+    &quot;id&quot;: 2,
+    &quot;name&quot;: &quot;Host meetup&quot;
+    },
+    {
+    &quot;completed&quot;: false,
+    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+    &quot;id&quot;: 3,
+    &quot;name&quot;: &quot;John Test&quot;
+    }
+]
+</code></pre></li>
+</ol>
 
-<p><a href="https://medium.freecodecamp.org/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b">A Beginner-Friendly Introduction to Containers, VMs, and Docker</a></p>
+<h3 id="conclusion">Conclusion</h3>
 
-<p><a href="https://medium.freecodecamp.org/how-to-choose-the-right-container-orchestration-and-how-to-deploy-it-41844021c241">How to Choose the Right Container Orchestration and How to Deploy It</a></p>
+<p>You have successfully deployed a golang REST API application to Critical Stack.  But this application is flawed - it can&rsquo;t scale beyond 1 node and has no persistence.  So next we will deploy a Go Application with a REST API and Persistence.</p>
 
-<p><a href="https://cloud.google.com/blog/products/containers-kubernetes/kubernetes-faq-for-the-c-suite">A Kubernetes FAQ for the C-Suite</a></p>
+<p>Note:  some bugs with <strong>DELETE</strong>!</p>
 
-<p><a href="https://medium.freecodecamp.org/learn-kubernetes-in-under-3-hours-a-detailed-guide-to-orchestrating-containers-114ff420e882">Learn Kubernetes in Under 3 Hours: A Detailed Guide to Orchestrating Containers</a></p>
+<h3 id="todo">TODO</h3>
 
+<p>Show how to build with scripts</p>
 
-
+<ol>
+<li>sh build.sh -v 0.0.2</li>
+</ol>
 
 
 <footer class=" footline" >
 	
 </footer>
 
-        
-            </div> 
+
         
         </div> 
         
@@ -578,6 +683,8 @@
             
                 
                     
+                        
+                        
                     
                 
                 
@@ -595,8 +702,6 @@
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -613,53 +718,8 @@
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -704,6 +764,36 @@
             
         
                     
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
             
         
                     
@@ -711,6 +801,32 @@
             
             
                 
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -766,10 +882,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/labs/" title=""> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/labs/featurelabs/go/hello/" title="Deploying a Stateless Go App"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/labs/featurelabs/" title="Feature Labs" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/labs/install/" title="Installation" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -800,3 +916,4 @@
 
   </body>
 </html>
+
