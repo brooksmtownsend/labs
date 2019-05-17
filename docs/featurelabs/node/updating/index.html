@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.55.4" />
+    <meta name="generator" content="Hugo 0.55.5" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>Updating a NodeJS App :: Critical Stack Labs</title>
 
     
-    <link href="/labs/css/nucleus.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/fontawesome-all.min.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/hybrid.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/featherlight.min.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/perfect-scrollbar.min.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/auto-complete.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/atom-one-dark-reasonable.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/theme.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/hugo-theme.css?1558123855" rel="stylesheet">
+    <link href="/labs/css/nucleus.css?1558125502" rel="stylesheet">
+    <link href="/labs/css/fontawesome-all.min.css?1558125502" rel="stylesheet">
+    <link href="/labs/css/hybrid.css?1558125502" rel="stylesheet">
+    <link href="/labs/css/featherlight.min.css?1558125502" rel="stylesheet">
+    <link href="/labs/css/perfect-scrollbar.min.css?1558125502" rel="stylesheet">
+    <link href="/labs/css/auto-complete.css?1558125502" rel="stylesheet">
+    <link href="/labs/css/atom-one-dark-reasonable.css?1558125502" rel="stylesheet">
+    <link href="/labs/css/theme.css?1558125502" rel="stylesheet">
+    <link href="/labs/css/hugo-theme.css?1558125502" rel="stylesheet">
     
-      <link href="/labs/css/theme-cs.css?1558123855" rel="stylesheet">
+      <link href="/labs/css/theme-cs.css?1558125502" rel="stylesheet">
     
 
-    <script src="/labs/js/jquery-3.3.1.min.js?1558123855"></script>
+    <script src="/labs/js/jquery-3.3.1.min.js?1558125502"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -56,14 +56,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/labs/js/lunr.min.js?1558123855"></script>
-<script type="text/javascript" src="/labs/js/auto-complete.js?1558123855"></script>
+<script type="text/javascript" src="/labs/js/lunr.min.js?1558125502"></script>
+<script type="text/javascript" src="/labs/js/auto-complete.js?1558125502"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/criticalstack.github.io\/labs\/";
     
 </script>
-<script type="text/javascript" src="/labs/js/search.js?1558123855"></script>
+<script type="text/javascript" src="/labs/js/search.js?1558125502"></script>
 
     
   </div>
@@ -484,7 +484,7 @@ and use the Critical Stack UI to instruct Kubernetes to roll out the update whil
 <h3 id="steps">Steps</h3>
 
 <ol>
-<li><p>Edit <code>app/index.js</code> (in your <code>node-lab</code> directory) and replace the source code with the following:</p>
+<li><p>Edit <strong>app/index.js</strong> (in your <strong>node-lab</strong> directory) and replace the source code with the following:</p>
 
 <pre><code>// Load the http module to create an http server.
 var http = require('http');
@@ -524,7 +524,7 @@ console.log(&quot;Random number: &quot; + random_number);
 console.log(&quot;Server running at http://0.0.0.0:3000/&quot;);
 </code></pre></li>
 
-<li><p>Increment the application version number in your <code>package.json</code> file and re-run <code>npm install</code> to update the <code>package-lock.json</code> file.</p>
+<li><p>Increment the application version number in your <strong>package.json</strong> file and re-run <code>npm install</code> to update the <strong>package-lock.json</strong> file.</p>
 
 <pre><code class="language-terminal">user@testhost node-lab$ cat package.json
 {
@@ -543,9 +543,11 @@ npm WARN hello-node@0.0.2 No repository field.
 
 up to date in 0.632s
 found 0 vulnerabilities
-</code></pre></li>
+</code></pre>
 
-<li><p>Build your docker image again, but this time tag it as <code>&lt;your-username&gt;/hello-node:0.0.2</code> so we can uniquely identify the new image. After it&rsquo;s built, <em>push</em> it to Docker Hub so it can be updated in your Critical Stack cluster.</p>
+<ol>
+<li>Build your docker image again, but this time tag it as <code>&lt;your-username&gt;/hello-node:0.0.2</code> so we can uniquely identify the new image. After it&rsquo;s built, <em>push</em> it to Docker Hub so it can be updated in your Critical Stack cluster.</li>
+</ol>
 
 <pre><code class="language-terminal">user@testhost node-lab$ docker build -t &lt;your-username&gt;/hello-node:0.0.2 -f Dockerfile .
 Sending build context to Docker daemon  4.288MB
@@ -605,7 +607,7 @@ dd1eb1fd7e08: Layer already exists
 
 <p><img src="../../../images/featurelabs/node/RollingUpdate.png" alt="Rolling update" title="Rolling update" /></p></li>
 
-<li><p>Click on the gear icon again, and select <em><strong>Edit</strong></em>.  On line 36, change the Docker image tag from <code>0.0.1</code> to <code>0.0.2</code>. For example: <code>image: 'docker.io/jabbottc1/hello-node:0.0.1'</code> becomes <code>image: 'docker.io/jabbottc1/hello-node:0.0.2'</code>.  Next click <em><strong>Save</strong></em> and then <em><strong>Exit</strong></em>.</p>
+<li><p>Click on the gear icon again, and select <em><strong>Edit</strong></em>.  On line 36, change the Docker image tag from <code>0.0.1</code> to <code>0.0.2</code>. For example: image: &lsquo;<code>docker.io/jabbottc1/hello-node:0.0.1</code>&rsquo; becomes image: &lsquo;<code>docker.io/jabbottc1/hello-node:0.0.2</code>&rsquo;.  Next click <em><strong>Save</strong></em> and then <em><strong>Exit</strong></em>.</p>
 
 <p><img src="../../../images/featurelabs/node/UseApplicationv2.png" alt="Use application v2" title="Use application v2" /></p>
 
@@ -870,20 +872,20 @@ dd1eb1fd7e08: Layer already exists
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/labs/js/clipboard.min.js?1558123855"></script>
-    <script src="/labs/js/perfect-scrollbar.min.js?1558123855"></script>
-    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558123855"></script>
-    <script src="/labs/js/jquery.sticky.js?1558123855"></script>
-    <script src="/labs/js/featherlight.min.js?1558123855"></script>
-    <script src="/labs/js/html5shiv-printshiv.min.js?1558123855"></script>
-    <script src="/labs/js/highlight.pack.js?1558123855"></script>
+    <script src="/labs/js/clipboard.min.js?1558125502"></script>
+    <script src="/labs/js/perfect-scrollbar.min.js?1558125502"></script>
+    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558125502"></script>
+    <script src="/labs/js/jquery.sticky.js?1558125502"></script>
+    <script src="/labs/js/featherlight.min.js?1558125502"></script>
+    <script src="/labs/js/html5shiv-printshiv.min.js?1558125502"></script>
+    <script src="/labs/js/highlight.pack.js?1558125502"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/labs/js/modernizr.custom-3.6.0.js?1558123855"></script>
-    <script src="/labs/js/learn.js?1558123855"></script>
-    <script src="/labs/js/hugo-learn.js?1558123855"></script>
+    <script src="/labs/js/modernizr.custom-3.6.0.js?1558125502"></script>
+    <script src="/labs/js/learn.js?1558125502"></script>
+    <script src="/labs/js/hugo-learn.js?1558125502"></script>
 
-    <link href="/labs/mermaid/mermaid.css?1558123855" type="text/css" rel="stylesheet" />
-    <script src="/labs/mermaid/mermaid.js?1558123855"></script>
+    <link href="/labs/mermaid/mermaid.css?1558125502" type="text/css" rel="stylesheet" />
+    <script src="/labs/mermaid/mermaid.js?1558125502"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
