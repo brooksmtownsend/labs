@@ -32,6 +32,7 @@
 @font-face {
     font-family: 'graphik-semibold';
     src: url("../fonts/Graphik-Semibold.otf");
+    font-weight: bold;
 }
 @font-face {
     font-family: 'graphik-regular';
@@ -50,6 +51,10 @@
 body {
     color: var(--MAIN-TEXT-color) !important;
     font-family: 'graphik-regular';
+}
+
+strong {
+    font-family: 'graphik-semibold';
 }
 
 textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="url"]:focus, input[type="color"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, select[multiple=multiple]:focus {

@@ -3,29 +3,29 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.55.5" />
+    <meta name="generator" content="Hugo 0.55.4" />
     <meta name="description" content="">
 
 
     <link rel="icon" href="/labs/images/favicon.png" type="image/png">
 
-    <title>Deploying a Stateless Go App :: Critical Stack Labs</title>
+    <title>Deploying a Go App :: Critical Stack Labs</title>
 
     
-    <link href="/labs/css/nucleus.css?1558109060" rel="stylesheet">
-    <link href="/labs/css/fontawesome-all.min.css?1558109060" rel="stylesheet">
-    <link href="/labs/css/hybrid.css?1558109060" rel="stylesheet">
-    <link href="/labs/css/featherlight.min.css?1558109060" rel="stylesheet">
-    <link href="/labs/css/perfect-scrollbar.min.css?1558109060" rel="stylesheet">
-    <link href="/labs/css/auto-complete.css?1558109060" rel="stylesheet">
-    <link href="/labs/css/atom-one-dark-reasonable.css?1558109060" rel="stylesheet">
-    <link href="/labs/css/theme.css?1558109060" rel="stylesheet">
-    <link href="/labs/css/hugo-theme.css?1558109060" rel="stylesheet">
+    <link href="/labs/css/nucleus.css?1558117380" rel="stylesheet">
+    <link href="/labs/css/fontawesome-all.min.css?1558117380" rel="stylesheet">
+    <link href="/labs/css/hybrid.css?1558117380" rel="stylesheet">
+    <link href="/labs/css/featherlight.min.css?1558117380" rel="stylesheet">
+    <link href="/labs/css/perfect-scrollbar.min.css?1558117380" rel="stylesheet">
+    <link href="/labs/css/auto-complete.css?1558117380" rel="stylesheet">
+    <link href="/labs/css/atom-one-dark-reasonable.css?1558117380" rel="stylesheet">
+    <link href="/labs/css/theme.css?1558117380" rel="stylesheet">
+    <link href="/labs/css/hugo-theme.css?1558117380" rel="stylesheet">
     
-      <link href="/labs/css/theme-cs.css?1558109060" rel="stylesheet">
+      <link href="/labs/css/theme-cs.css?1558117380" rel="stylesheet">
     
 
-    <script src="/labs/js/jquery-3.3.1.min.js?1558109060"></script>
+    <script src="/labs/js/jquery-3.3.1.min.js?1558117380"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -56,14 +56,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/labs/js/lunr.min.js?1558109060"></script>
-<script type="text/javascript" src="/labs/js/auto-complete.js?1558109060"></script>
+<script type="text/javascript" src="/labs/js/lunr.min.js?1558117380"></script>
+<script type="text/javascript" src="/labs/js/auto-complete.js?1558117380"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/criticalstack.github.io\/labs\/";
     
 </script>
-<script type="text/javascript" src="/labs/js/search.js?1558109060"></script>
+<script type="text/javascript" src="/labs/js/search.js?1558117380"></script>
 
     
   </div>
@@ -153,9 +153,9 @@
  
   
     
-      <li data-nav-id="/labs/featurelabs/node/deploystateless/" title="Deploying a Stateless NodeJS App" class="dd-item ">
+      <li data-nav-id="/labs/featurelabs/node/deploystateless/" title="Deploying a NodeJS App" class="dd-item ">
         <a href="/labs/featurelabs/node/deploystateless/">
-        <i class='fab fa-node'></i> Deploying a Stateless NodeJS App
+        <i class='fab fa-node'></i> Deploying a NodeJS App
         
         </a>
     </li>
@@ -225,9 +225,9 @@
  
   
     
-      <li data-nav-id="/labs/featurelabs/go/hello/" title="Deploying a Stateless Go App" class="dd-item active">
+      <li data-nav-id="/labs/featurelabs/go/hello/" title="Deploying a Go App" class="dd-item active">
         <a href="/labs/featurelabs/go/hello/">
-        <i class='fas fa-flask'></i> Deploying a Stateless Go App
+        <i class='fas fa-flask'></i> Deploying a Go App
         
         </a>
     </li>
@@ -408,7 +408,7 @@
             
           
           
-            <a href='/labs/'></a> > <a href='/labs/featurelabs/'>Feature Labs</a> > <a href='/labs/featurelabs/go/'>Go Labs</a> > Deploying a Stateless Go App
+            <a href='/labs/'></a> > <a href='/labs/featurelabs/'>Feature Labs</a> > <a href='/labs/featurelabs/go/'>Go Labs</a> > Deploying a Go App
           
          
           
@@ -433,8 +433,8 @@
 </ul></li>
 <li><a href="#overview">Overview</a></li>
 <li><a href="#building-your-hello-world-app">Building your Hello World App</a></li>
-<li><a href="#testing-your-hello-world-app">Testing your Hello World App</a></li>
-<li><a href="#tagging-and-pushing-your-image-to-a-container-registry">Tagging and pushing your image to a container registry</a></li>
+<li><a href="#testing-your-application">Testing Your Application</a></li>
+<li><a href="#tagging-and-pushing-your-image-to-a-registry">Tagging and Pushing your Image to a Registry</a></li>
 <li><a href="#deploy-your-container-into-critical-stack">Deploy your container into Critical Stack</a>
 <ul>
 <li><a href="#conclusion">Conclusion</a></li>
@@ -458,7 +458,7 @@
           
             <h1>
               
-              Deploying a Stateless Go App
+              Deploying a Go App
             </h1>
           
 
@@ -472,41 +472,46 @@
 
 <h3 id="getting-started">Getting Started</h3>
 
-<p>Pre-requisites:</p>
+<p>Before starting this lab, you will need:</p>
 
 <ol>
-<li><a href="https://golang.org/dl/">Go</a></li>
-<li><a href="https://code.visualstudio.com/download">Visual Studio Code</a></li>
-<li><code>curl</code> or some equivalent way to do <em><strong>GET</strong></em> and <em><strong>POST</strong></em></li>
-<li>If using <code>curl</code>, <code>python</code> to make <em><strong>JSON</strong></em> prettier</li>
-<li>Docker : <a href="https://www.docker.com/get-started">Docker</a></li>
-<li>Public container registry <a href="https://hub.docker.com">Docker Hub</a></li>
-<li>A <em><strong>Critical Stack</strong></em> deployment with a user account provisioned for you.  Note your <em><strong>namespace</strong></em> when you login.</li>
+<li><a href="https://golang.org/dl/">Go</a> installed</li>
+<li><a href="https://code.visualstudio.com/download">Visual Studio Code</a> (or your favorite IDE)</li>
+<li><code>curl</code> or some equivalent way to do <em><strong>GET</strong></em> and <em><strong>POST</strong></em>  &nbsp; (The <em><strong>Postman</strong></em> browser plugin is a good alternative).</li>
+<li>If using <code>curl</code>, <code>python</code> to make <em><strong>JSON</strong></em> prettier (you can also use <code>jq</code>)</li>
+<li><a href="https://www.docker.com/get-started">Docker</a> installed</li>
+<li>Access to a public container registry, e.g. <a href="https://hub.docker.com">Docker Hub</a></li>
+<li>A <em><strong>Critical Stack</strong></em> deployment with a user account provisioned for you.  Make sure to take note of your <em><strong>namespace</strong></em> when you log in.</li>
 </ol>
 
 <h2 id="overview">Overview</h2>
 
-<p>In this lab, you will deploy a simple <em><strong>Go</strong></em> <code>Hello World</code> application in <em><strong>Critical Stack</strong></em> and create <em><strong>Services</strong></em> to make it available externally.  We will then illustrate how upgrade the deployment by creating a new release of the application.</p>
+<p>In this lab, you will deploy a simple <em><strong>Go</strong></em> &ldquo;Hello World&rdquo; application to <em><strong>Critical Stack</strong></em> and create <em><strong>Services</strong></em> to make it accessible externally.  We will then illustrate how upgrade the deployment by creating a new release of the application.</p>
 
-<p>Lifted from <a href="https://thenewstack.io/make-a-restful-json-api-go/">Making a RESTful JSON API in Go</a> and adapted to Critical Stack, this is just example code and not intended to teach proper Go coding in any form.</p>
+<p>The Go code for this lab was lifted from <a href="https://thenewstack.io/make-a-restful-json-api-go/">Making a RESTful JSON API in Go</a> and adapted to Critical Stack. This lab is not designed to illustrate Go programming practices or idioms.</p>
 
 <h2 id="building-your-hello-world-app">Building your Hello World App</h2>
 
-<p>Note:  all materials for this lab are also located in <a href="https://github.com/criticalstack/labs-code.git">Critical Stack Feature Lab repo</a></p>
+<p>We need something to deploy, so let&rsquo;s get started by creating the &ldquo;Hello World&rdquo; application.</p>
+
+<p>Note: all source materials for this lab can be found in the <a href="https://github.com/criticalstack/labs-code.git">Critical Stack Feature Lab</a> repository.</p>
 
 <ol>
-<li><p>Create a working directory to build your <code>Hello World</code> application.  Open a terminal window.  In your current working directory (we will use the <code>Development</code> directory under the user&rsquo;s home directory in this example), create a lab directory called <code>go</code> and a subdirectory of that call &lsquo;app&rsquo;</p>
-
-<pre><code class="language-console">cd ~/Development
-mkdir -p go/app
-cd go/app
-</code></pre>
+<li><p>Create a working directory to build your &ldquo;Hello World&rdquo; application.</p>
 
 <ol>
-<li>Using the editor of your choice, create a new file called <code>main.go</code> inside the <strong>app</strong> directory.</li>
+<li>Open a terminal window.<br /></li>
+<li>In your current working directory (we will use the <code>Development</code> directory under the user&rsquo;s home directory in this example), create a lab directory called <code>go</code> and a subdirectory of that called &lsquo;app&rsquo;</li>
 </ol>
 
-<pre><code class="language-console">vi hello-go.go
+<pre><code class="language-terminal">cd ~/Development
+mkdir -p go/app
+cd go/app
+</code></pre></li>
+
+<li><p>Using the editor of your choice, create a new file called <code>main.go</code> inside the <strong>app</strong> directory.</p>
+
+<pre><code class="language-terminal">vi hello-go.go
 </code></pre></li>
 
 <li><p>Add the following content to your new file and <strong>save</strong>:</p>
@@ -529,15 +534,14 @@ func main() {
 }
 </code></pre></li>
 
-<li><p>Compile an executable (in this example a GO executable) which properly targets a linux OS and is built statically with bare-minimum libs and dependencies. In this example we have decided to name the executable <code>hello-go</code>.</p>
+<li><p>Compile your Go executable so it properly targets a linux OS and is built statically with minimal dependencies. In this example we have decided to name the executable <code>hello-go</code>:</p>
 
-<pre><code class="language-console">$ CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags=&quot;-s -w&quot; -a -o hello-go .
-</code></pre>
+<pre><code class="language-terminal">$ CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags=&quot;-s -w&quot; -a -o hello-go .
+</code></pre></li>
 
-<ol>
-<li><p>A new file called <code>hello-go</code> will be created in the same directory.  This  will be referenced when we build our docker container.</p></li>
+<li><p>A new executable binary called <code>hello-go</code> will be created in the same directory.  This will be referenced when we build our docker container.</p></li>
 
-<li><p>Create a new file in the same directory and name it <code>Dockerfile</code>.  This file could be named anything but for now we will just keep it simple.  Copy the following code into this file:</p>
+<li><p>Create a new file in the same directory and name it <code>Dockerfile</code>.  This file could be named anything, but common convention is to use this filename.  Copy the following code into this file:</p>
 
 <pre><code># STEP 1 build directory / file layout
 
@@ -575,94 +579,82 @@ EXPOSE 8080
 CMD [&quot;/app/hello-go&quot;]
 </code></pre></li>
 
-<li><p>Login to Docker registry</p></li>
-</ol>
+<li><p>Login to your docker registry:</p>
 
-<p><code>docker login</code></p>
-
-<pre><code class="language-console">$ docker login
+<pre><code class="language-terminal">$ docker login
 Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
 Username: jabbottc1
 Password:
 Login Succeeded
 </code></pre></li>
 
-<li><p>Build a Docker image using the <code>Dockerfile</code>.  Make sure to include the <code>.</code> at the end of the following command.  <strong>hello-go</strong> is the name of the image we are creating.</p>
+<li><p>Build a Docker image using the <code>Dockerfile</code>.  Make sure to include the <code>.</code> at the end of the following command. The name of the image we&rsquo;re creating is <strong>hello-go</strong>:</p>
 
 <p><code>docker build -t hello-go -f Dockerfile .</code></p></li>
 </ol>
 
-<h2 id="testing-your-hello-world-app">Testing your Hello World App</h2>
+<h2 id="testing-your-application">Testing Your Application</h2>
+
+<p><em>Optional</em> - if you want to test your docker image locally to see if it behaves as expected.</p>
 
 <ol>
-<li><p><strong>Optional Step</strong>. If you want to test your new docker container locally and see if it behaves as expected you can run the following command:</p>
+<li><p>Run the following command:</p>
 
 <p><code>docker run -e PORT=8080 -p 8080:8080 --rm -ti hello-go</code></p></li>
 
 <li><p>Verify the app works by using the following command in a <strong>new terminal window</strong>.  Alternatively, you could open a browser to <code>http://localhost:8080</code></p>
 
-<p><code>curl http://localhost:8080</code></p>
+<pre><code class="language-terminal">$ curl http://localhost:8080
+</code></pre>
 
 <p><strong>Note</strong>: to stop the running container run this command from the new terminal window (this uses <code>--filter</code> (<code>-f</code>) to find the container created from your <code>hello-go</code> image):</p>
 
 <p><code>docker stop $(docker ps -qf &quot;ancestor=hello-go&quot;)</code></p>
 
-<p>Another way to stop the <code>hello-go</code>container is to view all of the running docker containers and issue a command to stop it by the id</p>
+<p>Another way to stop the <code>hello-go</code>container is to view all of the running docker containers and issue a command to stop it by the ID:</p>
 
-<pre><code class="language-console">$ docker container ls
+<pre><code class="language-terminal">$ docker container ls
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                  PORTS                    NAMES
 6009be3dfae3        hello-go            &quot;/hello-go&quot;         5 seconds ago       Up 4 seconds            0.0.0.0:8080-&gt;8080/tcp   goofy_swanson
 </code></pre>
 
-<pre><code class="language-console">$ docker stop 6009be3dfae3 
+<pre><code class="language-terminal">$ docker stop 6009be3dfae3 
 6009be3dfae3
 $ docker container ls
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                  PORTS               NAMES
 </code></pre></li>
 </ol>
 
-<h2 id="tagging-and-pushing-your-image-to-a-container-registry">Tagging and pushing your image to a container registry</h2>
+<h2 id="tagging-and-pushing-your-image-to-a-registry">Tagging and Pushing your Image to a Registry</h2>
+
+<p>Now that we have an image we need to apply a <code>tag</code> and <code>push</code> it to a container registry.</p>
 
 <ol>
-<li><p>Now that we have an image we need to apply a <code>tag</code> and <code>push</code> it to a container registry.</p></li>
+<li><p>Docker tags allow you to convey useful information about a specific image version or variant.  Rather than referring to your image by the <code>IMAGE ID</code> you can create aliases for your images.  Lets look at the list of images locally (your list might be different):</p>
 
-<li><p>Docker Tags allow you to convey useful information about a specific image version/variant.  Rather than referring to your image by the <code>IMAGE ID</code> you can create an alias to your images.  Lets look at the list of images locally (your list might be different):</p>
-
-<p><code>docker images</code></p>
-
-<pre><code class="language-console">$ docker images
+<pre><code class="language-terminal">$ docker images
 REPOSITORY             TAG                 IMAGE ID            CREATED             
 hello-go               latest              56f2fefe6685        2 hours ago
 alpine                 latest              8cb3aa00f899        3 weeks ago         
 tomcat                 8.0                 ef6a7c98d192        6 months ago
-</code></pre>
+</code></pre></li>
 
-<ol>
-<li>We will <code>tag</code> your local image with your <strong>namespace/repo</strong></li>
-</ol>
+<li><p>We will <code>tag</code> your local image with your <strong>namespace/repository</strong> using the following command: <code>docker tag hello-go &lt;your-registry-user-name&gt;/hello-go:0.0.1</code></p>
 
-<p><code>docker tag hello-go &lt;your-registry-user-name&gt;/hello-go:0.0.1</code></p>
-
-<pre><code class="language-console">$ docker tag hello-go jabbottc1/hello-go:0.0.1
+<pre><code class="language-terminal">$ docker tag hello-go jabbottc1/hello-go:0.0.1
 </code></pre>
 
 <p><strong>Optional Step</strong> list your images and tags</p>
 
-<p><code>docker images</code></p>
-
-<pre><code class="language-console">$ docker images
+<pre><code class="language-terminal">$ docker images
 REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
 jabbottc1/hello-go       0.0.1               511503f3b991        16 minutes ago      7.06MB
 hello-go                 latest              511503f3b991        16 minutes ago      7.06MB
-</code></pre>
+</code></pre></li>
 
-<ol>
-<li>Push the tagged image into your public container registry</li>
-</ol>
+<li><p>Push the tagged image into your public container registry</p>
 
-<p><code>docker push jabbottc1/hello-go:0.0.1</code></p>
-
-<pre><code class="language-console">$ docker push jabbottc1/hello-go:0.0.1
+<pre><code class="language-terminal">$ docker push jabbottc1/hello-go:0.0.1
 The push refers to repository [docker.io/jabbottc1/hello-go]
 1c82c58a49f6: Layer already exists
 d992cd40d944: Layer already exists
@@ -673,25 +665,26 @@ c1b4e3786f95: Layer already exists
 0.0.1: digest: sha256:385984109a3cf6b1a82dcebb1ee124a7172a5a81795bf8116f2cab6d7a09ca4e size: 1569
 </code></pre>
 
-<p>Your image digest and layer hashes will differ.</p></li>
+<p>Your image digest and layer hashes will differ from the above terminal output.</p></li>
 </ol>
 
 <h2 id="deploy-your-container-into-critical-stack">Deploy your container into Critical Stack</h2>
 
-<ol>
-<li><p>Follow <a href="../../node/deploystateless">deployment steps similar to Node lab</a> with appropriate substitutions.</p></li>
+<p>Deploying your container is as simple as following the <a href="../../node/deploystateless/#deploying">deployment steps in the Node lab</a>, but change the docker image name and other parameters as appropriate.</p>
 
-<li><p>Navigate to your application host to see your <strong>Hello World</strong> message or run <code>curl</code> to verify that you application is running and exposed externally.  <strong>Note</strong> it may take a few minutes for this new cname to be created.</p>
+<ol>
+<li><p>Navigate to your application host to see your <strong>Hello World</strong> message or run <code>curl</code> to verify that you application is running and exposed externally.  <strong>Note</strong> it may take a few minutes for this new <strong>cname</strong> to be created.</p>
 
 <p><code>curl -s http://&lt;URL_for_your_deployment&gt;</code></p>
 
-<pre><code class="language-console">$ curl http://...
+<pre><code class="language-terminal">$ curl http://...
 Hello, &quot;/&quot;$ 
-</code></pre>
+</code></pre></li>
+</ol>
 
 <h3 id="conclusion">Conclusion</h3>
 
-<p>You have successfully deployed a golang application in Critical Stack.  But <em><strong>Hello World</strong></em> isn&rsquo;t enough, right?  Next we will deploy a <a href="../hello_rest">Deploying a Stateless RESTful Go App</a>.</p>
+<p>You have now successfully deployed a Go application in Critical Stack.  But <em><strong>Hello World</strong></em> isn&rsquo;t enough, right?  Next we will deploy a <a href="../hello_rest">Stateless RESTful Go App</a>.</p>
 
 <h3 id="todo">TODO</h3>
 
@@ -699,7 +692,6 @@ Hello, &quot;/&quot;$
 
 <ol>
 <li>sh build.sh -v 0.0.1</li>
-</ol></li>
 </ol>
 
 
@@ -948,20 +940,20 @@ Hello, &quot;/&quot;$
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/labs/js/clipboard.min.js?1558109060"></script>
-    <script src="/labs/js/perfect-scrollbar.min.js?1558109060"></script>
-    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558109060"></script>
-    <script src="/labs/js/jquery.sticky.js?1558109060"></script>
-    <script src="/labs/js/featherlight.min.js?1558109060"></script>
-    <script src="/labs/js/html5shiv-printshiv.min.js?1558109060"></script>
-    <script src="/labs/js/highlight.pack.js?1558109060"></script>
+    <script src="/labs/js/clipboard.min.js?1558117380"></script>
+    <script src="/labs/js/perfect-scrollbar.min.js?1558117380"></script>
+    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558117380"></script>
+    <script src="/labs/js/jquery.sticky.js?1558117380"></script>
+    <script src="/labs/js/featherlight.min.js?1558117380"></script>
+    <script src="/labs/js/html5shiv-printshiv.min.js?1558117380"></script>
+    <script src="/labs/js/highlight.pack.js?1558117380"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/labs/js/modernizr.custom-3.6.0.js?1558109060"></script>
-    <script src="/labs/js/learn.js?1558109060"></script>
-    <script src="/labs/js/hugo-learn.js?1558109060"></script>
+    <script src="/labs/js/modernizr.custom-3.6.0.js?1558117380"></script>
+    <script src="/labs/js/learn.js?1558117380"></script>
+    <script src="/labs/js/hugo-learn.js?1558117380"></script>
 
-    <link href="/labs/mermaid/mermaid.css?1558109060" type="text/css" rel="stylesheet" />
-    <script src="/labs/mermaid/mermaid.js?1558109060"></script>
+    <link href="/labs/mermaid/mermaid.css?1558117380" type="text/css" rel="stylesheet" />
+    <script src="/labs/mermaid/mermaid.js?1558117380"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

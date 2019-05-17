@@ -2,11 +2,11 @@
 title = "AWS Basic Cluster"
 date = 2019-04-23T09:43:37-04:00
 weight = 6
-chapter = true
+chapter = false
 pre = "<i class='fas fa-server'></i> "
 +++
 
-# Installing Critical Stack into an AWS account
+## Installing Critical Stack into an AWS account
 This document provides guidance with the installation of Critical Stack into an AWS account.  
 
 ## Prerequisites
