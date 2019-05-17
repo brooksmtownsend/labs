@@ -31,7 +31,7 @@ Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-rest
 
 	`git clone https://github.com/criticalstack/labs-code.git`
 
-	`cd labs-code/hello_rest`
+	`cd labs-code/go/hello_rest`
 
 1. As with previous lab, compile the REST API example code into `hello-go`.
 	
