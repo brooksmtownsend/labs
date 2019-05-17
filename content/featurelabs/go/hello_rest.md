@@ -17,11 +17,11 @@ Pre-requisites:
 1. If using `curl`, `python` to make _**JSON**_ prettier
 1. Docker : [Docker](https://www.docker.com/get-started)
 1. Public container registry [Docker Hub](https://hub.docker.com)
-1. [Previous Go lab](../hello.md) for **Docker registry** and **Load Balancer** setup - this demo will just update the previous Docker image with new functionality
+1. Previous Go lab for **Docker registry** and **Load Balancer** setup - this demo will just update the previous Docker image with new functionality
 
 ## Overview
 
-Update [previous lab](../hello.md) to introduce a REST API.
+Update previous lab to introduce a REST API.
 
 Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-restful-json-api-go/) and adapted to Critical Stack.  This is just example code and not intended to teach proper Go coding in any form.
 
