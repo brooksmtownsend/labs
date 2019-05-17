@@ -25,8 +25,31 @@
     
 }
 
+@font-face {
+    font-family: 'graphik-light';
+    src: url("../fonts/Graphik-Light.otf");
+}
+@font-face {
+    font-family: 'graphik-semibold';
+    src: url("../fonts/Graphik-Semibold.otf");
+}
+@font-face {
+    font-family: 'graphik-regular';
+    src: url("../fonts/Graphik-Regular.otf");
+}
+@font-face {
+    font-family: 'mirai-light';
+    src: url("../fonts/mirai-light.otf");
+}
+@font-face {
+    font-family: 'mirai-regular';
+    src: url("../fonts/mirai-regular.otf");
+}
+
+
 body {
     color: var(--MAIN-TEXT-color) !important;
+    font-family: 'graphik-regular';
 }
 
 textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="url"]:focus, input[type="color"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, select[multiple=multiple]:focus {
@@ -34,7 +57,18 @@ textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[typ
     box-shadow: none;
 }
 
+#chapter h3 {
+    font-family: "graphik-semibold", sans-serif;
+    font-weight: 300;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'mirai-regular';
+}
+
 h2, h3, h4, h5 {
+    font-family: 'graphik-regular';
     color: var(--MAIN-TITLES-TEXT-color) !important;
 }
 
@@ -66,6 +100,7 @@ a:hover {
     background-color: var(--MAIN-LINK-HOVER-color);
 }
 #sidebar {
+    font-family: 'mirai-regular';
 	background-color: var(--MENU-SECTIONS-BG-color);
 }
 #sidebar #header-wrapper {

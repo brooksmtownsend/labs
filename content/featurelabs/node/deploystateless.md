@@ -31,7 +31,7 @@ create a lab directory called `node-lab` and a subdirectory of that called `app`
 
 1. Using the editor of your choice, create a file called `index.js` inside the _**app**_ directory (resulting in _**app/index.js**_) with
 the following content:
-    ```js
+    ```
     // Say hello from Node
     var http = require('http');
 
