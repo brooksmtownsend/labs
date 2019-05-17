@@ -3,22 +3,12 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://criticalstack.github.io/labs/install/awsaccount/</loc>
-    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://criticalstack.github.io/labs/featurelabs/node/deploystateless/</loc>
-    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://criticalstack.github.io/labs/featurelabs/go/hello/</loc>
-    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://criticalstack.github.io/labs/faqs/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/install/</loc>
     <lastmod>2019-04-23T09:43:37-04:00</lastmod>
   </url>
   
@@ -28,7 +18,17 @@
   </url>
   
   <url>
-    <loc>https://criticalstack.github.io/labs/install/</loc>
+    <loc>https://criticalstack.github.io/labs/install/awsaccount/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/featurelabs/go/hello/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/featurelabs/node/deploystateless/</loc>
     <lastmod>2019-04-23T09:43:37-04:00</lastmod>
   </url>
   
@@ -39,6 +39,11 @@
   
   <url>
     <loc>https://criticalstack.github.io/labs/install/aws_basic_cluster/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/featurelabs/go/hello_rest/</loc>
     <lastmod>2019-04-23T09:43:37-04:00</lastmod>
   </url>
   

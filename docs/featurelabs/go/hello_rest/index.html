@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/labs/images/favicon.png" type="image/png">
 
-    <title>AWS Account Setup :: Critical Stack Labs</title>
+    <title>Deploying a Stateless RESTful Go App :: Critical Stack Labs</title>
 
     
     <link href="/labs/css/nucleus.css?1558123855" rel="stylesheet">
@@ -35,7 +35,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/labs/install/awsaccount/">
+  <body class="" data-url="/labs/featurelabs/go/hello_rest/">
     <nav id="sidebar" class="">
 
 
@@ -102,7 +102,7 @@
   
     
     <li data-nav-id="/labs/install/" title="Installation" class="dd-item 
-        parent
+        
         
         
         ">
@@ -129,8 +129,8 @@
   
     
     <li data-nav-id="/labs/install/awsaccount/" title="AWS Account Setup" class="dd-item 
-        parent
-        active
+        
+        
         
         ">
       <a href="/labs/install/awsaccount/">
@@ -184,7 +184,7 @@
   
     
     <li data-nav-id="/labs/featurelabs/" title="Feature Labs" class="dd-item 
-        
+        parent
         
         
         ">
@@ -283,7 +283,7 @@
   
     
     <li data-nav-id="/labs/featurelabs/go/" title="Go Labs" class="dd-item 
-        
+        parent
         
         
         ">
@@ -326,7 +326,7 @@
  
   
     
-      <li data-nav-id="/labs/featurelabs/go/hello_rest/" title="Deploying a Stateless RESTful Go App" class="dd-item ">
+      <li data-nav-id="/labs/featurelabs/go/hello_rest/" title="Deploying a Stateless RESTful Go App" class="dd-item active">
         <a href="/labs/featurelabs/go/hello_rest/">
         <i class='fas fa-flask'></i> Deploying a Stateless RESTful Go App
         
@@ -404,7 +404,13 @@
             
           
           
-            <a href='/labs/'></a> > <a href='/labs/install/'>Installation</a> > AWS Account Setup
+            
+            
+          
+          
+            <a href='/labs/'></a> > <a href='/labs/featurelabs/'>Feature Labs</a> > <a href='/labs/featurelabs/go/'>Go Labs</a> > Deploying a Stateless RESTful Go App
+          
+         
           
          
           
@@ -421,8 +427,14 @@
 <ul>
 <li>
 <ul>
-<li><a href="#aws-account-creation">AWS Account Creation</a></li>
-<li><a href="#manage-user-access">Manage User Access</a></li>
+<li><a href="#deploying-a-stateless-golang-app-with-rest-api-in-critical-stack">Deploying a Stateless Golang App with REST API in Critical Stack</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#building-your-restful-hello-world-app">Building Your RESTful Hello World App</a></li>
+<li><a href="#testing-your-restful-hello-world-app">Testing your RESTful Hello World App</a></li>
+<li><a href="#tagging-and-pushing-to-a-container-registry">Tagging and Pushing to a Container Registry</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#todo">TODO</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -441,7 +453,7 @@
           
             <h1>
               
-              AWS Account Setup
+              Deploying a Stateless RESTful Go App
             </h1>
           
 
@@ -450,271 +462,186 @@
 
 
 
-	
 
-<h2 id="aws-account-creation">AWS Account Creation</h2>
+<h2 id="deploying-a-stateless-golang-app-with-rest-api-in-critical-stack">Deploying a Stateless Golang App with REST API in Critical Stack</h2>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>Before starting this lab, you will need:</p>
 
 <ol>
-<li><p>Go to <a href="aws.amazon.com">AWS</a> and register for a new free account.</p>
-
-<p><img src="../../images/install/awsaccount/free_account.png" alt="freeaccount" /></p></li>
-
-<li><p>Sign up for a new account:</p>
-
-<p><img src="../../images/install/awsaccount/aws_creation.png" alt="awsaccountcreation" /></p></li>
-
-<li><p>Fill our your information including <strong>Payment Information</strong> so that Amazon can verify your identity.</p></li>
-
-<li><p>Verify your account:</p>
-
-<p><img src="../../images/install/awsaccount/verify_account.png" alt="verifyaccount" /></p></li>
-
-<li><p>Sign in to your account:</p>
-
-<p><img src="../../images/install/awsaccount/aws_signin.png" alt="awssignin" /></p></li>
+<li><a href="https://golang.org/dl/">Go</a> installed</li>
+<li><a href="https://code.visualstudio.com/download">Visual Studio Code</a> or your favorite IDE installed</li>
+<li><code>curl</code> or some equivalent way to do <em><strong>GET</strong></em> and <em><strong>POST</strong></em> &nbsp; (<em><strong>Postman</strong></em> is a good alternative)</li>
+<li>If using <code>curl</code>, <code>python</code> to make <em><strong>JSON</strong></em> prettier (you can also use <a href="https://stedolan.github.io/jq/download/">jq</a>)</li>
+<li><a href="https://www.docker.com/get-started">Docker</a> installed.</li>
+<li>Access to a public container registry, e.g. <a href="https://hub.docker.com">Docker Hub</a></li>
+<li>Completed the <a href="../hello">Previous Go lab</a> for the <strong>Docker registry</strong> and <strong>Load Balancer</strong> setup - this demo will just update the previous Docker image with new functionality</li>
 </ol>
 
-<h2 id="manage-user-access">Manage User Access</h2>
+<h2 id="overview">Overview</h2>
+
+<p>In this lab, we will be enhancing the work done in the previous lab to introduce a RESTful API and walking through the steps necessary to build and deploy this to Critical Stack.</p>
+
+<p>The Go code was lifted from <a href="https://thenewstack.io/make-a-restful-json-api-go/">Making a RESTful JSON API in Go</a> and adapted to Critical Stack. This is purely sample code and not intended to be used as a reference for best practices or idioms.</p>
+
+<h2 id="building-your-restful-hello-world-app">Building Your RESTful Hello World App</h2>
 
 <ol>
-<li><p>From the <strong>AWS Management Console</strong> -&gt; <strong>Find Services</strong> search for <code>IAM</code> (Manage User Access and Encryption Key).</p>
+<li><p>Clone the accompanying <a href="https://github.com/criticalstack/labs-code.git">Critical Stack Feature Lab repo</a> if you haven&rsquo;t already and change to the <a href="https://github.com/criticalstack/labs-code/hello_rest/">hello_rest</a> directory so you can access the source code:</p>
 
-<p><img src="../../images/install/awsaccount/iam.png" alt="iam" /></p></li>
+<p><code>git clone https://github.com/criticalstack/labs-code.git</code></p>
 
-<li><p>Click <strong>Policies</strong> from the Navigation.</p></li>
+<p><code>cd labs-code/go/hello_rest</code></p></li>
 
-<li><p>It is recommended that you create a new limited access policy rather than giving a user <code>admin</code> access.  For the purpose of the Critical Stack install we will create a new <strong>policy</strong> with only the permissions needed to build the cluster.  Click <strong>Create policy</strong> .</p>
+<li><p>As with previous lab, compile the REST API example code into <code>hello-go</code>.</p>
 
-<p><img src="../../images/install/awsaccount/policies.png" alt="policies" /></p></li>
-
-<li><p>In the new <strong>Create policy</strong> window you can create a new policy with the Visual editor or with JSON (JavaScript Object Notation).  Select <strong>JSON</strong></p>
-
-<p><img src="../../images/install/awsaccount/json.png" alt="json" /></p></li>
-
-<li><p>You can use use this <a href="../../res/cs_minimum_policy_install.json">sample json policy definition</a> or copy the text below within the JSON editor window.</p>
-
-<pre><code class="language-json">{
-    &quot;Version&quot;: &quot;2012-10-17&quot;,
-    &quot;Statement&quot;: [
-        {
-            &quot;Sid&quot;: &quot;CriticalStackInstallationPolicy&quot;,
-            &quot;Effect&quot;: &quot;Allow&quot;,
-            &quot;Action&quot;: [
-                &quot;autoscaling:AttachInstances&quot;,
-                &quot;autoscaling:AttachLoadBalancers&quot;,
-                &quot;autoscaling:AttachLoadBalancerTargetGroups&quot;,
-                &quot;autoscaling:CreateAutoScalingGroup&quot;,
-                &quot;autoscaling:CreateLaunchConfiguration&quot;,
-                &quot;autoscaling:CreateOrUpdateTags&quot;,
-                &quot;autoscaling:DeleteAutoScalingGroup&quot;,
-                &quot;autoscaling:DeleteLaunchConfiguration&quot;,
-                &quot;autoscaling:DeleteTags&quot;,
-                &quot;autoscaling:DescribeAutoScalingGroups&quot;,
-                &quot;autoscaling:DescribeAutoScalingInstances&quot;,
-                &quot;autoscaling:DescribeAutoScalingNotificationTypes&quot;,
-                &quot;autoscaling:DescribeLaunchConfigurations&quot;,
-                &quot;autoscaling:DescribeLoadBalancers&quot;,
-                &quot;autoscaling:DescribeLoadBalancerTargetGroups&quot;,
-                &quot;autoscaling:DescribePolicies&quot;,
-                &quot;autoscaling:DescribeScalingActivities&quot;,
-                &quot;autoscaling:DescribeTags&quot;,
-                &quot;autoscaling:DetachInstances&quot;,
-                &quot;autoscaling:DetachLoadBalancers&quot;,
-                &quot;autoscaling:DetachLoadBalancerTargetGroups&quot;,
-                &quot;autoscaling:SetDesiredCapacity&quot;,
-                &quot;autoscaling:SetInstanceHealth&quot;,
-                &quot;autoscaling:TerminateInstanceInAutoScalingGroup&quot;,
-                &quot;autoscaling:UpdateAutoScalingGroup&quot;,
-                &quot;ec2:AllocateAddress&quot;,
-                &quot;ec2:AssociateAddress&quot;,
-                &quot;ec2:AssociateIamInstanceProfile&quot;,
-                &quot;ec2:AssociateRouteTable&quot;,
-                &quot;ec2:AttachInternetGateway&quot;,
-                &quot;ec2:AttachNetworkInterface&quot;,
-                &quot;ec2:AttachVolume&quot;,
-                &quot;ec2:AuthorizeSecurityGroupIngress&quot;,
-                &quot;ec2:CopyImage&quot;,
-                &quot;ec2:CreateInternetGateway&quot;,
-                &quot;ec2:CreateKeyPair&quot;,
-                &quot;ec2:CreateNatGateway&quot;,
-                &quot;ec2:CreateNetworkAcl&quot;,
-                &quot;ec2:CreateNetworkInterface&quot;,
-                &quot;ec2:CreateRoute&quot;,
-                &quot;ec2:CreateRouteTable&quot;,
-                &quot;ec2:CreateSecurityGroup&quot;,
-                &quot;ec2:CreateSnapshot&quot;,
-                &quot;ec2:CreateSubnet&quot;,
-                &quot;ec2:CreateTags&quot;,
-                &quot;ec2:CreateVolume&quot;,
-                &quot;ec2:CreateVpc&quot;,
-                &quot;ec2:DeleteInternetGateway&quot;,
-                &quot;ec2:DeleteKeyPair&quot;,
-                &quot;ec2:DeleteNatGateway&quot;,
-                &quot;ec2:DeleteNetworkAcl&quot;,
-                &quot;ec2:DeleteNetworkInterface&quot;,
-                &quot;ec2:DeleteRoute&quot;,
-                &quot;ec2:DeleteRouteTable&quot;,
-                &quot;ec2:DeleteSecurityGroup&quot;,
-                &quot;ec2:DeleteSnapshot&quot;,
-                &quot;ec2:DeleteSubnet&quot;,
-                &quot;ec2:DeleteTags&quot;,
-                &quot;ec2:DeleteVolume&quot;,
-                &quot;ec2:DeleteVpc&quot;,
-                &quot;ec2:DescribeAccountAttributes&quot;,
-                &quot;ec2:DescribeAddresses&quot;,
-                &quot;ec2:DescribeAvailabilityZones&quot;,
-                &quot;ec2:DescribeFpgaImages&quot;,
-                &quot;ec2:DescribeImageAttribute&quot;,
-                &quot;ec2:DescribeImages&quot;,
-                &quot;ec2:DescribeInstanceAttribute&quot;,
-                &quot;ec2:DescribeInstances&quot;,
-                &quot;ec2:DescribeInstanceStatus&quot;,
-                &quot;ec2:DescribeInternetGateways&quot;,
-                &quot;ec2:DescribeKeyPairs&quot;,
-                &quot;ec2:DescribeNatGateways&quot;,
-                &quot;ec2:DescribeNetworkAcls&quot;,
-                &quot;ec2:DescribeNetworkInterfaceAttribute&quot;,
-                &quot;ec2:DescribeNetworkInterfaces&quot;,
-                &quot;ec2:DescribeRouteTables&quot;,
-                &quot;ec2:DescribeSecurityGroups&quot;,
-                &quot;ec2:DescribeSnapshots&quot;,
-                &quot;ec2:DescribeSubnets&quot;,
-                &quot;ec2:DescribeTags&quot;,
-                &quot;ec2:DescribeVolumes&quot;,
-                &quot;ec2:DescribeVolumeStatus&quot;,
-                &quot;ec2:DescribeVpcs&quot;,
-                &quot;ec2:DetachInternetGateway&quot;,
-                &quot;ec2:DetachNetworkInterface&quot;,
-                &quot;ec2:DetachVolume&quot;,
-                &quot;ec2:DisassociateAddress&quot;,
-                &quot;ec2:DisassociateIamInstanceProfile&quot;,
-                &quot;ec2:DisassociateRouteTable&quot;,
-                &quot;ec2:DisassociateSubnetCidrBlock&quot;,
-                &quot;ec2:ModifyFpgaImageAttribute&quot;,
-                &quot;ec2:ModifyImageAttribute&quot;,
-                &quot;ec2:ModifyInstanceAttribute&quot;,
-                &quot;ec2:ModifyNetworkInterfaceAttribute&quot;,
-                &quot;ec2:ModifySubnetAttribute&quot;,
-                &quot;ec2:ModifyVpcAttribute&quot;,
-                &quot;ec2:MonitorInstances&quot;,
-                &quot;ec2:ReleaseAddress&quot;,
-                &quot;ec2:ReportInstanceStatus&quot;,
-                &quot;ec2:RunInstances&quot;,
-                &quot;ec2:StartInstances&quot;,
-                &quot;ec2:StopInstances&quot;,
-                &quot;ec2:TerminateInstances&quot;,
-                &quot;elasticloadbalancing:AddTags&quot;,
-                &quot;elasticloadbalancing:ApplySecurityGroupsToLoadBalancer&quot;,
-                &quot;elasticloadbalancing:AttachLoadBalancerToSubnets&quot;,
-                &quot;elasticloadbalancing:ConfigureHealthCheck&quot;,
-                &quot;elasticloadbalancing:CreateAppCookieStickinessPolicy&quot;,
-                &quot;elasticloadbalancing:CreateLBCookieStickinessPolicy&quot;,
-                &quot;elasticloadbalancing:CreateLoadBalancer&quot;,
-                &quot;elasticloadbalancing:CreateLoadBalancerListeners&quot;,
-                &quot;elasticloadbalancing:CreateLoadBalancerPolicy&quot;,
-                &quot;elasticloadbalancing:DeleteLoadBalancer&quot;,
-                &quot;elasticloadbalancing:DeleteLoadBalancerListeners&quot;,
-                &quot;elasticloadbalancing:DeleteLoadBalancerPolicy&quot;,
-                &quot;elasticloadbalancing:DeregisterInstancesFromLoadBalancer&quot;,
-                &quot;elasticloadbalancing:DescribeInstanceHealth&quot;,
-                &quot;elasticloadbalancing:DescribeLoadBalancerAttributes&quot;,
-                &quot;elasticloadbalancing:DescribeLoadBalancerPolicies&quot;,
-                &quot;elasticloadbalancing:DescribeLoadBalancerPolicyTypes&quot;,
-                &quot;elasticloadbalancing:DescribeLoadBalancers&quot;,
-                &quot;elasticloadbalancing:DescribeTags&quot;,
-                &quot;elasticloadbalancing:DetachLoadBalancerFromSubnets&quot;,
-                &quot;elasticloadbalancing:DisableAvailabilityZonesForLoadBalancer&quot;,
-                &quot;elasticloadbalancing:EnableAvailabilityZonesForLoadBalancer&quot;,
-                &quot;elasticloadbalancing:ModifyLoadBalancerAttributes&quot;,
-                &quot;elasticloadbalancing:RegisterInstancesWithLoadBalancer&quot;,
-                &quot;elasticloadbalancing:RemoveTags&quot;,
-                &quot;elasticloadbalancing:SetLoadBalancerListenerSSLCertificate&quot;,
-                &quot;elasticloadbalancing:SetLoadBalancerPoliciesForBackendServer&quot;,
-                &quot;elasticloadbalancing:SetLoadBalancerPoliciesOfListener&quot;,
-                &quot;iam:AddRoleToInstanceProfile&quot;,
-                &quot;iam:AttachRolePolicy&quot;,
-                &quot;iam:CreateInstanceProfile&quot;,
-                &quot;iam:CreatePolicy&quot;,
-                &quot;iam:CreatePolicyVersion&quot;,
-                &quot;iam:CreateRole&quot;,
-                &quot;iam:CreateServiceLinkedRole&quot;,
-                &quot;iam:DeleteInstanceProfile&quot;,
-                &quot;iam:DeletePolicy&quot;,
-                &quot;iam:DeletePolicyVersion&quot;,
-                &quot;iam:DeleteRole&quot;,
-                &quot;iam:DeleteRolePolicy&quot;,
-                &quot;iam:DeleteServiceLinkedRole&quot;,
-                &quot;iam:DetachRolePolicy&quot;,
-                &quot;iam:GetInstanceProfile&quot;,
-                &quot;iam:GetPolicy&quot;,
-                &quot;iam:GetPolicyVersion&quot;,
-                &quot;iam:GetRole&quot;,
-                &quot;iam:GetRolePolicy&quot;,
-                &quot;iam:ListAttachedRolePolicies&quot;,
-                &quot;iam:ListEntitiesForPolicy&quot;,
-                &quot;iam:ListInstanceProfiles&quot;,
-                &quot;iam:ListInstanceProfilesForRole&quot;,
-                &quot;iam:ListPolicies&quot;,
-                &quot;iam:ListPolicyVersions&quot;,
-                &quot;iam:ListRolePolicies&quot;,
-                &quot;iam:ListRoles&quot;,
-                &quot;iam:PassRole&quot;,
-                &quot;iam:RemoveRoleFromInstanceProfile&quot;,
-                &quot;s3:*&quot;,
-                &quot;sts:GetCallerIdentity&quot;
-            ],
-            &quot;Resource&quot;: &quot;*&quot;
-        }
-    ]
-}
+<pre><code class="language-terminal">$ CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags=&quot;-s -w&quot; -a -o hello-go .
 </code></pre></li>
 
-<li><p>Your policy should look something like this:</p>
+<li><p>As with previous lab, build a Docker image using the <code>Dockerfile</code>.</p>
 
-<p><img src="../../images/install/awsaccount/json_policy.png" alt="jsonpolicy" /></p></li>
-
-<li><p>Select <strong>Review Policy</strong>.</p></li>
-
-<li><p>Give your policy a name and description and select <strong>Create policy</strong>.</p>
-
-<p><img src="../../images/install/awsaccount//policy_review.png" alt="policyreview" /></p></li>
-
-<li><p>Click <strong>Users</strong> from the Navigation and <strong>Add user</strong>.</p>
-
-<p><img src="../../images/install/awsaccount/newuser.png" alt="newuser" /></p></li>
-
-<li><p>Select <code>Programmatic access</code> for the <strong>Access Type</strong> and Click on <strong>Next: Permission</strong> at the bottom of the page.</p>
-
-<p><img src="../../images/install/awsaccount/add_user.png" alt="adduser" /></p></li>
-
-<li><p>Create a new group for permissions by selecting <strong>Create group</strong>.</p>
-
-<p><img src="../../images/install/awsaccount/new_group.png" alt="newgroup" /></p></li>
-
-<li><p>Click <strong>Refresh</strong> and search for the policy you just created <code>CS_Install_Policy</code>. Click the checkbox by the policy name and give your group a name.  Select <strong>Create Group</strong>.</p>
-
-<p><img src="../../images/install/awsaccount/cs_install_group.png" alt="cs_install_group" /></p></li>
-
-<li><p>With group selected click <strong>Next: Tags</strong> from the Add user screen.</p>
-
-<p><img src="../../images/install/awsaccount/user_next.png" alt="usernext" /></p></li>
-
-<li><p>Add any optional tags and select <strong>Next: Review</strong>.</p></li>
-
-<li><p>Select <strong>Create user</strong> to finalize to user creation.</p></li>
-
-<li><p>The <code>Access key ID</code> and <code>Secret access key</code> will be used for the CS Installer.</p>
-
-<p><img src="../../images/install/awsaccount/keyinfo.png" alt="keyinfo" /></p></li>
+<p><code>docker build -t hello-go -f Dockerfile .</code></p></li>
 </ol>
 
+<h2 id="testing-your-restful-hello-world-app">Testing your RESTful Hello World App</h2>
 
+<p><em><strong>Optional Step</strong></em>: If you want to test your new docker container locally and see if it behaves as expected you can follow these steps:</p>
 
+<ol>
+<li><p>Run the following command:</p>
+
+<p><code>docker run -e PORT=8080 -p 8080:8080 --rm -ti hello-go</code></p></li>
+
+<li><p>Verify the app works by using the following command in a <strong>new terminal window</strong>.  Alternatively, you could open a browser to <code>http://localhost:8080</code></p>
+
+<p>Basic test:
+<code>curl -s http://localhost:8080</code></p>
+
+<pre><code class="language-terminal">$ curl -s http://localhost:8080
+Welcome!
+</code></pre></li>
+
+<li><p>Show entries pre-inserted:
+<code>curl -s http://localhost:8080/todos | python -m json.tool</code></p>
+
+<pre><code class="language-terminal">$ curl -s http://localhost:8080/todos | python -m json.tool
+[
+    {
+        &quot;completed&quot;: false,
+        &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;Write presentation&quot;
+    },
+    {
+        &quot;completed&quot;: false,
+        &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+        &quot;id&quot;: 2,
+        &quot;name&quot;: &quot;Host meetup&quot;
+    }
+]
+</code></pre></li>
+
+<li><p>Show entry 1: &nbsp; <code>curl -s http://localhost:8080/todos/1 | python -m json.tool</code></p>
+
+<pre><code class="language-terminal">curl -s http://localhost:8080/todos/1 | python -m json.tool
+{
+    &quot;completed&quot;: false,
+    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;Write presentation&quot;
+}   
+</code></pre></li>
+
+<li><p>Insert a new entry:</p>
+
+<pre><code class="language-terminal">$ curl -s -H &quot;Content-Type: application/json&quot; -d '{&quot;name&quot;:&quot;New Todo&quot;}' http://localhost:8080/todos
+{&quot;id&quot;:3,&quot;name&quot;:&quot;New Todo&quot;,&quot;completed&quot;:false,&quot;due&quot;:&quot;0001-01-01T00:00:00Z&quot;}   
+</code></pre></li>
+
+<li><p>Show entry 3:</p>
+
+<pre><code class="language-terminal">$ curl -s http://localhost:8080/todos/3 | python -m json.tool
+{
+    &quot;completed&quot;: false,
+    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+    &quot;id&quot;: 3,
+    &quot;name&quot;: &quot;New Todo&quot;
+}
+</code></pre>
+
+<p>To stop the running container you can execute: &nbsp;  <code>docker stop $(docker ps -qf &quot;ancestor=hello-go&quot;)</code></p></li>
+</ol>
+
+<h2 id="tagging-and-pushing-to-a-container-registry">Tagging and Pushing to a Container Registry</h2>
+
+<ol>
+<li><p>Tag the new image with tag <code>0.0.2</code> using your image/repo/tag</p>
+
+<p><code>docker tag hello-go jabbottc1/hello-go:0.0.2</code></p></li>
+
+<li><p>Push to a docker registry</p>
+
+<pre><code class="language-terminal">$ docker push jabbottc1/hello-go:0.0.2
+The push refers to repository [docker.io/jabbottc1/hello-go]
+...
+</code></pre></li>
+
+<li><p>Edit your <code>hello-go-deployment</code> from the Critical Stack UI.  Update the image in the <em><strong>Deployment</strong></em> to pull <code>0.0.2</code>.  Then you can run the same tests as above but targeting the Load Balancer.</p>
+
+<pre><code>      image: 'jabbottc1/hello-go:0.0.2'  # Change this tag
+</code></pre></li>
+
+<li><p><strong>Save</strong> your deployment and <strong>exit</strong></p></li>
+
+<li><p>Test your upgraded deployment.  Then you can run the same tests as above but targeting the ingress host.</p>
+
+<pre><code class="language-terminal">$ curl -s -H &quot;Content-Type: application/json&quot; -d '{&quot;name&quot;:&quot;John Test&quot;}' https://&lt;URL_to_your_application&gt;/todos
+</code></pre>
+
+<pre><code class="language-terminal"> $ curl -s https://&lt;URL_to_your_application&gt;/todos | python -m json.tool
+[
+    {
+    &quot;completed&quot;: false,
+    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;Write presentation&quot;
+    },
+    {
+    &quot;completed&quot;: false,
+    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+    &quot;id&quot;: 2,
+    &quot;name&quot;: &quot;Host meetup&quot;
+    },
+    {
+    &quot;completed&quot;: false,
+    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+    &quot;id&quot;: 3,
+    &quot;name&quot;: &quot;John Test&quot;
+    }
+]
+</code></pre></li>
+</ol>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>You have successfully deployed a RESTful Go application to Critical Stack.  But this application is flawed - it can&rsquo;t scale beyond 1 node and has no persistence!  So next we will deploy a Go Application with a REST API and Persistence.</p>
+
+<p>Note:  some bugs with <strong>DELETE</strong>!</p>
+
+<h2 id="todo">TODO</h2>
+
+<p>Show how to build with scripts</p>
+
+<ol>
+<li>sh build.sh -v 0.0.2</li>
+</ol>
 
 
 <footer class=" footline" >
 	
 </footer>
+
 
         
         </div> 
@@ -766,80 +693,12 @@
             
                 
                     
-                    
                 
                 
 
                     
                     
                         
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
                     
                     
 
@@ -884,6 +743,25 @@
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
                 
                 
 
@@ -912,6 +790,59 @@
             
             
                 
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -939,10 +870,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/labs/install/" title="Installation"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/labs/featurelabs/go/hello/" title="Deploying a Go App"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/labs/install/aws_basic_cluster/" title="AWS Basic Cluster" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/labs/featurelabs/go/hello/" title="Deploying a Go App" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -973,3 +904,4 @@
 
   </body>
 </html>
+

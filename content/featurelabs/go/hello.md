@@ -1,5 +1,5 @@
 +++
-title = "Deploying a Stateless Go App"
+title = "Deploying a Go App"
 date = 2019-04-23T09:43:37-04:00
 weight = 5
 chapter = false
@@ -10,34 +10,41 @@ pre = "<i class='fas fa-flask'></i> "
 
 ### Getting Started
 
-Pre-requisites:
+Before starting this lab, you will need:
 
-1. [Go](https://golang.org/dl/)
-1. [Visual Studio Code](https://code.visualstudio.com/download)
-1. `curl` or some equivalent way to do _**GET**_ and _**POST**_
-1. If using `curl`, `python` to make _**JSON**_ prettier
-1. Docker : [Docker](https://www.docker.com/get-started)
-1. Public container registry [Docker Hub](https://hub.docker.com) 
-1. A _**Critical Stack**_ deployment with a user account provisioned for you.  Note your _**namespace**_ when you login.
+1. [Go](https://golang.org/dl/) installed
+1. [Visual Studio Code](https://code.visualstudio.com/download) (or your favorite IDE)
+1. `curl` or some equivalent way to do _**GET**_ and _**POST**_  &nbsp; (The _**Postman**_ browser plugin is a good alternative).
+1. If using `curl`, `python` to make _**JSON**_ prettier (you can also use `jq`)
+1. [Docker](https://www.docker.com/get-started) installed
+1. Access to a public container registry, e.g. [Docker Hub](https://hub.docker.com) 
+1. A _**Critical Stack**_ deployment with a user account provisioned for you.  Make sure to take note of your _**namespace**_ when you log in.
 
 ## Overview
 
-In this lab, you will deploy a simple _**Go**_ `Hello World` application in _**Critical Stack**_ and create _**Services**_ to make it available externally.  We will then illustrate how upgrade the deployment by creating a new release of the application.
+In this lab, you will deploy a simple _**Go**_ "Hello World" application to _**Critical Stack**_ and create _**Services**_ to make it accessible externally.  We will then illustrate how upgrade the deployment by creating a new release of the application.
 
-Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-restful-json-api-go/) and adapted to Critical Stack, this is just example code and not intended to teach proper Go coding in any form.
+The Go code for this lab was lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-restful-json-api-go/) and adapted to Critical Stack. This lab is not designed to illustrate Go programming practices or idioms.
 
 ## Building your Hello World App
 
-1. Create a working directory to build your `Hello World` application.  Open a terminal window.  In your current working directory (we will use the `Development` directory under the user's home directory in this example), create a lab directory called `go` and a subdirectory of that call 'app'
+We need something to deploy, so let's get started by creating the "Hello World" application.
 
-	```console
+Note: all source materials for this lab can be found in the [Critical Stack Feature Lab](https://github.com/criticalstack/labs-code.git) repository.
+
+1. Create a working directory to build your "Hello World" application.  
+
+	1. Open a terminal window.  
+	1. In your current working directory (we will use the `Development` directory under the user's home directory in this example), create a lab directory called `go` and a subdirectory of that called 'app'
+
+	```terminal
 	cd ~/Development
 	mkdir -p go/app
 	cd go/app
 	```
 2.  Using the editor of your choice, create a new file called `main.go` inside the **app** directory.
 
-	```console
+	```terminal
 	vi hello-go.go
 	```
 1.  Add the following content to your new file and **save**:
@@ -60,15 +67,15 @@ Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-rest
           log.Fatal(http.ListenAndServe(":8080", nil))
 	}
 	```
-1. Compile an executable (in this example a GO executable) which properly targets a linux OS and is built statically with bare-minimum libs and dependencies. In this example we have decided to name the executable `hello-go`.
+1. Compile your Go executable so it properly targets a linux OS and is built statically with minimal dependencies. In this example we have decided to name the executable `hello-go`:
 	
-	```console
+	```terminal
 	$ CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -a -o hello-go .
 	```
 	
-1.  A new file called `hello-go` will be created in the same directory.  This  will be referenced when we build our docker container.
+1.  A new executable binary called `hello-go` will be created in the same directory.  This will be referenced when we build our docker container.
 
-1.  Create a new file in the same directory and name it `Dockerfile`.  This file could be named anything but for now we will just keep it simple.  Copy the following code into this file:
+1.  Create a new file in the same directory and name it `Dockerfile`.  This file could be named anything, but common convention is to use this filename.  Copy the following code into this file:
 
 	```
 	# STEP 1 build directory / file layout
@@ -107,11 +114,9 @@ Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-rest
 	CMD ["/app/hello-go"]
 	```
 
-1. Login to Docker registry
-	
-	`docker login`
-
-	```console
+1. Login to your docker registry:
+		
+	```terminal
 	$ docker login
 	Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
 	Username: jabbottc1
@@ -119,65 +124,63 @@ Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-rest
 	Login Succeeded
 	```
 
-1.  Build a Docker image using the `Dockerfile`.  Make sure to include the `.` at the end of the following command.  **hello-go** is the name of the image we are creating.
+1.  Build a Docker image using the `Dockerfile`.  Make sure to include the `.` at the end of the following command. The name of the image we're creating is **hello-go**:
 
 	`docker build -t hello-go -f Dockerfile .`
 
-## Testing your Hello World App
-1.  **Optional Step**. If you want to test your new docker container locally and see if it behaves as expected you can run the following command:
+## Testing Your Application
+_Optional_ - if you want to test your docker image locally to see if it behaves as expected.
+
+1.  Run the following command:
 
 	`docker run -e PORT=8080 -p 8080:8080 --rm -ti hello-go`
 
 1. Verify the app works by using the following command in a **new terminal window**.  Alternatively, you could open a browser to `http://localhost:8080`
 
-	`curl http://localhost:8080`
-
+	```terminal
+	$ curl http://localhost:8080
+	```
+	
 	**Note**: to stop the running container run this command from the new terminal window (this uses `--filter` (`-f`) to find the container created from your `hello-go` image):
 
 	`docker stop $(docker ps -qf "ancestor=hello-go")`
 
-	Another way to stop the `hello-go`container is to view all of the running docker containers and issue a command to stop it by the id
+	Another way to stop the `hello-go`container is to view all of the running docker containers and issue a command to stop it by the ID:
 
-	```console
+	```terminal
    $ docker container ls
 	CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              	PORTS                    NAMES
 	6009be3dfae3        hello-go            "/hello-go"         5 seconds ago       Up 4 seconds        	0.0.0.0:8080->8080/tcp   goofy_swanson
 	```
-	```console
+	```terminal
 	$ docker stop 6009be3dfae3 
 	6009be3dfae3
 	$ docker container ls
 	CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              	PORTS               NAMES
 	```
 
-## Tagging and pushing your image to a container registry    
+## Tagging and Pushing your Image to a Registry
 
-1. Now that we have an image we need to apply a `tag` and `push` it to a container registry.
+Now that we have an image we need to apply a `tag` and `push` it to a container registry.
 
-1. Docker Tags allow you to convey useful information about a specific image version/variant.  Rather than referring to your image by the `IMAGE ID` you can create an alias to your images.  Lets look at the list of images locally (your list might be different):
-
-	`docker images`
-	
-	```console
+1. Docker tags allow you to convey useful information about a specific image version or variant.  Rather than referring to your image by the `IMAGE ID` you can create aliases for your images.  Lets look at the list of images locally (your list might be different):
+		
+	```terminal
 	$ docker images
 	REPOSITORY             TAG                 IMAGE ID            CREATED             
 	hello-go               latest              56f2fefe6685        2 hours ago
 	alpine                 latest              8cb3aa00f899        3 weeks ago         
 	tomcat                 8.0                 ef6a7c98d192        6 months ago
 	```
-1.  We will `tag` your local image with your **namespace/repo**
-
-	`docker tag hello-go <your-registry-user-name>/hello-go:0.0.1`
+1.  We will `tag` your local image with your **namespace/repository** using the following command: `docker tag hello-go <your-registry-user-name>/hello-go:0.0.1`
 	
-	```console
+	```terminal
 	$ docker tag hello-go jabbottc1/hello-go:0.0.1
 	```
 	
-	**Optional Step** list your images and tags
-
-	`docker images`
+	**Optional Step** list your images and tags	
 	
-	```console
+	```terminal
 	$ docker images
 	REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
 	jabbottc1/hello-go       0.0.1               511503f3b991        16 minutes ago      7.06MB
@@ -185,11 +188,9 @@ Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-rest
 	```
 
 
-1. Push the tagged image into your public container registry
-
-	`docker push jabbottc1/hello-go:0.0.1`
+1. Push the tagged image into your public container registry	
 	
-	```console
+	```terminal
 	$ docker push jabbottc1/hello-go:0.0.1
 	The push refers to repository [docker.io/jabbottc1/hello-go]
 	1c82c58a49f6: Layer already exists
@@ -200,26 +201,26 @@ Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-rest
 	c1b4e3786f95: Layer already exists
 	0.0.1: digest: sha256:385984109a3cf6b1a82dcebb1ee124a7172a5a81795bf8116f2cab6d7a09ca4e size: 1569
 	```
-	Your image digest and layer hashes will differ.
+	Your image digest and layer hashes will differ from the above terminal output.
 
 ## Deploy your container into Critical Stack
+Deploying your container is as simple as following the [deployment steps in the Node lab](../../node/deploystateless/#deploying), but change the docker image name and other parameters as appropriate.
 
-1. Follow [deployment steps similar to Node lab](../../node/deploystateless) with appropriate substitutions.
-
-1.  Navigate to your application host to see your **Hello World** message or run `curl` to verify that you application is running and exposed externally.  **Note** it may take a few minutes for this new cname to be created.
+1. Navigate to your application host to see your **Hello World** message or run `curl` to verify that you application is running and exposed externally.  **Note** it may take a few minutes for this new **cname** to be created.
 
 	`curl -s http://<URL_for_your_deployment>`
 	
-	```console
+	```terminal
 	$ curl http://...
 	Hello, "/"$ 
 	```
 
 ### Conclusion
-You have successfully deployed a golang application in Critical Stack.  But _**Hello World**_ isn't enough, right?  Next we will deploy a [golang application with a REST API](../hello+REST).
+You have now successfully deployed a Go application in Critical Stack.  But _**Hello World**_ isn't enough, right?  Next we will deploy a [Stateless RESTful Go App](../hello_rest).
 
 
 ### TODO
 Show how to build with scripts 
+
 1. sh build.sh -v 0.0.1
 

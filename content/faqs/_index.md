@@ -1,7 +1,7 @@
 +++
 title = "FAQ"
 date = 2019-04-23T09:43:37-04:00
-weight = 5
+weight = 1
 chapter = true
 pre = "<i class='fas fa-question-circle'></i> "
 +++
