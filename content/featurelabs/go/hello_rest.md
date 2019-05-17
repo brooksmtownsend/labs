@@ -17,7 +17,7 @@ Pre-requisites:
 1. If using `curl`, `python` to make _**JSON**_ prettier
 1. Docker : [Docker](https://www.docker.com/get-started)
 1. Public container registry [Docker Hub](https://hub.docker.com)
-1. Previous Go lab for **Docker registry** and **Load Balancer** setup - this demo will just update the previous Docker image with new functionality
+1. [Previous Go lab](../hello) for **Docker registry** and **Load Balancer** setup - this demo will just update the previous Docker image with new functionality
 
 ## Overview
 

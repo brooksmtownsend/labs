@@ -216,7 +216,7 @@ Lifted from [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-rest
 	```
 
 ### Conclusion
-You have successfully deployed a golang application in Critical Stack.  But _**Hello World**_ isn't enough, right?  Next we will deploy a [golang application with a REST API](./hello+REST).
+You have successfully deployed a golang application in Critical Stack.  But _**Hello World**_ isn't enough, right?  Next we will deploy a [Deploying a Stateless RESTful Go App](../hello_rest).
 
 
 ### TODO
