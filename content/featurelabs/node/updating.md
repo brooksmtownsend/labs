@@ -6,24 +6,24 @@ chapter = false
 pre = "<i class='fab fa-node'></i> "
 +++
 
-## Using Critical Stack to easily update a scalable, stateless application
+## Using Critical Stack to update a scalable, stateless application
 ### Getting Started
-Pre-requisites:  [Previous Node lab](../deploystateless)
+Before starting on this lab, you will need to have completed the [Previous Node lab](../deploystateless).
 
 ### Overview
 In the previous lab we created a simple NodeJS application,
-packaged the application in a Docker image,
-pushed the Docker image to a public Docker Hub repository,
-pulled that Docker image into a Critical Stack deployment as a container instance,
+packaged the application in a docker image,
+pushed the docker image to a public docker image repository (Docker Hub),
+pulled that image into a Critical Stack deployment as a container instance,
 and accessed the application via a public URL.
 
-Now we will create more instances of the container,
+In this next lab, we will create more instances of the container,
 update the application to show bread crumbs of those instances,
 push that update to Docker Hub,
-and use the Critical Stack UI to instruct K8s to roll out the update while we refresh on the public URL to see the change deploy seamlessly.
+and use the Critical Stack UI to instruct Kubernetes to roll out the update while we refresh the public URL. This will let us observe that a seamless rolling update is done with zero downtime.
 
 ### Steps
-1. Edit `app/index.js` and replace the source code with the following:
+1. Edit `app/index.js` (in your `node-lab` directory) and replace the source code with the following:
     ```
     // Load the http module to create an http server.
     var http = require('http');
@@ -65,7 +65,7 @@ and use the Critical Stack UI to instruct K8s to roll out the update while we re
 
 1. Increment the application version number in your `package.json` file and re-run `npm install` to update the `package-lock.json` file.
 
-    ```console
+    ```terminal
     user@testhost node-lab$ cat package.json
     {
     "name": "hello-node",
@@ -85,9 +85,9 @@ and use the Critical Stack UI to instruct K8s to roll out the update while we re
     found 0 vulnerabilities
     ```
 
-1. Build your Docker image again, but this time tag it as `<your-username>/hello-node:0.0.2` so we can uniquely identify the new image. After it's built, `push` it to DockerHub so we can update it in your Critical Stack cluster.
+1. Build your docker image again, but this time tag it as `<your-username>/hello-node:0.0.2` so we can uniquely identify the new image. After it's built, _push_ it to Docker Hub so it can be updated in your Critical Stack cluster.
 
-    ```console
+    ```terminal
     user@testhost node-lab$ docker build -t <your-username>/hello-node:0.0.2 -f Dockerfile .
     Sending build context to Docker daemon  4.288MB
     Step 1/9 : FROM node:9
@@ -137,16 +137,16 @@ and use the Critical Stack UI to instruct K8s to roll out the update while we re
     0.0.2: digest: sha256:2e1002b635cd983e7f2458331079f7b131d8096fd5994287c6f4933438513367 size: 3041
     ```
 
-1. Go to Critical Stack UI under *Deployment Listings*, find the row *my-first-deployment*, click on the gear icon, and select *Scale*.  Move the slider for *Number of pods* to `2` and then click *OK*.
+1. Go to the Critical Stack UI under _**Deployment Listings**_, find the row *my-first-deployment*, click on the gear icon, and select _**Scale**_.  Move the slider for _**Number of podS**_ to _2_ and then click _**OK**_.
 
     ![Scale deployment](../../../images/featurelabs/node/ScaleDeployment1.png "Scale deployment")
     ![Scale deployment](../../../images/featurelabs/node/ScaleDeployment2.png "Scale deployment")
 
-1. The previous step declaratively set the state of desired pods. Watch the deployment scale from `1` to `2`.
+1. The previous step declaratively set the desired state of our deployment's pods. Watch the deployment scale from 1 to 2:
 
     ![Rolling update](../../../images/featurelabs/node/RollingUpdate.png "Rolling update")
 
-1. Click on the gear icon again, and select *Edit*.  On line 36, change the Docker image tag from `0.0.1` to `0.0.2`, for example: `image: 'docker.io/jabbottc1/hello-node:0.0.1'` to `image: 'docker.io/jabbottc1/hello-node:0.0.2'`.  Then click *Save* and then *Exit*.
+1. Click on the gear icon again, and select _**Edit**_.  On line 36, change the Docker image tag from `0.0.1` to `0.0.2`. For example: `image: 'docker.io/jabbottc1/hello-node:0.0.1'` becomes `image: 'docker.io/jabbottc1/hello-node:0.0.2'`.  Next click _**Save**_ and then _**Exit**_.
 
     ![Use application v2](../../../images/featurelabs/node/UseApplicationv2.png "Use application v2")
 
@@ -154,11 +154,11 @@ and use the Critical Stack UI to instruct K8s to roll out the update while we re
 
     ![Increase replicas and use application v2](../../../images/featurelabs/node/IncreaseReplicasAndUseApplicationv2.png "Increase replicas and use application v2")
 
-1. Refresh the public URL to your application and watch the update roll out.  Also notice the different output when load changes from one pod to another.  Note: changing *Idle timeout* to `1` in the Load Balancer configuration will reduce the amount of time between switching from one pod to another (in the same section used to get the public facing URL in the previous lab).
+1. Refresh your browser pointing to the public URL for your application and watch the update roll out.  Also notice the different output when traffic shifts from one pod to another.  Note: changing _**Idle timeout**_ to 1 in the load balancer configuration will reduce the amount of time between switching from one pod to another (in the same section used to get the public facing URL in the previous lab).
 
     ![Change LB timeout](../../../images/featurelabs/node/ChangingLBTimeout.png "Change LB timeout")
 
-1. Want to go back to the previous application version?  Edit the deployment again and change the Docker image tag from `0.0.2` back to `0.0.1`.
+1. If you want to go back to the previous application version for any reason, simply edit the deployment again and change the Docker image tag from `0.0.2` back to `0.0.1`.
 
 ### Conclusion
-You should now feel comfortable with the basics of pushing new Docker images to a repository and pulling them into a Critical Stack deployment running multiple instances of your image.  This process is the basis for ongoing updates.
+You should now feel comfortable with the basics of pushing new docker images to a repository and pulling them into a Critical Stack deployment running multiple instances of your image.  This process is the basis for ongoing updates.
