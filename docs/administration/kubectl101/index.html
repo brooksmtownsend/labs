@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/labs/images/favicon.png" type="image/png">
 
-    <title>AWS Basic Cluster :: Critical Stack Labs</title>
+    <title>kubectl 101 :: Critical Stack Labs</title>
 
     
     <link href="/labs/css/nucleus.css?1558229606" rel="stylesheet">
@@ -35,7 +35,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/labs/install/aws_basic_cluster/">
+  <body class="" data-url="/labs/administration/kubectl101/">
     <nav id="sidebar" class="">
 
 
@@ -102,7 +102,7 @@
   
     
     <li data-nav-id="/labs/install/" title="Installation" class="dd-item 
-        parent
+        
         
         
         ">
@@ -153,8 +153,8 @@
   
     
     <li data-nav-id="/labs/install/aws_basic_cluster/" title="AWS Basic Cluster" class="dd-item 
-        parent
-        active
+        
+        
         
         ">
       <a href="/labs/install/aws_basic_cluster/">
@@ -362,7 +362,7 @@
   
     
     <li data-nav-id="/labs/administration/" title="Administration" class="dd-item 
-        
+        parent
         
         
         ">
@@ -424,7 +424,7 @@
  
   
     
-      <li data-nav-id="/labs/administration/kubectl101/" title="kubectl 101" class="dd-item ">
+      <li data-nav-id="/labs/administration/kubectl101/" title="kubectl 101" class="dd-item active">
         <a href="/labs/administration/kubectl101/">
         <i class='fas fa-info'></i> kubectl 101
         
@@ -493,7 +493,7 @@
             
           
           
-            <a href='/labs/'></a> > <a href='/labs/install/'>Installation</a> > AWS Basic Cluster
+            <a href='/labs/'></a> > <a href='/labs/administration/'>Administration</a> > kubectl 101
           
          
           
@@ -510,11 +510,15 @@
 <ul>
 <li>
 <ul>
-<li><a href="#installing-critical-stack-into-an-aws-account">Installing Critical Stack into an AWS account</a></li>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#account-setup">Account Setup</a></li>
-<li><a href="#installation">Installation</a></li>
-<li><a href="#cluster-assets">Cluster Assets</a></li>
+<li><a href="#kubectl">Kubectl</a>
+<ul>
+<li><a href="#getting-started">Getting Started</a></li>
+</ul></li>
+<li><a href="#getting-started-1">Getting Started</a></li>
+<li><a href="#connecting-to-your-server">Connecting to your server</a></li>
+<li><a href="#basic-commands">Basic commands</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#notes">Notes</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -533,7 +537,7 @@
           
             <h1>
               
-              AWS Basic Cluster
+              kubectl 101
             </h1>
           
 
@@ -542,101 +546,164 @@
 
 
 
-	
 
-<h2 id="installing-critical-stack-into-an-aws-account">Installing Critical Stack into an AWS account</h2>
+<h2 id="kubectl">Kubectl</h2>
 
-<p>This document provides guidance with the installation of Critical Stack into an AWS account.</p>
+<h3 id="getting-started">Getting Started</h3>
 
-<h2 id="prerequisites">Prerequisites</h2>
+<p>Pre-requisites:
+1. A Critical Stack cluster.  You will need to know your username and password.  This lab is more interesting if you have already deployed an <a href="../../featurelabs/go/hello.md">app</a> so that you can view the resources created by command line.</p>
+
+<ol>
+<li>kubectl installed : <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl">kubectl</a></li>
+</ol>
+
+<h2 id="getting-started-1">Getting Started</h2>
+
+<p>Intro Lifted from <a href="https://kubernetes.io/docs/reference/kubectl/overview/">kubernetes.io</a></p>
+
+<p>Kubectl is a command line interface for running commands against Kubernetes clusters. This overview covers kubectl syntax, describes the command operations, and provides common examples. For details about each command, including all the supported flags and subcommands, see the kubectl reference documentation.</p>
+
+<p>Use the following syntax to run <code>kubectl</code> commands from your terminal window:</p>
+
+<p><code>kubectl [command] [TYPE] [NAME] [flags]</code></p>
+
+<p>where <code>command</code>, <code>TYPE</code>, <code>NAME</code>, and <code>flags</code> are:</p>
 
 <ul>
-<li>An AWS account</li>
-<li>An AWS <em>Access key ID</em> and <em>Secret access key</em></li>
-<li>Instructions for setting up a new account and access keys - see <a href="../awsaccount">AWS Account Setup</a></li>
+<li><code>command</code>: Specifies the operation that you want to perform on one or more resources, for example <strong>create</strong>, <strong>get</strong>, <strong>describe</strong>, <strong>delete</strong>.</li>
+
+<li><p><code>Type</code>: Specifies the <a href="https://kubernetes.io/docs/reference/kubectl/overview/#resource-types">resource type</a>.  Some examples are : pods, nodes, services, deployments. Resource types are case-insensitive and you can specify the singular, plural, or abbreviated forms. For example, the following commands produce the same output:</p>
+
+<pre><code class="language-console"> kubectl get pod pod1
+ kubectl get pods pod1
+ kubectl get po pod1
+</code></pre>
+
+<ul>
+<li><code>NAME</code>:  Specifies the name of the resource. Names are case-sensitive. If the name is omitted, details for all resources are displayed.<br /></li>
+<li><code>flags</code>: Specifies optional flags. For example, you can use the -s or &ndash;server flags to specify the address and port of the Kubernetes API server.</li>
 </ul>
 
-<h2 id="account-setup">Account Setup</h2>
+<h2 id="connecting-to-your-server">Connecting to your server</h2>
 
 <ol>
-<li><p>Register for a new account at <a href="https://portal.criticalstack.com">portal.criticalstack.com</a>.</p></li>
+<li><p>There are a few ways to run <code>kubectl</code> commands with the Critical Stack Cluster.  You can <a href="../ssh_master_node/"><strong>ssh</strong> into a master node</a> and download <strong>external-admin.conf</strong> from your cluster&rsquo;s S3 bucket (but is complicated to use since master nodes are not accessible directly).  For now, we recommend to SSH into a master node.</p></li>
 
-<li><p>Select <strong>Register</strong> from the link at the bottom of the page.</p>
+<li><p>By default <code>kubectl</code> uses the configuration in $HOME/.kube/config.  If you want to run commands against multiple servers (CS or minikube) you will need a multi config file or use <strong>Environment</strong> variables.</p></li>
 
-<p><img src="../../images/install/aws_basic_cluster/register.png" alt="register" /></p></li>
-
-<li><p>Read the <strong>Terms of Service</strong> and if you agree click <strong>Accept</strong>.</p></li>
-
-<li><p>Select a <strong>registration type</strong>.  If the cloud service provider (CSP) account into which Critical Stack will be installed is owned by and paid for by a registered business, click the &ldquo;Business&rdquo; registration type. Otherwise, select &ldquo;Individual&rdquo;.</p>
-
-<p><img src="../../images/install/aws_basic_cluster/registration_type.png" alt="registrationtype" /></p></li>
-
-<li><p>After you fill our your user information click <strong>Register</strong>, you will receive a Welcome Email and a link to confirm your email.</p></li>
-
-<li><p>Login to your account at <a href="https://portal.criticalstack.com">Critical Stack Developer Portal</a>.  In the <strong>Key Generator</strong> section, click <strong>Generate License</strong> button to produce a valid license key.  Select <strong>Cloud</strong> as the *<em>License Type</em> since we are installing into <strong>AWS</strong>.</p>
-
-<p><img src="../../images/install/aws_basic_cluster/license_type.png" alt="licensetype" /></p></li>
-
-<li><p>After generating a license key, click the <strong>Go to Installer</strong> button at the top right of the page to run the Critical Stack installer in your AWS environment.  By logging into the installer, the system will automatically link your account’s generated license key to your Critical Stack instance.</p></li>
+<li><p>To view your current config you can run this command:</p></li>
 </ol>
 
-<h2 id="installation">Installation</h2>
+<p><code>kubectl config view</code></p>
+
+<pre><code class="language-console">kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+  server: https://&lt;server&gt;
+  name: critical-stack
+- cluster:
+  certificate-authority: /Users/&lt;user&gt;/.minikube/ca.crt
+  server: https://192.168.99.100:8443
+name: minikube
+contexts:
+- context:
+  cluster: critical-stack
+  namespace: &lt;namespace&gt;
+</code></pre></li>
+</ul>
+
+<h2 id="basic-commands">Basic commands</h2>
 
 <ol>
-<li><p>There are two types of installations: <strong>Cloud</strong> and <strong>Local</strong>.  For this walkthrough, we will be installing to <strong>AWS</strong> so select <strong>Cloud</strong> and your license key and click <strong>Proceed</strong>.</p>
+<li><p>Lets test our a few commands and compare with what we see in the UI.</p>
 
-<p><img src="../../images/install/aws_basic_cluster/installation_type.png" alt="installation_type" /></p></li>
+<p><code>kubectl get pods</code></p>
 
-<li><p>Select your Cloud provider, <strong>AWS</strong></p></li>
+<pre><code class="language-console">$ kubectl get pods
+NAME                                   READY     STATUS    RESTARTS   AGE
+hello-go-deployment-85b5b5cc6f-9h4wh   1/1       Running   0          4d
+hello-go-deployment-85b5b5cc6f-ccsd5   1/1       Running   0          4d
+hello-go-deployment-85b5b5cc6f-s6htw   1/1       Running   0          5d
+</code></pre>
 
-<li><p>Enter your AWS Credentials to create and configure the required resources.  It is strongly recommended you create a limited access role.  You can use this <a href="../../res/cs_minimum_policy_install.json">sample JSON definition</a> to create a policy for your user/group.  Additional information for creating IAM Policies and generating keys can be found <a href="../awsaccount">here</a></p></li>
-
-<li><p>Select your AWS Region for this cluster and click <strong>Proceed</strong>.</p>
-
-<p><img src="../../images/install/aws_basic_cluster/provider.png" alt="provider" /></p></li>
-
-<li><p>You may add any optional <strong>Cluster Tags</strong> and click <strong>Proceed</strong>.</p></li>
-
-<li><p>If you want to customize the network settings you can add your own <strong>VPC CIDR</strong> and <strong>Subnets</strong> or use the default.  Click on <strong>Proceed</strong>.   Additional details on VPCs and Subnets can be found <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#vpc-sizing-ipv4">here</a>.</p></li>
-
-<li><p>Choose what <strong>Instance Type</strong> you want for your master node. For detailed comparison ECS instance types this <a href="https://aws.amazon.com/ec2/instance-types">guide</a> is very helpful.</p></li>
-
-<li><p>Choose <strong>Public</strong> for the subnet type unless you are connecting to a private subnet with a VPN.</p></li>
-
-<li><p>Choose what type of Storage you want to use, either <code>gp2</code> General Purpose SSD volume (balance of price and performance) or <code>io1</code> Highest-Performance SSD volume (low-latency / high throughput workloads) and the <strong>storage size</strong>.  Select <strong>Proceed</strong>.</p>
-
-<p><img src="../../images/install/aws_basic_cluster/instance_type.png" alt="instancetype" /></p></li>
-
-<li><p>Review the cluster settings.  If you need to make any changes you can use the <strong>Go Back</strong> button or click on a section header in the sidebar to make the desired changes.  <strong>Note</strong> the <strong>access_key_id</strong> and <strong>secret_access_key</strong> will not be stored and is only showed for you convenience to verify.  If everything looks correct, click <strong>CREATE CLUSTER</strong>.
-<img src="../../images/install/aws_basic_cluster/create_cluster.png" alt="createcluster" /></p></li>
-
-<li><p>When you cluster is ready, select <strong>Download Assets</strong> to get the details about your environment.<br />
-<img src="../../images/install/aws_basic_cluster/install_complete.png" alt="installcomplete" /></p></li>
-</ol>
-
-<h2 id="cluster-assets">Cluster Assets</h2>
-
-<p>The <strong>Cluster Assets</strong> page lists the <strong>Cluster information</strong>, <strong>PEM Key</strong>, and and <strong>Cluster Link</strong>.  If you plan to <code>ssh</code> into the cluster nodes, you must download the <strong>PEM Key</strong>.  You can come back to this page at any time if you need to access the cluster information.<br />
-    <img src="../../images/install/aws_basic_cluster/assets.png" alt="assets" /></p>
+<p><img src="../../images/getpods.png" alt="getpods" /></p>
 
 <ol>
-<li><p>Create a <strong>cluster administrator</strong> login by clicking on the <strong>CREATE ADMIN</strong> button.  You must complete this step to access the cluster, and this step can be completed only one time so note the password you choose.
-<img src="../../images/install/aws_basic_cluster/admin.png" alt="admin" /></p></li>
+<li><p><strong>Note</strong> you will have have access to the resource types that your have permission to view/create within your namespace. If you are the cluster admin you will have permission to see all namespaces and resources.</p></li>
 
-<li><p>To access the Critical Stack cluster click the <strong>GO TO CLUSTER</strong> button or copy the url provided in the <strong>Cluster Link</strong> section.
-<img src="../../images/install/aws_basic_cluster/cluster_login.png" alt="cluster_login" /></p></li>
-
-<li><p>The Secure Orchestration Platform for the Enterprise
-<img src="../../images/install/aws_basic_cluster/critical_stack_cluster.png" alt="critical_stack_cluster" /></p></li>
+<li><p>In this example, I have 3 pods running all from one deployment.  Let&rsquo;s take a look at the deployment:</p></li>
 </ol>
 
+<p><code>kubectl get deployments</code></p>
 
+<pre><code class="language-console">$ kubectl get deployments
+NAME                  DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+hello-go-deployment   3         3         3            3           6d
+</code></pre>
 
+<p><img src="../../images/getdeployment.png" alt="getdeployment" /></p></li>
+
+<li><p>To view the configuration for this deployment, run this command:</p>
+
+<p><code>kubectl describe deployment</code></p>
+
+<pre><code class="language-console">$ kubectl describe deployment
+Name:                   hello-go-deployment
+Namespace:              &lt;namespace&gt;
+CreationTimestamp:      Wed, 17 Apr 2019 10:18:24 -0400
+Labels:                 app=hello-go
+Annotations:            deployment.kubernetes.io/revision=3
+Selector:               app=hello-go
+Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  1 max unavailable, 1 max surge
+Pod Template:
+  Labels:  app=hello-go
+  Containers:
+   hello-go:
+    Image:        jabbottc1/hello-go:0.0.3
+    Port:         8080/TCP
+</code></pre>
+
+<ol>
+<li>Let&rsquo;s change the <code>replicas</code> value of the deployment.  You could do this from the UI, but we will change this from the command line.</li>
+</ol>
+
+<p><code>kubectl scale deployment hello-go-deployment --replicas=2</code></p>
+
+<pre><code class="language-console">$ kubectl scale deployment hello-go-deployment --replicas=2
+kubectl describe deployment
+Name:                   hello-go-deployment
+Namespace:              &lt;namespace&gt;
+CreationTimestamp:      Wed, 17 Apr 2019 10:18:24 -0400
+Labels:                 app=hello-go
+Annotations:            deployment.kubernetes.io/revision=3
+Selector:               app=hello-go
+Replicas:               2 desired | 2 updated | 2 total | 2 available | 0   unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  1 max unavailable, 1 max surge
+Pod Template:
+Labels:  app=hello-go
+</code></pre></li>
+</ol>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>You have successfully setup <code>kubectl</code> with your Critical Stack cluster and can run some basic commands to view and update existing resources.</p>
+
+<h2 id="notes">Notes</h2>
+
+<p>Provide instructions how to use kubeconfig via bastion host and provide <code>generate-kubeconfig.sh</code> script to pull kubeconfig from S3 bucket.</p>
 
 
 <footer class=" footline" >
 	
 </footer>
+
 
         
         </div> 
@@ -688,7 +755,6 @@
             
                 
                     
-                    
                 
                 
 
@@ -703,9 +769,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -722,7 +785,6 @@
             
             
                 
-                    
                     
                 
                 
@@ -742,9 +804,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -860,6 +919,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -872,6 +932,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -904,6 +967,7 @@
             
             
                 
+                    
                     
                 
                 
@@ -928,10 +992,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/labs/install/awsaccount/" title="AWS Account Setup"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/labs/administration/helm_support/" title="helm support for Critical Stack"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/labs/featurelabs/" title="Feature Labs" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/labs/administration/ssh_master_node/" title="SSH to private subnet master nodes via secure bastion host" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -962,3 +1026,4 @@
 
   </body>
 </html>
+

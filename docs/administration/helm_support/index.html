@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/labs/images/favicon.png" type="image/png">
 
-    <title>AWS Basic Cluster :: Critical Stack Labs</title>
+    <title>helm support for Critical Stack :: Critical Stack Labs</title>
 
     
     <link href="/labs/css/nucleus.css?1558229606" rel="stylesheet">
@@ -35,7 +35,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/labs/install/aws_basic_cluster/">
+  <body class="" data-url="/labs/administration/helm_support/">
     <nav id="sidebar" class="">
 
 
@@ -102,7 +102,7 @@
   
     
     <li data-nav-id="/labs/install/" title="Installation" class="dd-item 
-        parent
+        
         
         
         ">
@@ -153,8 +153,8 @@
   
     
     <li data-nav-id="/labs/install/aws_basic_cluster/" title="AWS Basic Cluster" class="dd-item 
-        parent
-        active
+        
+        
         
         ">
       <a href="/labs/install/aws_basic_cluster/">
@@ -362,7 +362,7 @@
   
     
     <li data-nav-id="/labs/administration/" title="Administration" class="dd-item 
-        
+        parent
         
         
         ">
@@ -405,7 +405,7 @@
  
   
     
-      <li data-nav-id="/labs/administration/helm_support/" title="helm support for Critical Stack" class="dd-item ">
+      <li data-nav-id="/labs/administration/helm_support/" title="helm support for Critical Stack" class="dd-item active">
         <a href="/labs/administration/helm_support/">
         <i class='fas fa-info'></i> helm support for Critical Stack
         
@@ -493,7 +493,7 @@
             
           
           
-            <a href='/labs/'></a> > <a href='/labs/install/'>Installation</a> > AWS Basic Cluster
+            <a href='/labs/'></a> > <a href='/labs/administration/'>Administration</a> > helm support for Critical Stack
           
          
           
@@ -510,11 +510,14 @@
 <ul>
 <li>
 <ul>
-<li><a href="#installing-critical-stack-into-an-aws-account">Installing Critical Stack into an AWS account</a></li>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#account-setup">Account Setup</a></li>
-<li><a href="#installation">Installation</a></li>
-<li><a href="#cluster-assets">Cluster Assets</a></li>
+<li><a href="#helm-chart-support-for-critical-stack">helm chart support for Critical Stack</a>
+<ul>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#steps">Steps</a></li>
+<li><a href="#follow-up">Follow-up</a></li>
+<li><a href="#troubleshooting-tips">Troubleshooting tips</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -533,7 +536,7 @@
           
             <h1>
               
-              AWS Basic Cluster
+              helm support for Critical Stack
             </h1>
           
 
@@ -542,101 +545,99 @@
 
 
 
-	
 
-<h2 id="installing-critical-stack-into-an-aws-account">Installing Critical Stack into an AWS account</h2>
+<h2 id="helm-chart-support-for-critical-stack">helm chart support for Critical Stack</h2>
 
-<p>This document provides guidance with the installation of Critical Stack into an AWS account.</p>
+<h3 id="getting-started">Getting Started</h3>
 
-<h2 id="prerequisites">Prerequisites</h2>
+<p>Pre-requisites:
+1. A Critical Stack cluster
+1. Master node with access to the Internet for helm, helm charts, and Docker images</p>
 
-<ul>
-<li>An AWS account</li>
-<li>An AWS <em>Access key ID</em> and <em>Secret access key</em></li>
-<li>Instructions for setting up a new account and access keys - see <a href="../awsaccount">AWS Account Setup</a></li>
-</ul>
+<h3 id="overview">Overview</h3>
 
-<h2 id="account-setup">Account Setup</h2>
+<p>This document describes how to deploy <strong>helm</strong> to support deployment of <strong>helm chart</strong>-based applications.</p>
 
-<ol>
-<li><p>Register for a new account at <a href="https://portal.criticalstack.com">portal.criticalstack.com</a>.</p></li>
+<p>Note that the next version of <strong>helm</strong> will not include <strong>tiller</strong> so steps to deploy will change significantly (expected to be much simpler and more secure).</p>
 
-<li><p>Select <strong>Register</strong> from the link at the bottom of the page.</p>
-
-<p><img src="../../images/install/aws_basic_cluster/register.png" alt="register" /></p></li>
-
-<li><p>Read the <strong>Terms of Service</strong> and if you agree click <strong>Accept</strong>.</p></li>
-
-<li><p>Select a <strong>registration type</strong>.  If the cloud service provider (CSP) account into which Critical Stack will be installed is owned by and paid for by a registered business, click the &ldquo;Business&rdquo; registration type. Otherwise, select &ldquo;Individual&rdquo;.</p>
-
-<p><img src="../../images/install/aws_basic_cluster/registration_type.png" alt="registrationtype" /></p></li>
-
-<li><p>After you fill our your user information click <strong>Register</strong>, you will receive a Welcome Email and a link to confirm your email.</p></li>
-
-<li><p>Login to your account at <a href="https://portal.criticalstack.com">Critical Stack Developer Portal</a>.  In the <strong>Key Generator</strong> section, click <strong>Generate License</strong> button to produce a valid license key.  Select <strong>Cloud</strong> as the *<em>License Type</em> since we are installing into <strong>AWS</strong>.</p>
-
-<p><img src="../../images/install/aws_basic_cluster/license_type.png" alt="licensetype" /></p></li>
-
-<li><p>After generating a license key, click the <strong>Go to Installer</strong> button at the top right of the page to run the Critical Stack installer in your AWS environment.  By logging into the installer, the system will automatically link your account’s generated license key to your Critical Stack instance.</p></li>
-</ol>
-
-<h2 id="installation">Installation</h2>
+<h3 id="steps">Steps</h3>
 
 <ol>
-<li><p>There are two types of installations: <strong>Cloud</strong> and <strong>Local</strong>.  For this walkthrough, we will be installing to <strong>AWS</strong> so select <strong>Cloud</strong> and your license key and click <strong>Proceed</strong>.</p>
+<li><p><a href="../ssh_master_node/">SSH to master node</a></p></li>
 
-<p><img src="../../images/install/aws_basic_cluster/installation_type.png" alt="installation_type" /></p></li>
+<li><p>Get helm</p>
 
-<li><p>Select your Cloud provider, <strong>AWS</strong></p></li>
-
-<li><p>Enter your AWS Credentials to create and configure the required resources.  It is strongly recommended you create a limited access role.  You can use this <a href="../../res/cs_minimum_policy_install.json">sample JSON definition</a> to create a policy for your user/group.  Additional information for creating IAM Policies and generating keys can be found <a href="../awsaccount">here</a></p></li>
-
-<li><p>Select your AWS Region for this cluster and click <strong>Proceed</strong>.</p>
-
-<p><img src="../../images/install/aws_basic_cluster/provider.png" alt="provider" /></p></li>
-
-<li><p>You may add any optional <strong>Cluster Tags</strong> and click <strong>Proceed</strong>.</p></li>
-
-<li><p>If you want to customize the network settings you can add your own <strong>VPC CIDR</strong> and <strong>Subnets</strong> or use the default.  Click on <strong>Proceed</strong>.   Additional details on VPCs and Subnets can be found <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#vpc-sizing-ipv4">here</a>.</p></li>
-
-<li><p>Choose what <strong>Instance Type</strong> you want for your master node. For detailed comparison ECS instance types this <a href="https://aws.amazon.com/ec2/instance-types">guide</a> is very helpful.</p></li>
-
-<li><p>Choose <strong>Public</strong> for the subnet type unless you are connecting to a private subnet with a VPN.</p></li>
-
-<li><p>Choose what type of Storage you want to use, either <code>gp2</code> General Purpose SSD volume (balance of price and performance) or <code>io1</code> Highest-Performance SSD volume (low-latency / high throughput workloads) and the <strong>storage size</strong>.  Select <strong>Proceed</strong>.</p>
-
-<p><img src="../../images/install/aws_basic_cluster/instance_type.png" alt="instancetype" /></p></li>
-
-<li><p>Review the cluster settings.  If you need to make any changes you can use the <strong>Go Back</strong> button or click on a section header in the sidebar to make the desired changes.  <strong>Note</strong> the <strong>access_key_id</strong> and <strong>secret_access_key</strong> will not be stored and is only showed for you convenience to verify.  If everything looks correct, click <strong>CREATE CLUSTER</strong>.
-<img src="../../images/install/aws_basic_cluster/create_cluster.png" alt="createcluster" /></p></li>
-
-<li><p>When you cluster is ready, select <strong>Download Assets</strong> to get the details about your environment.<br />
-<img src="../../images/install/aws_basic_cluster/install_complete.png" alt="installcomplete" /></p></li>
-</ol>
-
-<h2 id="cluster-assets">Cluster Assets</h2>
-
-<p>The <strong>Cluster Assets</strong> page lists the <strong>Cluster information</strong>, <strong>PEM Key</strong>, and and <strong>Cluster Link</strong>.  If you plan to <code>ssh</code> into the cluster nodes, you must download the <strong>PEM Key</strong>.  You can come back to this page at any time if you need to access the cluster information.<br />
-    <img src="../../images/install/aws_basic_cluster/assets.png" alt="assets" /></p>
+<pre><code class="language-sh">curl -f https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &gt; /tmp/get_helm.sh
+sudo sh /tmp/get_helm.sh
+sudo helm init	# --tiller-tls-verify
+</code></pre>
 
 <ol>
-<li><p>Create a <strong>cluster administrator</strong> login by clicking on the <strong>CREATE ADMIN</strong> button.  You must complete this step to access the cluster, and this step can be completed only one time so note the password you choose.
-<img src="../../images/install/aws_basic_cluster/admin.png" alt="admin" /></p></li>
+<li>Fix <strong>RBACs</strong>
+<code>sh
+sudo kubectl create serviceaccount --namespace kube-system tiller
+sudo kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+sudo kubectl patch deploy --namespace kube-system tiller-deploy -p '{&quot;spec&quot;:{&quot;template&quot;:{&quot;spec&quot;:{&quot;serviceAccount&quot;:&quot;tiller&quot;}}}}'
+</code></li>
+</ol></li>
 
-<li><p>To access the Critical Stack cluster click the <strong>GO TO CLUSTER</strong> button or copy the url provided in the <strong>Cluster Link</strong> section.
-<img src="../../images/install/aws_basic_cluster/cluster_login.png" alt="cluster_login" /></p></li>
+<li><p>Sync number of replicas (1:1 to number of master nodes).  Re-run this step if you change the number of master nodes.</p>
 
-<li><p>The Secure Orchestration Platform for the Enterprise
-<img src="../../images/install/aws_basic_cluster/critical_stack_cluster.png" alt="critical_stack_cluster" /></p></li>
+<pre><code class="language-sh">sudo kubectl -n kube-system scale deployment/tiller-deploy --replicas=$(kubectl get nodes --selector='node-role.kubernetes.io/master' | grep -v '^NAME ' | wc -l)
+</code></pre>
+
+<ol>
+<li>Deploy <strong>helm charts</strong>, e.g., <strong>jenkins</strong>
+<code>sh
+sudo helm install stable/jenkins --namespace development
+</code></li>
+</ol></li>
 </ol>
 
+<h3 id="follow-up">Follow-up</h3>
 
+<ol>
+<li>Enable <code>--tiller-tls-verify</code> <a href="https://github.com/helm/helm/blob/master/docs/securing_installation.md">for better security</a></li>
+</ol>
 
+<h3 id="troubleshooting-tips">Troubleshooting tips</h3>
+
+<ol>
+<li><p>To uninstall helm client and tiller server, first try:</p>
+
+<pre><code class="language-sh">sudo helm reset --force
+</code></pre>
+
+<ol>
+<li>Delete tiller server deployment
+<code>sh
+sudo kubectl -n kube-system delete deployment tiller-deploy
+</code></li>
+</ol></li>
+
+<li><p>Delete tiller server replicaset (old style tiller)</p>
+
+<pre><code class="language-sh">sudo kubectl -n kube-system delete replicaset tiller-deploy-     # use &lt;ESC&gt; to complete
+</code></pre>
+
+<ol>
+<li>Delete tiller server pod
+<code>sh
+sudo kubectl -n kube-system delete pod tiller-deploy-     # use &lt;ESC&gt; to complete
+</code></li>
+</ol></li>
+
+<li><p>Uninstall helm chart, delete pods, delete helm release</p>
+
+<pre><code class="language-sh">sudo helm delete &lt;chart&gt; --purge
+</code></pre></li>
+</ol>
 
 
 <footer class=" footline" >
 	
 </footer>
+
 
         
         </div> 
@@ -688,7 +689,6 @@
             
                 
                     
-                    
                 
                 
 
@@ -703,9 +703,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -722,7 +719,6 @@
             
             
                 
-                    
                     
                 
                 
@@ -742,9 +738,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -860,6 +853,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -872,6 +866,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -889,6 +886,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -904,6 +902,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -928,10 +929,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/labs/install/awsaccount/" title="AWS Account Setup"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/labs/administration/ssh_master_node/" title="SSH to private subnet master nodes via secure bastion host"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/labs/featurelabs/" title="Feature Labs" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/labs/administration/kubectl101/" title="kubectl 101" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -962,3 +963,4 @@
 
   </body>
 </html>
+
