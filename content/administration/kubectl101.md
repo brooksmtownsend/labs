@@ -1,12 +1,13 @@
 +++
-title = "kubectl 101"
+title = "Kubectl 101"
 date = 2019-04-23T09:43:37-04:00
 weight = 5
 chapter = false
-pre = "<i class='fas fa-info'></i> "
+pre = "<i class='fas fa-toolbox'></i> &nbsp;"
 +++
 
-## Kubectl 
+## Kubectl 101
+
 ### Getting Started
 Pre-requisites:
 1. A Critical Stack cluster.  You will need to know your username and password.  This lab is more interesting if you have already deployed an [app](../../featurelabs/go/hello.md) so that you can view the resources created by command line.

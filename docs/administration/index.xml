@@ -12,35 +12,35 @@
     
     
     <item>
-      <title>SSH to private subnet master nodes via secure bastion host</title>
+      <title>Kubectl 101</title>
+      <link>https://criticalstack.github.io/labs/administration/kubectl101/</link>
+      <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
+      
+      <guid>https://criticalstack.github.io/labs/administration/kubectl101/</guid>
+      <description>Kubectl 101 Getting Started Pre-requisites: 1. A Critical Stack cluster. You will need to know your username and password. This lab is more interesting if you have already deployed an app so that you can view the resources created by command line.
+ kubectl installed : kubectl  Getting Started Intro Lifted from kubernetes.io
+Kubectl is a command line interface for running commands against Kubernetes clusters. This overview covers kubectl syntax, describes the command operations, and provides common examples.</description>
+    </item>
+    
+    <item>
+      <title>Helm Support for Critical Stack</title>
+      <link>https://criticalstack.github.io/labs/administration/helm_support/</link>
+      <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
+      
+      <guid>https://criticalstack.github.io/labs/administration/helm_support/</guid>
+      <description>Helm Chart Support for Critical Stack Getting Started Pre-requisites: 1. A Critical Stack cluster 1. Master node with access to the Internet for helm, helm charts, and Docker images
+Overview This document describes how to deploy helm to support deployment of helm chart-based applications.
+Note that the next version of helm will not include tiller so steps to deploy will change significantly (expected to be much simpler and more secure).</description>
+    </item>
+    
+    <item>
+      <title>SSH to Master Nodes via Bastion Host</title>
       <link>https://criticalstack.github.io/labs/administration/ssh_master_node/</link>
       <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
       
       <guid>https://criticalstack.github.io/labs/administration/ssh_master_node/</guid>
       <description>Securely Connect to a Critical Stack Master Node running in a Private VPC Overview The Critical Stack master nodes are not located on a public subnet. If you need to access the nodes you will first need to create a bastion host. This guide will help explain how to securely access these environments without uploading private keys to the secondary nodes.
 Prerequisities  A Critical Stack cluster deployed using the installer in an external AWS account and the cluster private key (.</description>
-    </item>
-    
-    <item>
-      <title>helm support for Critical Stack</title>
-      <link>https://criticalstack.github.io/labs/administration/helm_support/</link>
-      <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
-      
-      <guid>https://criticalstack.github.io/labs/administration/helm_support/</guid>
-      <description>helm chart support for Critical Stack Getting Started Pre-requisites: 1. A Critical Stack cluster 1. Master node with access to the Internet for helm, helm charts, and Docker images
-Overview This document describes how to deploy helm to support deployment of helm chart-based applications.
-Note that the next version of helm will not include tiller so steps to deploy will change significantly (expected to be much simpler and more secure).</description>
-    </item>
-    
-    <item>
-      <title>kubectl 101</title>
-      <link>https://criticalstack.github.io/labs/administration/kubectl101/</link>
-      <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
-      
-      <guid>https://criticalstack.github.io/labs/administration/kubectl101/</guid>
-      <description>Kubectl Getting Started Pre-requisites: 1. A Critical Stack cluster. You will need to know your username and password. This lab is more interesting if you have already deployed an app so that you can view the resources created by command line.
- kubectl installed : kubectl  Getting Started Intro Lifted from kubernetes.io
-Kubectl is a command line interface for running commands against Kubernetes clusters. This overview covers kubectl syntax, describes the command operations, and provides common examples.</description>
     </item>
     
   </channel>

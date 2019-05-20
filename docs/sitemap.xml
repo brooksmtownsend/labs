@@ -38,22 +38,12 @@
   </url>
   
   <url>
-    <loc>https://criticalstack.github.io/labs/featurelabs/node/</loc>
-    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://criticalstack.github.io/labs/administration/ssh_master_node/</loc>
-    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://criticalstack.github.io/labs/administration/helm_support/</loc>
-    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://criticalstack.github.io/labs/administration/kubectl101/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/featurelabs/node/</loc>
     <lastmod>2019-04-23T09:43:37-04:00</lastmod>
   </url>
   
@@ -73,7 +63,17 @@
   </url>
   
   <url>
+    <loc>https://criticalstack.github.io/labs/administration/helm_support/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://criticalstack.github.io/labs/featurelabs/node/updating/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/administration/ssh_master_node/</loc>
     <lastmod>2019-04-23T09:43:37-04:00</lastmod>
   </url>
   

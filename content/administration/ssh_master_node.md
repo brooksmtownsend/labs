@@ -1,9 +1,9 @@
 +++
-title = "SSH to private subnet master nodes via secure bastion host"
+title = "SSH to Master Nodes via Bastion Host"
 date = 2019-04-23T09:43:37-04:00
-weight = 5
+weight = 7
 chapter = false
-pre = "<i class='fas fa-info'></i> "
+pre = "<i class='fas fa-toolbox'></i> &nbsp;"
 +++
 
 ## Securely Connect to a Critical Stack Master Node running in a Private VPC

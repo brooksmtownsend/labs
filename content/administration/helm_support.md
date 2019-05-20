@@ -1,12 +1,13 @@
 +++
-title = "helm support for Critical Stack"
+title = "Helm Support for Critical Stack"
 date = 2019-04-23T09:43:37-04:00
-weight = 5
+weight = 6
 chapter = false
-pre = "<i class='fas fa-info'></i> "
+pre = "<i class='fas fa-toolbox'></i> &nbsp;"
 +++
 
-## helm chart support for Critical Stack
+## Helm Chart Support for Critical Stack
+
 ### Getting Started
 Pre-requisites:
 1. A Critical Stack cluster
