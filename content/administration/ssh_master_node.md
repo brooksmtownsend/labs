@@ -1,7 +1,7 @@
 +++
 title = "SSH to Master Nodes via Bastion Host"
 date = 2019-04-23T09:43:37-04:00
-weight = 7
+weight = 2
 chapter = false
 pre = "<i class='fas fa-toolbox'></i> &nbsp;"
 +++
