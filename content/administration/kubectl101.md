@@ -10,6 +10,7 @@ pre = "<i class='fas fa-toolbox'></i> &nbsp;"
 
 ### Getting Started
 Pre-requisites:
+
 1. A Critical Stack cluster.  You will need to know your username and password.  This lab is more interesting if you have already deployed an [app](../../featurelabs/go/hello.md) so that you can view the resources created by command line.
 
 1. kubectl installed : [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl)
@@ -78,9 +79,8 @@ where `command`, `TYPE`, `NAME`, and `flags` are:
 	hello-go-deployment-85b5b5cc6f-s6htw   1/1       Running   0          5d
 	```
 
-	
 	![getpods](../../images/getpods.png)
-	
+
 1. **Note** you will have have access to the resource types that your have permission to view/create within your namespace. If you are the cluster admin you will have permission to see all namespaces and resources.
 
 1.  In this example, I have 3 pods running all from one deployment.  Let's take a look at the deployment:
