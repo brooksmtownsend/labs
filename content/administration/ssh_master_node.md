@@ -66,6 +66,7 @@ The Critical Stack master nodes are not located on a public subnet.  If you need
 	```
 	
 	![ssh_agent](../../images/ssh_agent.png)
+
 1.  SSH to your bastion host using the **-A** flag to to forward the key.
 
 1. `ssh -A -i ~/.ssh/<your_cluster_private_key>.pem ec2-user@<bastion_host_public_IP>`

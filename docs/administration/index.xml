@@ -27,8 +27,10 @@ Prerequisities  A Critical Stack cluster deployed using the installer in an exte
       <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
       
       <guid>https://criticalstack.github.io/labs/administration/helm_support/</guid>
-      <description>Helm Chart Support for Critical Stack Getting Started Pre-requisites: 1. A Critical Stack cluster 1. Master node with access to the Internet for helm, helm charts, and Docker images
-Overview This document describes how to deploy helm to support deployment of helm chart-based applications.
+      <description>Helm Chart Support for Critical Stack Getting Started Pre-requisites:
+ A Critical Stack cluster
+ Master node with access to the Internet for helm, helm charts, and Docker images
+  Overview This document describes how to deploy helm to support deployment of helm chart-based applications.
 Note that the next version of helm will not include tiller so steps to deploy will change significantly (expected to be much simpler and more secure).</description>
     </item>
     
@@ -38,8 +40,10 @@ Note that the next version of helm will not include tiller so steps to deploy wi
       <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
       
       <guid>https://criticalstack.github.io/labs/administration/kubectl101/</guid>
-      <description>Kubectl 101 Getting Started Pre-requisites: 1. A Critical Stack cluster. You will need to know your username and password. This lab is more interesting if you have already deployed an app so that you can view the resources created by command line.
- kubectl installed : kubectl  Getting Started Intro Lifted from kubernetes.io
+      <description>Kubectl 101 Getting Started Pre-requisites:
+ A Critical Stack cluster. You will need to know your username and password. This lab is more interesting if you have already deployed an app so that you can view the resources created by command line.
+ kubectl installed : kubectl
+  Getting Started Intro Lifted from kubernetes.io
 Kubectl is a command line interface for running commands against Kubernetes clusters. This overview covers kubectl syntax, describes the command operations, and provides common examples.</description>
     </item>
     

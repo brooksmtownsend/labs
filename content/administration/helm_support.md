@@ -10,7 +10,9 @@ pre = "<i class='fas fa-toolbox'></i> &nbsp;"
 
 ### Getting Started
 Pre-requisites:
+
 1. A Critical Stack cluster
+
 1. Master node with access to the Internet for helm, helm charts, and Docker images
 
 ### Overview
@@ -28,19 +30,19 @@ sudo sh /tmp/get_helm.sh
 sudo helm init	# --tiller-tls-verify
 ```
 
-2. Fix **RBACs**
+1. Fix **RBACs**
 ```sh
 sudo kubectl create serviceaccount --namespace kube-system tiller
 sudo kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 sudo kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
 ```
 
-3. Sync number of replicas (1:1 to number of master nodes).  Re-run this step if you change the number of master nodes.
+1. Sync number of replicas (1:1 to number of master nodes).  Re-run this step if you change the number of master nodes.
 ```sh
 sudo kubectl -n kube-system scale deployment/tiller-deploy --replicas=$(kubectl get nodes --selector='node-role.kubernetes.io/master' | grep -v '^NAME ' | wc -l)
 ```
 
-4. Deploy **helm charts**, e.g., **jenkins**
+1. Deploy **helm charts**, e.g., **jenkins**
 ```sh
 sudo helm install stable/jenkins --namespace development
 ```
