@@ -61,15 +61,15 @@ The Critical Stack master nodes are not located on a public subnet.  If you need
 
 1. Configure SSH Agent Forwarding by adding the Critical Stack cluster private key to your local SSH agent.  This will allow you to pass the **cluster private key** to the master node after you are connected to the bastion host (thereby eliminating the need to copy the private key to your bastion host).
 
-    ```console
-    ssh-add -K <clusterprivatekey>
-	```
-	
-	![ssh_agent](../../images/ssh_agent.png)
+```console
+ssh-add -K <clusterprivatekey>
+```
+
+![ssh_agent](../../images/ssh_agent.png)
 
 1.  SSH to your bastion host using the **-A** flag to to forward the key.
 
-1. `ssh -A -i ~/.ssh/<your_cluster_private_key>.pem ec2-user@<bastion_host_public_IP>`
+	`ssh -A -i ~/.ssh/<your_cluster_private_key>.pem ec2-user@<bastion_host_public_IP>`
 
 	![ssh](../../images/ssh.png)
 
