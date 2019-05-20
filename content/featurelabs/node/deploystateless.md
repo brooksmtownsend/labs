@@ -23,7 +23,7 @@ In this lab we will create a simple NodeJS application, deploy it via Critical S
 ### Steps
 
 #### Building
-1. Open a terminal window.  In your current working directory (in the example below we use the **Development** directory under the user's home directory) create a directory for this lab called `node-lab` and a subdirectory of that called `app`:
+1. Open a terminal window.  In your current working directory (in the example below we use the **Development** directory under the user's home directory) create a directory for this lab called **node-lab** and a subdirectory of that called **app**:
     ```terminal
     user@testhost Development$ mkdir -p node-lab/app
     user@testhost Development$ cd node-lab
@@ -31,7 +31,7 @@ In this lab we will create a simple NodeJS application, deploy it via Critical S
     app
     ```
 
-1. Using the editor of your choice, create a file called `index.js` inside the _app_ directory (resulting in _app/index.js_) with
+1. Using the editor of your choice, create a file called **index.js** inside the **app** directory (resulting in **app/index.js**) with
 the following content:
     ```
     // Say hello from Node
@@ -44,9 +44,9 @@ the following content:
     console.log('Server running on :3000');
     ```
 
-1. Generate the app configuration with _npm_ in the root of your `node-lab` directory.
+1. Generate the app configuration with _npm_ in the root of your **node-lab** directory.
     
-    Accept all defaults except _package name_, which should be something like `hello-node`, version number (this is definitely a `0.0.1` release!), and _entry point_, as that will be `app/index.js`
+    Accept all defaults except _package name_, which should be something like **hello-node**, version number (this is definitely a `0.0.1` release!), and **entry point**, as that will be **app/index.js**
     ```terminal
     user@testhost node-lab$ npm init
     This utility will walk you through creating a package.json file.
@@ -71,7 +71,7 @@ the following content:
     About to write to /Users/user/Development/node-lab/package.json:
     ```
 
-1. _npm_ makes it easy for JavaScript developers to share and re-use code.  Install the dependencies for this lab by running this command:
+1. `npm` makes it easy for JavaScript developers to share and re-use code.  Install the dependencies for this lab by running this command:
     
     ```terminal
     user@testhost node-lab$ npm install
@@ -83,7 +83,7 @@ the following content:
     found 0 vulnerabilities
     ```
 
-1. Create a **Dockerfile** to target _node_ and copy the necessary files into the docker image (_Note to instructor_: explain the **base image** from which this image is derived). The port you choose to expose should be the same as the port on which your application server listens. Your _Dockerfile_ should be in the root of your `node-lab` directory and have the following content:
+1. Create a **Dockerfile** to target _node_ and copy the necessary files into the docker image (_Note to instructor_: explain the **base image** from which this image is derived). The port you choose to expose should be the same as the port on which your application server listens. Your _Dockerfile_ should be in the root of your **node-lab** directory and have the following content:
     ```
     FROM node:9
 
@@ -103,7 +103,7 @@ the following content:
     CMD ["node", "app/index.js"]
     ```
 
-1. Build a Docker image using the _Dockerfile_ with the tag `hello-node`:
+1. Build a Docker image using the _Dockerfile_ with the tag **hello-node**:
     
     ```terminal
     user@testhost node-lab$ docker build -t hello-node -f Dockerfile .
@@ -127,7 +127,7 @@ the following content:
     Hello from Node!
     ```
 
-    Note: to stop the running container run this command from the new terminal window (this uses `-f` to find the container created from your `hello-node` image):
+    Note: to stop the running container run this command from the new terminal window (this uses **-f** to find the container created from your **hello-node** image):
 
     ```terminal
     user@testhost ~$ docker stop $(docker ps -qf "ancestor=hello-node")

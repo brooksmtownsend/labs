@@ -12,20 +12,20 @@
     <title>Deploying a NodeJS App :: Critical Stack Labs</title>
 
     
-    <link href="/labs/css/nucleus.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/fontawesome-all.min.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/hybrid.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/featherlight.min.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/perfect-scrollbar.min.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/auto-complete.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/atom-one-dark-reasonable.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/theme.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/hugo-theme.css?1558123855" rel="stylesheet">
+    <link href="/labs/css/nucleus.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/fontawesome-all.min.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/hybrid.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/featherlight.min.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/perfect-scrollbar.min.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/auto-complete.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/atom-one-dark-reasonable.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/theme.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/hugo-theme.css?1558358674" rel="stylesheet">
     
-      <link href="/labs/css/theme-cs.css?1558123855" rel="stylesheet">
+      <link href="/labs/css/theme-cs.css?1558358674" rel="stylesheet">
     
 
-    <script src="/labs/js/jquery-3.3.1.min.js?1558123855"></script>
+    <script src="/labs/js/jquery-3.3.1.min.js?1558358674"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -56,14 +56,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/labs/js/lunr.min.js?1558123855"></script>
-<script type="text/javascript" src="/labs/js/auto-complete.js?1558123855"></script>
+<script type="text/javascript" src="/labs/js/lunr.min.js?1558358674"></script>
+<script type="text/javascript" src="/labs/js/auto-complete.js?1558358674"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/criticalstack.github.io\/labs\/";
     
 </script>
-<script type="text/javascript" src="/labs/js/search.js?1558123855"></script>
+<script type="text/javascript" src="/labs/js/search.js?1558358674"></script>
 
     
   </div>
@@ -355,6 +355,95 @@
  
 
           
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/labs/administration/" title="Administration" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/labs/administration/">
+          <i class='fas fa-toolbox'></i> Administration
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/labs/administration/kubectl101/" title="Kubectl 101" class="dd-item ">
+        <a href="/labs/administration/kubectl101/">
+        <i class='fas fa-toolbox'></i> &nbsp;Kubectl 101
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/labs/administration/helm_support/" title="Helm Support for Critical Stack" class="dd-item ">
+        <a href="/labs/administration/helm_support/">
+        <i class='fas fa-toolbox'></i> &nbsp;Helm Support for Critical Stack
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/labs/administration/ssh_master_node/" title="SSH to Master Nodes via Bastion Host" class="dd-item ">
+        <a href="/labs/administration/ssh_master_node/">
+        <i class='fas fa-toolbox'></i> &nbsp;SSH to Master Nodes via Bastion Host
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
          
     </ul>
 
@@ -489,7 +578,7 @@
 <h4 id="building">Building</h4>
 
 <ol>
-<li><p>Open a terminal window.  In your current working directory (in the example below we use the <strong>Development</strong> directory under the user&rsquo;s home directory) create a directory for this lab called <code>node-lab</code> and a subdirectory of that called <code>app</code>:</p>
+<li><p>Open a terminal window.  In your current working directory (in the example below we use the <strong>Development</strong> directory under the user&rsquo;s home directory) create a directory for this lab called <strong>node-lab</strong> and a subdirectory of that called <strong>app</strong>:</p>
 
 <pre><code class="language-terminal">user@testhost Development$ mkdir -p node-lab/app
 user@testhost Development$ cd node-lab
@@ -497,7 +586,7 @@ user@testhost node-lab$ ls
 app
 </code></pre></li>
 
-<li><p>Using the editor of your choice, create a file called <code>index.js</code> inside the <em>app</em> directory (resulting in <em>app/index.js</em>) with
+<li><p>Using the editor of your choice, create a file called <strong>index.js</strong> inside the <strong>app</strong> directory (resulting in <strong>app/index.js</strong>) with
 the following content:</p>
 
 <pre><code>// Say hello from Node
@@ -510,9 +599,9 @@ http.createServer(function (req, res) {
 console.log('Server running on :3000');
 </code></pre></li>
 
-<li><p>Generate the app configuration with <em>npm</em> in the root of your <code>node-lab</code> directory.</p>
+<li><p>Generate the app configuration with <em>npm</em> in the root of your <strong>node-lab</strong> directory.</p>
 
-<p>Accept all defaults except <em>package name</em>, which should be something like <code>hello-node</code>, version number (this is definitely a <code>0.0.1</code> release!), and <em>entry point</em>, as that will be <code>app/index.js</code></p>
+<p>Accept all defaults except <em>package name</em>, which should be something like <strong>hello-node</strong>, version number (this is definitely a <code>0.0.1</code> release!), and <strong>entry point</strong>, as that will be <strong>app/index.js</strong></p>
 
 <pre><code class="language-terminal">user@testhost node-lab$ npm init
 This utility will walk you through creating a package.json file.
@@ -537,7 +626,7 @@ license: (ISC)
 About to write to /Users/user/Development/node-lab/package.json:
 </code></pre></li>
 
-<li><p><em>npm</em> makes it easy for JavaScript developers to share and re-use code.  Install the dependencies for this lab by running this command:</p>
+<li><p><code>npm</code> makes it easy for JavaScript developers to share and re-use code.  Install the dependencies for this lab by running this command:</p>
 
 <pre><code class="language-terminal">user@testhost node-lab$ npm install
 npm notice created a lockfile as package-lock.json. You should commit this file.
@@ -548,7 +637,7 @@ up to date in 10.179s
 found 0 vulnerabilities
 </code></pre></li>
 
-<li><p>Create a <strong>Dockerfile</strong> to target <em>node</em> and copy the necessary files into the docker image (<em>Note to instructor</em>: explain the <strong>base image</strong> from which this image is derived). The port you choose to expose should be the same as the port on which your application server listens. Your <em>Dockerfile</em> should be in the root of your <code>node-lab</code> directory and have the following content:</p>
+<li><p>Create a <strong>Dockerfile</strong> to target <em>node</em> and copy the necessary files into the docker image (<em>Note to instructor</em>: explain the <strong>base image</strong> from which this image is derived). The port you choose to expose should be the same as the port on which your application server listens. Your <em>Dockerfile</em> should be in the root of your <strong>node-lab</strong> directory and have the following content:</p>
 
 <pre><code>FROM node:9
 
@@ -568,7 +657,7 @@ EXPOSE 3000
 CMD [&quot;node&quot;, &quot;app/index.js&quot;]
 </code></pre></li>
 
-<li><p>Build a Docker image using the <em>Dockerfile</em> with the tag <code>hello-node</code>:</p>
+<li><p>Build a Docker image using the <em>Dockerfile</em> with the tag <strong>hello-node</strong>:</p>
 
 <pre><code class="language-terminal">user@testhost node-lab$ docker build -t hello-node -f Dockerfile .
 Sending build context to Docker daemon  71.68kB
@@ -590,7 +679,7 @@ Server running on :3000
 Hello from Node!
 </code></pre>
 
-<p>Note: to stop the running container run this command from the new terminal window (this uses <code>-f</code> to find the container created from your <code>hello-node</code> image):</p>
+<p>Note: to stop the running container run this command from the new terminal window (this uses <strong>-f</strong> to find the container created from your <strong>hello-node</strong> image):</p>
 
 <pre><code class="language-terminal">user@testhost ~$ docker stop $(docker ps -qf &quot;ancestor=hello-node&quot;)
 42c18d268c56
@@ -916,6 +1005,70 @@ dd1eb1fd7e08: Mounted from library/node
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
             
         
         
@@ -938,20 +1091,20 @@ dd1eb1fd7e08: Mounted from library/node
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/labs/js/clipboard.min.js?1558123855"></script>
-    <script src="/labs/js/perfect-scrollbar.min.js?1558123855"></script>
-    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558123855"></script>
-    <script src="/labs/js/jquery.sticky.js?1558123855"></script>
-    <script src="/labs/js/featherlight.min.js?1558123855"></script>
-    <script src="/labs/js/html5shiv-printshiv.min.js?1558123855"></script>
-    <script src="/labs/js/highlight.pack.js?1558123855"></script>
+    <script src="/labs/js/clipboard.min.js?1558358674"></script>
+    <script src="/labs/js/perfect-scrollbar.min.js?1558358674"></script>
+    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558358674"></script>
+    <script src="/labs/js/jquery.sticky.js?1558358674"></script>
+    <script src="/labs/js/featherlight.min.js?1558358674"></script>
+    <script src="/labs/js/html5shiv-printshiv.min.js?1558358674"></script>
+    <script src="/labs/js/highlight.pack.js?1558358674"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/labs/js/modernizr.custom-3.6.0.js?1558123855"></script>
-    <script src="/labs/js/learn.js?1558123855"></script>
-    <script src="/labs/js/hugo-learn.js?1558123855"></script>
+    <script src="/labs/js/modernizr.custom-3.6.0.js?1558358674"></script>
+    <script src="/labs/js/learn.js?1558358674"></script>
+    <script src="/labs/js/hugo-learn.js?1558358674"></script>
 
-    <link href="/labs/mermaid/mermaid.css?1558123855" type="text/css" rel="stylesheet" />
-    <script src="/labs/mermaid/mermaid.js?1558123855"></script>
+    <link href="/labs/mermaid/mermaid.css?1558358674" type="text/css" rel="stylesheet" />
+    <script src="/labs/mermaid/mermaid.js?1558358674"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/labs/images/favicon.png" type="image/png">
 
-    <title>Updating a NodeJS App :: Critical Stack Labs</title>
+    <title>Helm Support for Critical Stack :: Critical Stack Labs</title>
 
     
     <link href="/labs/css/nucleus.css?1558358674" rel="stylesheet">
@@ -35,7 +35,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/labs/featurelabs/node/updating/">
+  <body class="" data-url="/labs/administration/helm_support/">
     <nav id="sidebar" class="">
 
 
@@ -184,7 +184,7 @@
   
     
     <li data-nav-id="/labs/featurelabs/" title="Feature Labs" class="dd-item 
-        parent
+        
         
         
         ">
@@ -211,7 +211,7 @@
   
     
     <li data-nav-id="/labs/featurelabs/node/" title="NodeJS Labs" class="dd-item 
-        parent
+        
         
         
         ">
@@ -254,7 +254,7 @@
  
   
     
-      <li data-nav-id="/labs/featurelabs/node/updating/" title="Updating a NodeJS App" class="dd-item active">
+      <li data-nav-id="/labs/featurelabs/node/updating/" title="Updating a NodeJS App" class="dd-item ">
         <a href="/labs/featurelabs/node/updating/">
         <i class='fab fa-node'></i> Updating a NodeJS App
         
@@ -362,7 +362,7 @@
   
     
     <li data-nav-id="/labs/administration/" title="Administration" class="dd-item 
-        
+        parent
         
         
         ">
@@ -405,7 +405,7 @@
  
   
     
-      <li data-nav-id="/labs/administration/helm_support/" title="Helm Support for Critical Stack" class="dd-item ">
+      <li data-nav-id="/labs/administration/helm_support/" title="Helm Support for Critical Stack" class="dd-item active">
         <a href="/labs/administration/helm_support/">
         <i class='fas fa-toolbox'></i> &nbsp;Helm Support for Critical Stack
         
@@ -493,13 +493,7 @@
             
           
           
-            
-            
-          
-          
-            <a href='/labs/'></a> > <a href='/labs/featurelabs/'>Feature Labs</a> > <a href='/labs/featurelabs/node/'>NodeJS Labs</a> > Updating a NodeJS App
-          
-         
+            <a href='/labs/'></a> > <a href='/labs/administration/'>Administration</a> > Helm Support for Critical Stack
           
          
           
@@ -516,12 +510,13 @@
 <ul>
 <li>
 <ul>
-<li><a href="#using-critical-stack-to-update-a-scalable-stateless-application">Using Critical Stack to update a scalable, stateless application</a>
+<li><a href="#helm-chart-support-for-critical-stack">Helm Chart Support for Critical Stack</a>
 <ul>
 <li><a href="#getting-started">Getting Started</a></li>
 <li><a href="#overview">Overview</a></li>
 <li><a href="#steps">Steps</a></li>
-<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#follow-up">Follow-up</a></li>
+<li><a href="#troubleshooting-tips">Troubleshooting tips</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -541,7 +536,7 @@
           
             <h1>
               
-              Updating a NodeJS App
+              Helm Support for Critical Stack
             </h1>
           
 
@@ -551,167 +546,84 @@
 
 
 
-<h2 id="using-critical-stack-to-update-a-scalable-stateless-application">Using Critical Stack to update a scalable, stateless application</h2>
+<h2 id="helm-chart-support-for-critical-stack">Helm Chart Support for Critical Stack</h2>
 
 <h3 id="getting-started">Getting Started</h3>
 
-<p>Before starting on this lab, you will need to have completed the <a href="../deploystateless">Previous Node lab</a>.</p>
+<p>Pre-requisites:
+1. A Critical Stack cluster
+1. Master node with access to the Internet for helm, helm charts, and Docker images</p>
 
 <h3 id="overview">Overview</h3>
 
-<p>In the previous lab we created a simple NodeJS application,
-packaged the application in a docker image,
-pushed the docker image to a public docker image repository (Docker Hub),
-pulled that image into a Critical Stack deployment as a container instance,
-and accessed the application via a public URL.</p>
+<p>This document describes how to deploy <strong>helm</strong> to support deployment of <strong>helm chart</strong>-based applications.</p>
 
-<p>In this next lab, we will create more instances of the container,
-update the application to show bread crumbs of those instances,
-push that update to Docker Hub,
-and use the Critical Stack UI to instruct Kubernetes to roll out the update while we refresh the public URL. This will let us observe that a seamless rolling update is done with zero downtime.</p>
+<p>Note that the next version of <strong>helm</strong> will not include <strong>tiller</strong> so steps to deploy will change significantly (expected to be much simpler and more secure).</p>
 
 <h3 id="steps">Steps</h3>
 
 <ol>
-<li><p>Edit <strong>app/index.js</strong> (in your <strong>node-lab</strong> directory) and replace the source code with the following:</p>
+<li><p><a href="../ssh_master_node/">SSH to master node</a></p></li>
 
-<pre><code>// Load the http module to create an http server.
-var http = require('http');
-// Load the os module to access network interfaces.
-var os = require('os');
-// Load the crypto module to generate a random number.
-var crypto = require(&quot;crypto&quot;);
+<li><p>Get helm</p>
 
-
-// Get all interfaces by IP address
-var interfaces = os.networkInterfaces();
-var addresses = [];
-for (var k in interfaces) {
-    for (var k2 in interfaces[k]) {
-        var address = interfaces[k][k2];
-        if (address.family === 'IPv4' &amp;&amp; !address.internal) {
-            addresses.push(address.address);
-        }
-    }
-}
-
-// Generate a random number
-var random_number = crypto.randomBytes(16).toString(&quot;hex&quot;);
-
-// Configure our HTTP server to respond with Hello World to all requests.
-var server = http.createServer(function (request, response) {
-response.writeHead(200, {&quot;Content-Type&quot;: &quot;text/plain&quot;});
-response.end(&quot;Hello World from &quot; + addresses + &quot; (&quot; + random_number + &quot;)\n&quot;);
-});
-
-// Listen on port 3000
-server.listen(3000, &quot;0.0.0.0&quot;);
-
-// Put a friendly message on the terminal
-console.log(&quot;Server IPs: &quot; + addresses);
-console.log(&quot;Random number: &quot; + random_number);
-console.log(&quot;Server running at http://0.0.0.0:3000/&quot;);
+<pre><code class="language-sh">curl -f https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get &gt; /tmp/get_helm.sh
+sudo sh /tmp/get_helm.sh
+sudo helm init	# --tiller-tls-verify
 </code></pre></li>
 
-<li><p>Increment the application version number in your <strong>package.json</strong> file and re-run <code>npm install</code> to update the <strong>package-lock.json</strong> file.</p>
+<li><p>Fix <strong>RBACs</strong></p>
 
-<pre><code class="language-terminal">user@testhost node-lab$ cat package.json
-{
-&quot;name&quot;: &quot;hello-node&quot;,
-&quot;version&quot;: &quot;0.0.2&quot;,
-&quot;description&quot;: &quot;Say hello from Node&quot;,
-&quot;main&quot;: &quot;app/index.js&quot;,
-&quot;scripts&quot;: {
-    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
-},
-&quot;author&quot;: &quot;&quot;,
-&quot;license&quot;: &quot;ISC&quot;
-}
-user@testhost node-lab$ npm install
-npm WARN hello-node@0.0.2 No repository field.
-
-up to date in 0.632s
-found 0 vulnerabilities
+<pre><code class="language-sh">sudo kubectl create serviceaccount --namespace kube-system tiller
+sudo kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+sudo kubectl patch deploy --namespace kube-system tiller-deploy -p '{&quot;spec&quot;:{&quot;template&quot;:{&quot;spec&quot;:{&quot;serviceAccount&quot;:&quot;tiller&quot;}}}}'
 </code></pre></li>
 
-<li><p>Build your docker image again, but this time tag it as <code>&lt;your-username&gt;/hello-node:0.0.2</code> so we can uniquely identify the new image. After it&rsquo;s built, <em>push</em> it to Docker Hub so it can be updated in your Critical Stack cluster.</p>
+<li><p>Sync number of replicas (1:1 to number of master nodes).  Re-run this step if you change the number of master nodes.</p>
 
-<pre><code class="language-terminal">user@testhost node-lab$ docker build -t &lt;your-username&gt;/hello-node:0.0.2 -f Dockerfile .
-Sending build context to Docker daemon  4.288MB
-Step 1/9 : FROM node:9
----&gt; 08a8c8089ab1
-Step 2/9 : RUN mkdir /src
----&gt; Using cache
----&gt; 3530d1bbe38a
-Step 3/9 : WORKDIR /src
----&gt; Using cache
----&gt; 4096063f6a2b
-Step 4/9 : COPY ./package.json /src/package.json
----&gt; ad23e7eb360e
-Step 5/9 : COPY ./package-lock.json /src/package-lock.json
----&gt; 46c675f287b6
-Step 6/9 : RUN npm install --silent
----&gt; Running in d3144afb3a54
-up to date in 0.076s
-Removing intermediate container d3144afb3a54
----&gt; 56cbd547eb6d
-Step 7/9 : COPY ./app /src/app
----&gt; 50b39bb7ea64
-Step 8/9 : EXPOSE 3000
----&gt; Running in 0ab1df6c4e2c
-Removing intermediate container 0ab1df6c4e2c
----&gt; 67b69d1d4337
-Step 9/9 : CMD [&quot;node&quot;, &quot;app/index.js&quot;]
----&gt; Running in 7925bde282fc
-Removing intermediate container 7925bde282fc
----&gt; be1e663ce0d2
-Successfully built be1e663ce0d2
-Successfully tagged &lt;your-username&gt;/hello-node:0.0.2
-user@testhost node-lab$ docker push &lt;your-username&gt;/hello-node:0.0.2
-The push refers to repository [docker.io/&lt;your-username&gt;/hello-node]
-13108b60c999: Pushed
-328a2707105e: Pushed
-700b0faff5ac: Pushed
-eb80df9a56cf: Pushed
-df64ff0ed93f: Layer already exists
-71521673e105: Layer already exists
-7695686f75c0: Layer already exists
-e492023cc4f9: Layer already exists
-cbda574aa37a: Layer already exists
-8451f9fe0016: Layer already exists
-858cd8541f7e: Layer already exists
-a42d312a03bb: Layer already exists
-dd1eb1fd7e08: Layer already exists
-0.0.2: digest: sha256:2e1002b635cd983e7f2458331079f7b131d8096fd5994287c6f4933438513367 size: 3041
+<pre><code class="language-sh">sudo kubectl -n kube-system scale deployment/tiller-deploy --replicas=$(kubectl get nodes --selector='node-role.kubernetes.io/master' | grep -v '^NAME ' | wc -l)
 </code></pre></li>
 
-<li><p>Go to the Critical Stack UI under <em><strong>Deployment Listings</strong></em>, find the row <em>my-first-deployment</em>, click on the gear icon, and select <em><strong>Scale</strong></em>.  Move the slider for <em><strong>Number of podS</strong></em> to <em>2</em> and then click <em><strong>OK</strong></em>.</p>
+<li><p>Deploy <strong>helm charts</strong>, e.g., <strong>jenkins</strong></p>
 
-<p><img src="../../../images/featurelabs/node/ScaleDeployment1.png" alt="Scale deployment" title="Scale deployment" />
-<img src="../../../images/featurelabs/node/ScaleDeployment2.png" alt="Scale deployment" title="Scale deployment" /></p></li>
-
-<li><p>The previous step declaratively set the desired state of our deployment&rsquo;s pods. Watch the deployment scale from 1 to 2:</p>
-
-<p><img src="../../../images/featurelabs/node/RollingUpdate.png" alt="Rolling update" title="Rolling update" /></p></li>
-
-<li><p>Click on the gear icon again, and select <em><strong>Edit</strong></em>.  On line 36, change the Docker image tag from <code>0.0.1</code> to <code>0.0.2</code>. For example: image: &lsquo;<code>docker.io/jabbottc1/hello-node:0.0.1</code>&rsquo; becomes image: &lsquo;<code>docker.io/jabbottc1/hello-node:0.0.2</code>&rsquo;.  Next click <em><strong>Save</strong></em> and then <em><strong>Exit</strong></em>.</p>
-
-<p><img src="../../../images/featurelabs/node/UseApplicationv2.png" alt="Use application v2" title="Use application v2" /></p>
-
-<p>Note that while we are editing the deployment, another way to scale the application is to directly update the yaml as shown below.</p>
-
-<p><img src="../../../images/featurelabs/node/IncreaseReplicasAndUseApplicationv2.png" alt="Increase replicas and use application v2" title="Increase replicas and use application v2" /></p></li>
-
-<li><p>Refresh your browser pointing to the public URL for your application and watch the update roll out.  Also notice the different output when traffic shifts from one pod to another.  Note: changing <em><strong>Idle timeout</strong></em> to 1 in the load balancer configuration will reduce the amount of time between switching from one pod to another (in the same section used to get the public facing URL in the previous lab).</p>
-
-<p><img src="../../../images/featurelabs/node/ChangingLBTimeout.png" alt="Change LB timeout" title="Change LB timeout" /></p></li>
-
-<li><p>If you want to go back to the previous application version for any reason, simply edit the deployment again and change the Docker image tag from <code>0.0.2</code> back to <code>0.0.1</code>.</p></li>
+<pre><code class="language-sh">sudo helm install stable/jenkins --namespace development
+</code></pre></li>
 </ol>
 
-<h3 id="conclusion">Conclusion</h3>
+<h3 id="follow-up">Follow-up</h3>
 
-<p>You should now feel comfortable with the basics of pushing new docker images to a repository and pulling them into a Critical Stack deployment running multiple instances of your image.  This process is the basis for ongoing updates.</p>
+<ol>
+<li>Enable <code>--tiller-tls-verify</code> <a href="https://github.com/helm/helm/blob/master/docs/securing_installation.md">for better security</a></li>
+</ol>
+
+<h3 id="troubleshooting-tips">Troubleshooting tips</h3>
+
+<ol>
+<li><p>To uninstall helm client and tiller server, first try:</p>
+
+<pre><code class="language-sh">sudo helm reset --force
+</code></pre></li>
+
+<li><p>Delete tiller server deployment</p>
+
+<pre><code class="language-sh">sudo kubectl -n kube-system delete deployment tiller-deploy
+</code></pre></li>
+
+<li><p>Delete tiller server replicaset (old style tiller)</p>
+
+<pre><code class="language-sh">sudo kubectl -n kube-system delete replicaset tiller-deploy-     # use &lt;ESC&gt; to complete
+</code></pre></li>
+
+<li><p>Delete tiller server pod</p>
+
+<pre><code class="language-sh">sudo kubectl -n kube-system delete pod tiller-deploy-     # use &lt;ESC&gt; to complete
+</code></pre></li>
+
+<li><p>Uninstall helm chart, delete pods, delete helm release</p>
+
+<pre><code class="language-sh">sudo helm delete &lt;chart&gt; --purge
+</code></pre></li>
+</ol>
 
 
 <footer class=" footline" >
@@ -819,7 +731,6 @@ dd1eb1fd7e08: Layer already exists
             
                 
                     
-                    
                 
                 
 
@@ -835,7 +746,6 @@ dd1eb1fd7e08: Layer already exists
             
                 
                     
-                    
                 
                 
 
@@ -848,9 +758,6 @@ dd1eb1fd7e08: Layer already exists
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -867,7 +774,6 @@ dd1eb1fd7e08: Layer already exists
             
             
                 
-                    
                     
                 
                 
@@ -887,9 +793,6 @@ dd1eb1fd7e08: Layer already exists
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -942,6 +845,7 @@ dd1eb1fd7e08: Layer already exists
             
                 
                     
+                    
                 
                 
 
@@ -954,6 +858,9 @@ dd1eb1fd7e08: Layer already exists
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -971,6 +878,7 @@ dd1eb1fd7e08: Layer already exists
             
                 
                     
+                    
                 
                 
 
@@ -986,6 +894,9 @@ dd1eb1fd7e08: Layer already exists
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1010,10 +921,10 @@ dd1eb1fd7e08: Layer already exists
 	 
 	 
 		
-			<a class="nav nav-prev" href="/labs/featurelabs/node/deploystateless/" title="Deploying a NodeJS App"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/labs/administration/kubectl101/" title="Kubectl 101"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/labs/featurelabs/go/" title="Go Labs" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/labs/administration/ssh_master_node/" title="SSH to Master Nodes via Bastion Host" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

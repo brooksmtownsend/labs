@@ -12,20 +12,20 @@
     <title>Deploying a Stateless RESTful Go App :: Critical Stack Labs</title>
 
     
-    <link href="/labs/css/nucleus.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/fontawesome-all.min.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/hybrid.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/featherlight.min.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/perfect-scrollbar.min.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/auto-complete.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/atom-one-dark-reasonable.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/theme.css?1558123855" rel="stylesheet">
-    <link href="/labs/css/hugo-theme.css?1558123855" rel="stylesheet">
+    <link href="/labs/css/nucleus.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/fontawesome-all.min.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/hybrid.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/featherlight.min.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/perfect-scrollbar.min.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/auto-complete.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/atom-one-dark-reasonable.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/theme.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/hugo-theme.css?1558358674" rel="stylesheet">
     
-      <link href="/labs/css/theme-cs.css?1558123855" rel="stylesheet">
+      <link href="/labs/css/theme-cs.css?1558358674" rel="stylesheet">
     
 
-    <script src="/labs/js/jquery-3.3.1.min.js?1558123855"></script>
+    <script src="/labs/js/jquery-3.3.1.min.js?1558358674"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -56,14 +56,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/labs/js/lunr.min.js?1558123855"></script>
-<script type="text/javascript" src="/labs/js/auto-complete.js?1558123855"></script>
+<script type="text/javascript" src="/labs/js/lunr.min.js?1558358674"></script>
+<script type="text/javascript" src="/labs/js/auto-complete.js?1558358674"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/criticalstack.github.io\/labs\/";
     
 </script>
-<script type="text/javascript" src="/labs/js/search.js?1558123855"></script>
+<script type="text/javascript" src="/labs/js/search.js?1558358674"></script>
 
     
   </div>
@@ -355,6 +355,95 @@
  
 
           
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/labs/administration/" title="Administration" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/labs/administration/">
+          <i class='fas fa-toolbox'></i> Administration
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/labs/administration/kubectl101/" title="Kubectl 101" class="dd-item ">
+        <a href="/labs/administration/kubectl101/">
+        <i class='fas fa-toolbox'></i> &nbsp;Kubectl 101
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/labs/administration/helm_support/" title="Helm Support for Critical Stack" class="dd-item ">
+        <a href="/labs/administration/helm_support/">
+        <i class='fas fa-toolbox'></i> &nbsp;Helm Support for Critical Stack
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/labs/administration/ssh_master_node/" title="SSH to Master Nodes via Bastion Host" class="dd-item ">
+        <a href="/labs/administration/ssh_master_node/">
+        <i class='fas fa-toolbox'></i> &nbsp;SSH to Master Nodes via Bastion Host
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
          
     </ul>
 
@@ -499,7 +588,7 @@
 <pre><code class="language-terminal">$ CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags=&quot;-s -w&quot; -a -o hello-go .
 </code></pre></li>
 
-<li><p>As with previous lab, build a Docker image using the <code>Dockerfile</code>.</p>
+<li><p>As with previous lab, build a Docker image using the <strong>Dockerfile</strong>.</p>
 
 <p><code>docker build -t hello-go -f Dockerfile .</code></p></li>
 </ol>
@@ -587,37 +676,37 @@ The push refers to repository [docker.io/jabbottc1/hello-go]
 ...
 </code></pre></li>
 
-<li><p>Edit your <code>hello-go-deployment</code> from the Critical Stack UI.  Update the image in the <em><strong>Deployment</strong></em> to pull <code>0.0.2</code>.  Then you can run the same tests as above but targeting the Load Balancer.</p>
+<li><p>Edit your <strong>hello-go-deployment</strong> from the Critical Stack UI.  Update the image in the <strong>Deployment</strong> to pull <code>0.0.2</code>.</p>
 
 <pre><code>      image: 'jabbottc1/hello-go:0.0.2'  # Change this tag
 </code></pre></li>
 
-<li><p><strong>Save</strong> your deployment and <strong>exit</strong></p></li>
+<li><p><strong>Save</strong> your deployment and <strong>Exit</strong></p></li>
 
-<li><p>Test your upgraded deployment.  Then you can run the same tests as above but targeting the ingress host.</p>
+<li><p>Test your upgraded deployment.  You can run the same tests as above but targeting the Load Balancer.</p>
 
 <pre><code class="language-terminal">$ curl -s -H &quot;Content-Type: application/json&quot; -d '{&quot;name&quot;:&quot;John Test&quot;}' https://&lt;URL_to_your_application&gt;/todos
 </code></pre>
 
-<pre><code class="language-terminal"> $ curl -s https://&lt;URL_to_your_application&gt;/todos | python -m json.tool
+<pre><code class="language-terminal">$ curl -s https://&lt;URL_to_your_application&gt;/todos | python -m json.tool
 [
     {
-    &quot;completed&quot;: false,
-    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
-    &quot;id&quot;: 1,
-    &quot;name&quot;: &quot;Write presentation&quot;
+        &quot;completed&quot;: false,
+        &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;Write presentation&quot;
     },
     {
-    &quot;completed&quot;: false,
-    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
-    &quot;id&quot;: 2,
-    &quot;name&quot;: &quot;Host meetup&quot;
+        &quot;completed&quot;: false,
+        &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+        &quot;id&quot;: 2,
+        &quot;name&quot;: &quot;Host meetup&quot;
     },
     {
-    &quot;completed&quot;: false,
-    &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
-    &quot;id&quot;: 3,
-    &quot;name&quot;: &quot;John Test&quot;
+        &quot;completed&quot;: false,
+        &quot;due&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+        &quot;id&quot;: 3,
+        &quot;name&quot;: &quot;John Test&quot;
     }
 ]
 </code></pre></li>
@@ -625,7 +714,7 @@ The push refers to repository [docker.io/jabbottc1/hello-go]
 
 <h2 id="conclusion">Conclusion</h2>
 
-<p>You have successfully deployed a RESTful Go application to Critical Stack.  But this application is flawed - it can&rsquo;t scale beyond 1 node and has no persistence!  So next we will deploy a Go Application with a REST API and Persistence.</p>
+<p>You have successfully deployed a RESTful Go application to Critical Stack.  But this application is flawed - it can&rsquo;t scale beyond 1 node and has no persistence!  So next we will update the application with persistence and scale the deployment to multiple instances.</p>
 
 <p>Note:  some bugs with <strong>DELETE</strong>!</p>
 
@@ -861,6 +950,73 @@ The push refers to repository [docker.io/jabbottc1/hello-go]
             
         
                     
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
             
         
         
@@ -873,7 +1029,7 @@ The push refers to repository [docker.io/jabbottc1/hello-go]
 			<a class="nav nav-prev" href="/labs/featurelabs/go/hello/" title="Deploying a Go App"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/labs/featurelabs/go/hello/" title="Deploying a Go App" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/labs/administration/" title="Administration" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -883,20 +1039,20 @@ The push refers to repository [docker.io/jabbottc1/hello-go]
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/labs/js/clipboard.min.js?1558123855"></script>
-    <script src="/labs/js/perfect-scrollbar.min.js?1558123855"></script>
-    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558123855"></script>
-    <script src="/labs/js/jquery.sticky.js?1558123855"></script>
-    <script src="/labs/js/featherlight.min.js?1558123855"></script>
-    <script src="/labs/js/html5shiv-printshiv.min.js?1558123855"></script>
-    <script src="/labs/js/highlight.pack.js?1558123855"></script>
+    <script src="/labs/js/clipboard.min.js?1558358674"></script>
+    <script src="/labs/js/perfect-scrollbar.min.js?1558358674"></script>
+    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558358674"></script>
+    <script src="/labs/js/jquery.sticky.js?1558358674"></script>
+    <script src="/labs/js/featherlight.min.js?1558358674"></script>
+    <script src="/labs/js/html5shiv-printshiv.min.js?1558358674"></script>
+    <script src="/labs/js/highlight.pack.js?1558358674"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/labs/js/modernizr.custom-3.6.0.js?1558123855"></script>
-    <script src="/labs/js/learn.js?1558123855"></script>
-    <script src="/labs/js/hugo-learn.js?1558123855"></script>
+    <script src="/labs/js/modernizr.custom-3.6.0.js?1558358674"></script>
+    <script src="/labs/js/learn.js?1558358674"></script>
+    <script src="/labs/js/hugo-learn.js?1558358674"></script>
 
-    <link href="/labs/mermaid/mermaid.css?1558123855" type="text/css" rel="stylesheet" />
-    <script src="/labs/mermaid/mermaid.js?1558123855"></script>
+    <link href="/labs/mermaid/mermaid.css?1558358674" type="text/css" rel="stylesheet" />
+    <script src="/labs/mermaid/mermaid.js?1558358674"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
