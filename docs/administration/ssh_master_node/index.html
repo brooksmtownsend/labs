@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.55.4" />
+    <meta name="generator" content="Hugo 0.55.5" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>SSH to Master Nodes via Bastion Host :: Critical Stack Labs</title>
 
     
-    <link href="/labs/css/nucleus.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/fontawesome-all.min.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/hybrid.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/featherlight.min.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/perfect-scrollbar.min.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/auto-complete.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/atom-one-dark-reasonable.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/theme.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/hugo-theme.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/nucleus.css?1558360894" rel="stylesheet">
+    <link href="/labs/css/fontawesome-all.min.css?1558360894" rel="stylesheet">
+    <link href="/labs/css/hybrid.css?1558360894" rel="stylesheet">
+    <link href="/labs/css/featherlight.min.css?1558360894" rel="stylesheet">
+    <link href="/labs/css/perfect-scrollbar.min.css?1558360894" rel="stylesheet">
+    <link href="/labs/css/auto-complete.css?1558360894" rel="stylesheet">
+    <link href="/labs/css/atom-one-dark-reasonable.css?1558360894" rel="stylesheet">
+    <link href="/labs/css/theme.css?1558360894" rel="stylesheet">
+    <link href="/labs/css/hugo-theme.css?1558360894" rel="stylesheet">
     
-      <link href="/labs/css/theme-cs.css?1558358674" rel="stylesheet">
+      <link href="/labs/css/theme-cs.css?1558360894" rel="stylesheet">
     
 
-    <script src="/labs/js/jquery-3.3.1.min.js?1558358674"></script>
+    <script src="/labs/js/jquery-3.3.1.min.js?1558360894"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -56,14 +56,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/labs/js/lunr.min.js?1558358674"></script>
-<script type="text/javascript" src="/labs/js/auto-complete.js?1558358674"></script>
+<script type="text/javascript" src="/labs/js/lunr.min.js?1558360894"></script>
+<script type="text/javascript" src="/labs/js/auto-complete.js?1558360894"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/criticalstack.github.io\/labs\/";
     
 </script>
-<script type="text/javascript" src="/labs/js/search.js?1558358674"></script>
+<script type="text/javascript" src="/labs/js/search.js?1558360894"></script>
 
     
   </div>
@@ -386,9 +386,9 @@
  
   
     
-      <li data-nav-id="/labs/administration/kubectl101/" title="Kubectl 101" class="dd-item ">
-        <a href="/labs/administration/kubectl101/">
-        <i class='fas fa-toolbox'></i> &nbsp;Kubectl 101
+      <li data-nav-id="/labs/administration/ssh_master_node/" title="SSH to Master Nodes via Bastion Host" class="dd-item active">
+        <a href="/labs/administration/ssh_master_node/">
+        <i class='fas fa-toolbox'></i> &nbsp;SSH to Master Nodes via Bastion Host
         
         </a>
     </li>
@@ -424,9 +424,9 @@
  
   
     
-      <li data-nav-id="/labs/administration/ssh_master_node/" title="SSH to Master Nodes via Bastion Host" class="dd-item active">
-        <a href="/labs/administration/ssh_master_node/">
-        <i class='fas fa-toolbox'></i> &nbsp;SSH to Master Nodes via Bastion Host
+      <li data-nav-id="/labs/administration/kubectl101/" title="Kubectl 101" class="dd-item ">
+        <a href="/labs/administration/kubectl101/">
+        <i class='fas fa-toolbox'></i> &nbsp;Kubectl 101
         
         </a>
     </li>
@@ -613,17 +613,20 @@
 <pre><code class="language-console">ssh-add -K &lt;clusterprivatekey&gt;
 </code></pre>
 
-<p><img src="../../images/ssh_agent.png" alt="ssh_agent" /></p></li>
+<p><img src="../../images/ssh_agent.png" alt="ssh_agent" />
+1.  SSH to your bastion host using the <strong>-A</strong> flag to to forward the key.</p>
 
-<li><p>SSH to your bastion host using the <strong>-A</strong> flag to to forward the key.</p></li>
+<ol>
+<li><code>ssh -A -i ~/.ssh/&lt;your_cluster_private_key&gt;.pem ec2-user@&lt;bastion_host_public_IP&gt;</code></li>
+</ol>
 
-<li><p><code>ssh -A -i ~/.ssh/&lt;your_cluster_private_key&gt;.pem ec2-user@&lt;bastion_host_public_IP&gt;</code></p>
+<p><img src="../../images/ssh.png" alt="ssh" /></p>
 
-<p><img src="../../images/ssh.png" alt="ssh" /></p></li>
-
+<ol>
 <li><p>From the bastion host, <strong>ssh</strong> into the master node.  Identify the master node IP from the AWS EC2 Console.  The master nodes will be prefixed with <strong>CS-Cluster-</strong> (case significant).  Note worker nodes will be all lower case, <strong>cs-cluster-</strong>.  Since we are passing the cluster private key through SSH forwarding you will only need to know the Critical Stack user <strong>csos</strong>.</p></li>
 
-<li><p><code>ssh csos@&lt;master_node_private_IP&gt;</code></p>
+<li><p><code>ssh csos@&lt;master_node_private_IP&gt;</code></p></li>
+</ol>
 
 <p><img src="../../images/ssh_csos.png" alt="ssh" /></p></li>
 </ol>
@@ -862,6 +865,23 @@
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                         
                         
                     
@@ -880,23 +900,6 @@
             
             
                 
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                     
                 
                 
@@ -921,10 +924,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/labs/administration/helm_support/" title="Helm Support for Critical Stack"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/labs/administration/" title="Administration"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/labs/administration/kubectl101/" title="Kubectl 101" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/labs/administration/helm_support/" title="Helm Support for Critical Stack" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -934,20 +937,20 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/labs/js/clipboard.min.js?1558358674"></script>
-    <script src="/labs/js/perfect-scrollbar.min.js?1558358674"></script>
-    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558358674"></script>
-    <script src="/labs/js/jquery.sticky.js?1558358674"></script>
-    <script src="/labs/js/featherlight.min.js?1558358674"></script>
-    <script src="/labs/js/html5shiv-printshiv.min.js?1558358674"></script>
-    <script src="/labs/js/highlight.pack.js?1558358674"></script>
+    <script src="/labs/js/clipboard.min.js?1558360894"></script>
+    <script src="/labs/js/perfect-scrollbar.min.js?1558360894"></script>
+    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558360894"></script>
+    <script src="/labs/js/jquery.sticky.js?1558360894"></script>
+    <script src="/labs/js/featherlight.min.js?1558360894"></script>
+    <script src="/labs/js/html5shiv-printshiv.min.js?1558360894"></script>
+    <script src="/labs/js/highlight.pack.js?1558360894"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/labs/js/modernizr.custom-3.6.0.js?1558358674"></script>
-    <script src="/labs/js/learn.js?1558358674"></script>
-    <script src="/labs/js/hugo-learn.js?1558358674"></script>
+    <script src="/labs/js/modernizr.custom-3.6.0.js?1558360894"></script>
+    <script src="/labs/js/learn.js?1558360894"></script>
+    <script src="/labs/js/hugo-learn.js?1558360894"></script>
 
-    <link href="/labs/mermaid/mermaid.css?1558358674" type="text/css" rel="stylesheet" />
-    <script src="/labs/mermaid/mermaid.js?1558358674"></script>
+    <link href="/labs/mermaid/mermaid.css?1558360894" type="text/css" rel="stylesheet" />
+    <script src="/labs/mermaid/mermaid.js?1558360894"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

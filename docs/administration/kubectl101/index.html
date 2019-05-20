@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.55.4" />
+    <meta name="generator" content="Hugo 0.55.5" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>Kubectl 101 :: Critical Stack Labs</title>
 
     
-    <link href="/labs/css/nucleus.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/fontawesome-all.min.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/hybrid.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/featherlight.min.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/perfect-scrollbar.min.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/auto-complete.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/atom-one-dark-reasonable.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/theme.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/hugo-theme.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/nucleus.css?1558360894" rel="stylesheet">
+    <link href="/labs/css/fontawesome-all.min.css?1558360894" rel="stylesheet">
+    <link href="/labs/css/hybrid.css?1558360894" rel="stylesheet">
+    <link href="/labs/css/featherlight.min.css?1558360894" rel="stylesheet">
+    <link href="/labs/css/perfect-scrollbar.min.css?1558360894" rel="stylesheet">
+    <link href="/labs/css/auto-complete.css?1558360894" rel="stylesheet">
+    <link href="/labs/css/atom-one-dark-reasonable.css?1558360894" rel="stylesheet">
+    <link href="/labs/css/theme.css?1558360894" rel="stylesheet">
+    <link href="/labs/css/hugo-theme.css?1558360894" rel="stylesheet">
     
-      <link href="/labs/css/theme-cs.css?1558358674" rel="stylesheet">
+      <link href="/labs/css/theme-cs.css?1558360894" rel="stylesheet">
     
 
-    <script src="/labs/js/jquery-3.3.1.min.js?1558358674"></script>
+    <script src="/labs/js/jquery-3.3.1.min.js?1558360894"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -56,14 +56,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/labs/js/lunr.min.js?1558358674"></script>
-<script type="text/javascript" src="/labs/js/auto-complete.js?1558358674"></script>
+<script type="text/javascript" src="/labs/js/lunr.min.js?1558360894"></script>
+<script type="text/javascript" src="/labs/js/auto-complete.js?1558360894"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/criticalstack.github.io\/labs\/";
     
 </script>
-<script type="text/javascript" src="/labs/js/search.js?1558358674"></script>
+<script type="text/javascript" src="/labs/js/search.js?1558360894"></script>
 
     
   </div>
@@ -386,9 +386,9 @@
  
   
     
-      <li data-nav-id="/labs/administration/kubectl101/" title="Kubectl 101" class="dd-item active">
-        <a href="/labs/administration/kubectl101/">
-        <i class='fas fa-toolbox'></i> &nbsp;Kubectl 101
+      <li data-nav-id="/labs/administration/ssh_master_node/" title="SSH to Master Nodes via Bastion Host" class="dd-item ">
+        <a href="/labs/administration/ssh_master_node/">
+        <i class='fas fa-toolbox'></i> &nbsp;SSH to Master Nodes via Bastion Host
         
         </a>
     </li>
@@ -424,9 +424,9 @@
  
   
     
-      <li data-nav-id="/labs/administration/ssh_master_node/" title="SSH to Master Nodes via Bastion Host" class="dd-item ">
-        <a href="/labs/administration/ssh_master_node/">
-        <i class='fas fa-toolbox'></i> &nbsp;SSH to Master Nodes via Bastion Host
+      <li data-nav-id="/labs/administration/kubectl101/" title="Kubectl 101" class="dd-item active">
+        <a href="/labs/administration/kubectl101/">
+        <i class='fas fa-toolbox'></i> &nbsp;Kubectl 101
         
         </a>
     </li>
@@ -578,11 +578,11 @@
 <pre><code class="language-console"> kubectl get pod pod1
  kubectl get pods pod1
  kubectl get po pod1
-</code></pre></li>
+</code></pre>
 
-<li><p><code>NAME</code>:  Specifies the name of the resource. Names are case-sensitive. If the name is omitted, details for all resources are displayed.</p></li>
-
-<li><p><code>flags</code>: Specifies optional flags. For example, you can use the -s or &ndash;server flags to specify the address and port of the Kubernetes API server.</p></li>
+<ul>
+<li><code>NAME</code>:  Specifies the name of the resource. Names are case-sensitive. If the name is omitted, details for all resources are displayed.<br /></li>
+<li><code>flags</code>: Specifies optional flags. For example, you can use the -s or &ndash;server flags to specify the address and port of the Kubernetes API server.</li>
 </ul>
 
 <h2 id="connecting-to-your-server">Connecting to your server</h2>
@@ -592,30 +592,27 @@
 
 <li><p>By default <code>kubectl</code> uses the configuration in $HOME/.kube/config.  If you want to run commands against multiple servers (CS or minikube) you will need a multi config file or use <strong>Environment</strong> variables.</p></li>
 
-<li><p>To view your current config you can run this command:</p>
+<li><p>To view your current config you can run this command:</p></li>
+</ol>
 
 <p><code>kubectl config view</code></p>
 
-<p>```console
-kubectl config view
+<pre><code class="language-console">kubectl config view
 apiVersion: v1
-clusters:</p>
-
-<ul>
-<li>cluster:
-server: https://<server>
-name: critical-stack</li>
-<li>cluster:
-certificate-authority: /Users/<user>/.minikube/ca.crt
-server: <a href="https://192.168.99.100:8443">https://192.168.99.100:8443</a>
+clusters:
+- cluster:
+  server: https://&lt;server&gt;
+  name: critical-stack
+- cluster:
+  certificate-authority: /Users/&lt;user&gt;/.minikube/ca.crt
+  server: https://192.168.99.100:8443
 name: minikube
-contexts:</li>
-<li>context:
-cluster: critical-stack
-namespace: <namespace>
-```</li>
-</ul></li>
-</ol>
+contexts:
+- context:
+  cluster: critical-stack
+  namespace: &lt;namespace&gt;
+</code></pre></li>
+</ul>
 
 <h2 id="basic-commands">Basic commands</h2>
 
@@ -631,11 +628,13 @@ hello-go-deployment-85b5b5cc6f-ccsd5   1/1       Running   0          4d
 hello-go-deployment-85b5b5cc6f-s6htw   1/1       Running   0          5d
 </code></pre>
 
-<p><img src="../../images/getpods.png" alt="getpods" /></p></li>
+<p><img src="../../images/getpods.png" alt="getpods" /></p>
 
+<ol>
 <li><p><strong>Note</strong> you will have have access to the resource types that your have permission to view/create within your namespace. If you are the cluster admin you will have permission to see all namespaces and resources.</p></li>
 
-<li><p>In this example, I have 3 pods running all from one deployment.  Let&rsquo;s take a look at the deployment:</p>
+<li><p>In this example, I have 3 pods running all from one deployment.  Let&rsquo;s take a look at the deployment:</p></li>
+</ol>
 
 <p><code>kubectl get deployments</code></p>
 
@@ -667,9 +666,11 @@ Pod Template:
    hello-go:
     Image:        jabbottc1/hello-go:0.0.3
     Port:         8080/TCP
-</code></pre></li>
+</code></pre>
 
-<li><p>Let&rsquo;s change the <code>replicas</code> value of the deployment.  You could do this from the UI, but we will change this from the command line.</p>
+<ol>
+<li>Let&rsquo;s change the <code>replicas</code> value of the deployment.  You could do this from the UI, but we will change this from the command line.</li>
+</ol>
 
 <p><code>kubectl scale deployment hello-go-deployment --replicas=2</code></p>
 
@@ -932,23 +933,6 @@ Labels:  app=hello-go
             
                 
                     
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                         
                         
                     
@@ -967,6 +951,23 @@ Labels:  app=hello-go
             
             
                 
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -991,10 +992,10 @@ Labels:  app=hello-go
 	 
 	 
 		
-			<a class="nav nav-prev" href="/labs/administration/" title="Administration"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/labs/administration/helm_support/" title="Helm Support for Critical Stack"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/labs/administration/helm_support/" title="Helm Support for Critical Stack" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/labs/administration/ssh_master_node/" title="SSH to Master Nodes via Bastion Host" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1004,20 +1005,20 @@ Labels:  app=hello-go
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/labs/js/clipboard.min.js?1558358674"></script>
-    <script src="/labs/js/perfect-scrollbar.min.js?1558358674"></script>
-    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558358674"></script>
-    <script src="/labs/js/jquery.sticky.js?1558358674"></script>
-    <script src="/labs/js/featherlight.min.js?1558358674"></script>
-    <script src="/labs/js/html5shiv-printshiv.min.js?1558358674"></script>
-    <script src="/labs/js/highlight.pack.js?1558358674"></script>
+    <script src="/labs/js/clipboard.min.js?1558360894"></script>
+    <script src="/labs/js/perfect-scrollbar.min.js?1558360894"></script>
+    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558360894"></script>
+    <script src="/labs/js/jquery.sticky.js?1558360894"></script>
+    <script src="/labs/js/featherlight.min.js?1558360894"></script>
+    <script src="/labs/js/html5shiv-printshiv.min.js?1558360894"></script>
+    <script src="/labs/js/highlight.pack.js?1558360894"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/labs/js/modernizr.custom-3.6.0.js?1558358674"></script>
-    <script src="/labs/js/learn.js?1558358674"></script>
-    <script src="/labs/js/hugo-learn.js?1558358674"></script>
+    <script src="/labs/js/modernizr.custom-3.6.0.js?1558360894"></script>
+    <script src="/labs/js/learn.js?1558360894"></script>
+    <script src="/labs/js/hugo-learn.js?1558360894"></script>
 
-    <link href="/labs/mermaid/mermaid.css?1558358674" type="text/css" rel="stylesheet" />
-    <script src="/labs/mermaid/mermaid.js?1558358674"></script>
+    <link href="/labs/mermaid/mermaid.css?1558360894" type="text/css" rel="stylesheet" />
+    <script src="/labs/mermaid/mermaid.js?1558360894"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
