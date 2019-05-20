@@ -76,3 +76,6 @@ ssh-add -K <clusterprivatekey>
 
 	![ssh](../../images/ssh_csos.png)
 
+### Notes
+Port forwarding can be utilized to chain together the `ssh` sessions via the bastion host thereby turning subsequent `ssh`-protocol based commands (`scp`, etc) into a one liner.  Implementing is beyond the scope of this lab.
+
