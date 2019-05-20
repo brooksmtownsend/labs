@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.55.5" />
+    <meta name="generator" content="Hugo 0.55.4" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>Deploying a Go App :: Critical Stack Labs</title>
 
     
-    <link href="/labs/css/nucleus.css?1558362679" rel="stylesheet">
-    <link href="/labs/css/fontawesome-all.min.css?1558362679" rel="stylesheet">
-    <link href="/labs/css/hybrid.css?1558362679" rel="stylesheet">
-    <link href="/labs/css/featherlight.min.css?1558362679" rel="stylesheet">
-    <link href="/labs/css/perfect-scrollbar.min.css?1558362679" rel="stylesheet">
-    <link href="/labs/css/auto-complete.css?1558362679" rel="stylesheet">
-    <link href="/labs/css/atom-one-dark-reasonable.css?1558362679" rel="stylesheet">
-    <link href="/labs/css/theme.css?1558362679" rel="stylesheet">
-    <link href="/labs/css/hugo-theme.css?1558362679" rel="stylesheet">
+    <link href="/labs/css/nucleus.css?1558363314" rel="stylesheet">
+    <link href="/labs/css/fontawesome-all.min.css?1558363314" rel="stylesheet">
+    <link href="/labs/css/hybrid.css?1558363314" rel="stylesheet">
+    <link href="/labs/css/featherlight.min.css?1558363314" rel="stylesheet">
+    <link href="/labs/css/perfect-scrollbar.min.css?1558363314" rel="stylesheet">
+    <link href="/labs/css/auto-complete.css?1558363314" rel="stylesheet">
+    <link href="/labs/css/atom-one-dark-reasonable.css?1558363314" rel="stylesheet">
+    <link href="/labs/css/theme.css?1558363314" rel="stylesheet">
+    <link href="/labs/css/hugo-theme.css?1558363314" rel="stylesheet">
     
-      <link href="/labs/css/theme-cs.css?1558362679" rel="stylesheet">
+      <link href="/labs/css/theme-cs.css?1558363314" rel="stylesheet">
     
 
-    <script src="/labs/js/jquery-3.3.1.min.js?1558362679"></script>
+    <script src="/labs/js/jquery-3.3.1.min.js?1558363314"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -56,14 +56,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/labs/js/lunr.min.js?1558362679"></script>
-<script type="text/javascript" src="/labs/js/auto-complete.js?1558362679"></script>
+<script type="text/javascript" src="/labs/js/lunr.min.js?1558363314"></script>
+<script type="text/javascript" src="/labs/js/auto-complete.js?1558363314"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/criticalstack.github.io\/labs\/";
     
 </script>
-<script type="text/javascript" src="/labs/js/search.js?1558362679"></script>
+<script type="text/javascript" src="/labs/js/search.js?1558363314"></script>
 
     
   </div>
@@ -596,11 +596,9 @@
 <pre><code class="language-terminal">cd ~/Development
 mkdir -p go/app
 cd go/app
-</code></pre>
+</code></pre></li>
 
-<ol>
-<li>Using the editor of your choice, create a new file called <strong>main.go</strong> inside the <strong>app</strong> directory.</li>
-</ol>
+<li><p>Using the editor of your choice, create a new file called <strong>main.go</strong> inside the <strong>app</strong> directory.</p>
 
 <pre><code class="language-terminal">vi hello-go.go
 </code></pre></li>
@@ -628,9 +626,8 @@ func main() {
 <li><p>Compile your Go executable so it properly targets a linux OS and is built statically with minimal dependencies. In this example we have decided to name the executable <strong>hello-go</strong>:</p>
 
 <pre><code class="language-terminal">$ CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags=&quot;-s -w&quot; -a -o hello-go .
-</code></pre>
+</code></pre></li>
 
-<ol>
 <li><p>A new executable binary called <strong>hello-go</strong> will be created in the same directory.  This will be referenced when we build our docker container.</p></li>
 
 <li><p>Create a new file in the same directory and name it <strong>Dockerfile</strong>.  This file could be named anything, but common convention is to use this filename.  Copy the following code into this file:</p>
@@ -671,8 +668,7 @@ EXPOSE 8080
 CMD [&quot;/app/hello-go&quot;]
 </code></pre></li>
 
-<li><p>Login to your docker registry:</p></li>
-</ol>
+<li><p>Login to your docker registry:</p>
 
 <pre><code class="language-terminal">$ docker login
 Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
@@ -715,16 +711,15 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 6009be3dfae3
 $ docker container ls
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                  PORTS               NAMES
-</code></pre>
+</code></pre></li>
+</ol>
 
 <h2 id="tagging-and-pushing-your-image-to-a-registry">Tagging and Pushing your Image to a Registry</h2>
 
 <p>Now that we have an image we need to apply a <strong>tag</strong> and <strong>push</strong> it to a container registry.</p>
 
 <ol>
-<li>Docker tags allow you to convey useful information about a specific image version or variant.  Rather than referring to your image by the <strong>IMAGE ID</strong> you can create aliases for your images.  Lets look at the list of images locally (your list might be different):
-<br /></li>
-</ol>
+<li><p>Docker tags allow you to convey useful information about a specific image version or variant.  Rather than referring to your image by the <strong>IMAGE ID</strong> you can create aliases for your images.  Lets look at the list of images locally (your list might be different):</p>
 
 <pre><code class="language-terminal">$ docker images
 REPOSITORY             TAG                 IMAGE ID            CREATED             
@@ -759,15 +754,15 @@ c1b4e3786f95: Layer already exists
 0.0.1: digest: sha256:385984109a3cf6b1a82dcebb1ee124a7172a5a81795bf8116f2cab6d7a09ca4e size: 1569
 </code></pre>
 
-<p>Your image digest and layer hashes will differ from the above terminal output.</p>
+<p>Your image digest and layer hashes will differ from the above terminal output.</p></li>
+</ol>
 
 <h2 id="deploy-your-container-into-critical-stack">Deploy your container into Critical Stack</h2>
 
 <p>Deploying your container is as simple as following the <a href="../../node/deploystateless/#deploying">deployment steps in the Node lab</a>, but change the docker image name and other parameters as appropriate.</p>
 
 <ol>
-<li>Navigate to the application Load Balancer URL to see your <strong>Hello World</strong> message or run <code>curl</code> to verify that you application is running and exposed externally.  <strong>Note</strong> it may take a few minutes for the <strong>Load Balancer</strong> to be created.</li>
-</ol>
+<li><p>Navigate to the application Load Balancer URL to see your <strong>Hello World</strong> message or run <code>curl</code> to verify that you application is running and exposed externally.  <strong>Note</strong> it may take a few minutes for the <strong>Load Balancer</strong> to be created.</p>
 
 <p><code>curl -s http://&lt;URL_for_your_deployment&gt;</code></p>
 
@@ -1098,20 +1093,20 @@ Hello, &quot;/&quot;$
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/labs/js/clipboard.min.js?1558362679"></script>
-    <script src="/labs/js/perfect-scrollbar.min.js?1558362679"></script>
-    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558362679"></script>
-    <script src="/labs/js/jquery.sticky.js?1558362679"></script>
-    <script src="/labs/js/featherlight.min.js?1558362679"></script>
-    <script src="/labs/js/html5shiv-printshiv.min.js?1558362679"></script>
-    <script src="/labs/js/highlight.pack.js?1558362679"></script>
+    <script src="/labs/js/clipboard.min.js?1558363314"></script>
+    <script src="/labs/js/perfect-scrollbar.min.js?1558363314"></script>
+    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558363314"></script>
+    <script src="/labs/js/jquery.sticky.js?1558363314"></script>
+    <script src="/labs/js/featherlight.min.js?1558363314"></script>
+    <script src="/labs/js/html5shiv-printshiv.min.js?1558363314"></script>
+    <script src="/labs/js/highlight.pack.js?1558363314"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/labs/js/modernizr.custom-3.6.0.js?1558362679"></script>
-    <script src="/labs/js/learn.js?1558362679"></script>
-    <script src="/labs/js/hugo-learn.js?1558362679"></script>
+    <script src="/labs/js/modernizr.custom-3.6.0.js?1558363314"></script>
+    <script src="/labs/js/learn.js?1558363314"></script>
+    <script src="/labs/js/hugo-learn.js?1558363314"></script>
 
-    <link href="/labs/mermaid/mermaid.css?1558362679" type="text/css" rel="stylesheet" />
-    <script src="/labs/mermaid/mermaid.js?1558362679"></script>
+    <link href="/labs/mermaid/mermaid.css?1558363314" type="text/css" rel="stylesheet" />
+    <script src="/labs/mermaid/mermaid.js?1558363314"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
