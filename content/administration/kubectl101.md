@@ -40,7 +40,7 @@ where `command`, `TYPE`, `NAME`, and `flags` are:
 
 
 ## Connecting to your server
-1. There are a few ways to run `kubectl` commands with the Critical Stack Cluster.  You can [**ssh** into a master node](../ssh_master_node/) or download kubeconfig from your cluster.  For now, we recommend to SSH into a master node.
+1. There are a few ways to run `kubectl` commands with the Critical Stack Cluster.  You can [**ssh** into a master node](../ssh_master_node/) and download **external-admin.conf** from your cluster's S3 bucket (but is complicated to use since master nodes are not accessible directly).  For now, we recommend to SSH into a master node.
 
 1. By default `kubectl` uses the configuration in $HOME/.kube/config.  If you want to run commands against multiple servers (CS or minikube) you will need a multi config file or use **Environment** variables. 
 
@@ -144,5 +144,5 @@ where `command`, `TYPE`, `NAME`, and `flags` are:
 You have successfully setup `kubectl` with your Critical Stack cluster and can run some basic commands to view and update existing resources.
 
 ## Notes
-Provide instructions how to retrieve kubeconfig from the cluster (manual steps and via `generate-kubeconfig.sh` script).
+Provide instructions how to use kubeconfig via bastion host and provide `generate-kubeconfig.sh` script to pull kubeconfig from S3 bucket.
 

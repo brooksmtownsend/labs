@@ -21,7 +21,6 @@ This document describes how to deploy **helm** to support deployment of **helm c
 Note that the next version of **helm** will not include **tiller** so steps to deploy will change significantly (expected to be much simpler and more secure).
 
 ### Steps
-
 1. [SSH to master node](../ssh_master_node/)
 
 1. Get helm
@@ -57,22 +56,22 @@ sudo helm install stable/jenkins --namespace development
 sudo helm reset --force
 ```
 
-1. Delete tiller server deployment
+2. Delete tiller server deployment
 ```sh
 sudo kubectl -n kube-system delete deployment tiller-deploy
 ```
 
-1. Delete tiller server replicaset (old style tiller)
+3. Delete tiller server replicaset (old style tiller)
 ```sh
 sudo kubectl -n kube-system delete replicaset tiller-deploy-     # use <ESC> to complete
 ```
 
-1. Delete tiller server pod
+4. Delete tiller server pod
 ```sh
 sudo kubectl -n kube-system delete pod tiller-deploy-     # use <ESC> to complete
 ```
 
-1. Uninstall helm chart, delete pods, delete helm release
+5. Uninstall helm chart, delete pods, delete helm release
 ```sh
 sudo helm delete <chart> --purge
 ```
