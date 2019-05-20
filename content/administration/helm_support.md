@@ -1,7 +1,7 @@
 +++
 title = "Helm Support for Critical Stack"
 date = 2019-04-23T09:43:37-04:00
-weight = 6
+weight = 4
 chapter = false
 pre = "<i class='fas fa-toolbox'></i> &nbsp;"
 +++
