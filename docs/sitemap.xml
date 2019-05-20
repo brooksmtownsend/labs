@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/faqs/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/install/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/administration/ssh_master_node/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/featurelabs/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/administration/</loc>
+    <lastmod>2019-05-18T20:26:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/administration/helm_support/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/install/awsaccount/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/featurelabs/go/hello/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/featurelabs/node/deploystateless/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/featurelabs/node/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/install/aws_basic_cluster/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/featurelabs/go/hello_rest/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/featurelabs/go/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/administration/kubectl101/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/featurelabs/node/updating/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/</loc>
+    <lastmod>2019-04-23T09:43:37-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://criticalstack.github.io/labs/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

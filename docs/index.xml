@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Critical Stack Labs</title>
+    <link>https://criticalstack.github.io/labs/</link>
+    <description>Recent content on Critical Stack Labs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Apr 2019 09:43:37 -0400</lastBuildDate>
+    
+	<atom:link href="https://criticalstack.github.io/labs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SSH to Master Nodes via Bastion Host</title>
+      <link>https://criticalstack.github.io/labs/administration/ssh_master_node/</link>
+      <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
+      
+      <guid>https://criticalstack.github.io/labs/administration/ssh_master_node/</guid>
+      <description>Securely Connect to a Critical Stack Master Node running in a Private VPC Overview The Critical Stack master nodes are not located on a public subnet. If you need to access the nodes you will first need to create a bastion host. This guide will help explain how to securely access these environments without uploading private keys to the secondary nodes.
+Prerequisities  A Critical Stack cluster deployed using the installer in an external AWS account and the cluster private key (.</description>
+    </item>
+    
+    <item>
+      <title>Helm Support for Critical Stack</title>
+      <link>https://criticalstack.github.io/labs/administration/helm_support/</link>
+      <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
+      
+      <guid>https://criticalstack.github.io/labs/administration/helm_support/</guid>
+      <description>Helm Chart Support for Critical Stack Getting Started Pre-requisites:
+ A Critical Stack cluster
+ Master node with access to the Internet for helm, helm charts, and Docker images
+  Overview This document describes how to deploy helm to support deployment of helm chart-based applications.
+Note that the next version of helm will not include tiller so steps to deploy will change significantly (expected to be much simpler and more secure).</description>
+    </item>
+    
+    <item>
+      <title>Deploying a Go App</title>
+      <link>https://criticalstack.github.io/labs/featurelabs/go/hello/</link>
+      <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
+      
+      <guid>https://criticalstack.github.io/labs/featurelabs/go/hello/</guid>
+      <description>Deploying a Stateless Golang App in Critical Stack Getting Started Before starting this lab, you will need:
+ Go installed Visual Studio Code (or your favorite IDE) curl or some equivalent way to do GET and POST &amp;nbsp; (The Postman browser plugin is a good alternative). If using curl, python to make JSON prettier (you can also use jq) Docker installed Access to a public container registry, e.g. Docker Hub A Critical Stack deployment with a user account provisioned for you.</description>
+    </item>
+    
+    <item>
+      <title>Deploying a NodeJS App</title>
+      <link>https://criticalstack.github.io/labs/featurelabs/node/deploystateless/</link>
+      <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
+      
+      <guid>https://criticalstack.github.io/labs/featurelabs/node/deploystateless/</guid>
+      <description>Deploying a Stateless NodeJS App in Critical Stack This lab will walk you through the process of deploying a stateless NodeJS application to Critical Stack.
+Getting Started Before we get started, you&amp;rsquo;ll need:
+ Node JS (and npm) installed : Node.JS Docker installed : Docker Access to a public container registry (Docker Hub is easiest, Artifactory works too) : Docker Hub  Overview In this lab we will create a simple NodeJS application, deploy it via Critical Stack.</description>
+    </item>
+    
+    <item>
+      <title>Deploying a Stateless RESTful Go App</title>
+      <link>https://criticalstack.github.io/labs/featurelabs/go/hello_rest/</link>
+      <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
+      
+      <guid>https://criticalstack.github.io/labs/featurelabs/go/hello_rest/</guid>
+      <description>Deploying a Stateless Golang App with REST API in Critical Stack Getting Started Before starting this lab, you will need:
+ Go installed Visual Studio Code or your favorite IDE installed curl or some equivalent way to do GET and POST &amp;nbsp; (Postman is a good alternative) If using curl, python to make JSON prettier (you can also use jq) Docker installed. Access to a public container registry, e.g. Docker Hub Completed the Previous Go lab for the Docker registry and Load Balancer setup - this demo will just update the previous Docker image with new functionality  Overview In this lab, we will be enhancing the work done in the previous lab to introduce a RESTful API and walking through the steps necessary to build and deploy this to Critical Stack.</description>
+    </item>
+    
+    <item>
+      <title>Kubectl 101</title>
+      <link>https://criticalstack.github.io/labs/administration/kubectl101/</link>
+      <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
+      
+      <guid>https://criticalstack.github.io/labs/administration/kubectl101/</guid>
+      <description>Kubectl 101 Getting Started Pre-requisites:
+ A Critical Stack cluster. You will need to know your username and password. This lab is more interesting if you have already deployed an app so that you can view the resources created by command line.
+ kubectl installed : kubectl
+  Getting Started Intro Lifted from kubernetes.io
+Kubectl is a command line interface for running commands against Kubernetes clusters. This overview covers kubectl syntax, describes the command operations, and provides common examples.</description>
+    </item>
+    
+    <item>
+      <title>Updating a NodeJS App</title>
+      <link>https://criticalstack.github.io/labs/featurelabs/node/updating/</link>
+      <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
+      
+      <guid>https://criticalstack.github.io/labs/featurelabs/node/updating/</guid>
+      <description>Using Critical Stack to update a scalable, stateless application Getting Started Before starting on this lab, you will need to have completed the Previous Node lab.
+Overview In the previous lab we created a simple NodeJS application, packaged the application in a docker image, pushed the docker image to a public docker image repository (Docker Hub), pulled that image into a Critical Stack deployment as a container instance, and accessed the application via a public URL.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Go Labs on Critical Stack Labs</title>
+    <link>https://criticalstack.github.io/labs/featurelabs/go/</link>
+    <description>Recent content in Go Labs on Critical Stack Labs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Apr 2019 09:43:37 -0400</lastBuildDate>
+    
+	<atom:link href="https://criticalstack.github.io/labs/featurelabs/go/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Deploying a Go App</title>
+      <link>https://criticalstack.github.io/labs/featurelabs/go/hello/</link>
+      <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
+      
+      <guid>https://criticalstack.github.io/labs/featurelabs/go/hello/</guid>
+      <description>Deploying a Stateless Golang App in Critical Stack Getting Started Before starting this lab, you will need:
+ Go installed Visual Studio Code (or your favorite IDE) curl or some equivalent way to do GET and POST &amp;nbsp; (The Postman browser plugin is a good alternative). If using curl, python to make JSON prettier (you can also use jq) Docker installed Access to a public container registry, e.g. Docker Hub A Critical Stack deployment with a user account provisioned for you.</description>
+    </item>
+    
+    <item>
+      <title>Deploying a Stateless RESTful Go App</title>
+      <link>https://criticalstack.github.io/labs/featurelabs/go/hello_rest/</link>
+      <pubDate>Tue, 23 Apr 2019 09:43:37 -0400</pubDate>
+      
+      <guid>https://criticalstack.github.io/labs/featurelabs/go/hello_rest/</guid>
+      <description>Deploying a Stateless Golang App with REST API in Critical Stack Getting Started Before starting this lab, you will need:
+ Go installed Visual Studio Code or your favorite IDE installed curl or some equivalent way to do GET and POST &amp;nbsp; (Postman is a good alternative) If using curl, python to make JSON prettier (you can also use jq) Docker installed. Access to a public container registry, e.g. Docker Hub Completed the Previous Go lab for the Docker registry and Load Balancer setup - this demo will just update the previous Docker image with new functionality  Overview In this lab, we will be enhancing the work done in the previous lab to introduce a RESTful API and walking through the steps necessary to build and deploy this to Critical Stack.</description>
+    </item>
+    
+  </channel>
+</rss>
