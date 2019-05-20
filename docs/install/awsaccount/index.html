@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.55.4" />
+    <meta name="generator" content="Hugo 0.55.5" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>AWS Account Setup :: Critical Stack Labs</title>
 
     
-    <link href="/labs/css/nucleus.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/fontawesome-all.min.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/hybrid.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/featherlight.min.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/perfect-scrollbar.min.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/auto-complete.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/atom-one-dark-reasonable.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/theme.css?1558358674" rel="stylesheet">
-    <link href="/labs/css/hugo-theme.css?1558358674" rel="stylesheet">
+    <link href="/labs/css/nucleus.css?1558360777" rel="stylesheet">
+    <link href="/labs/css/fontawesome-all.min.css?1558360777" rel="stylesheet">
+    <link href="/labs/css/hybrid.css?1558360777" rel="stylesheet">
+    <link href="/labs/css/featherlight.min.css?1558360777" rel="stylesheet">
+    <link href="/labs/css/perfect-scrollbar.min.css?1558360777" rel="stylesheet">
+    <link href="/labs/css/auto-complete.css?1558360777" rel="stylesheet">
+    <link href="/labs/css/atom-one-dark-reasonable.css?1558360777" rel="stylesheet">
+    <link href="/labs/css/theme.css?1558360777" rel="stylesheet">
+    <link href="/labs/css/hugo-theme.css?1558360777" rel="stylesheet">
     
-      <link href="/labs/css/theme-cs.css?1558358674" rel="stylesheet">
+      <link href="/labs/css/theme-cs.css?1558360777" rel="stylesheet">
     
 
-    <script src="/labs/js/jquery-3.3.1.min.js?1558358674"></script>
+    <script src="/labs/js/jquery-3.3.1.min.js?1558360777"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -56,14 +56,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/labs/js/lunr.min.js?1558358674"></script>
-<script type="text/javascript" src="/labs/js/auto-complete.js?1558358674"></script>
+<script type="text/javascript" src="/labs/js/lunr.min.js?1558360777"></script>
+<script type="text/javascript" src="/labs/js/auto-complete.js?1558360777"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/criticalstack.github.io\/labs\/";
     
 </script>
-<script type="text/javascript" src="/labs/js/search.js?1558358674"></script>
+<script type="text/javascript" src="/labs/js/search.js?1558360777"></script>
 
     
   </div>
@@ -756,43 +756,58 @@
         }
     ]
 }
-</code></pre></li>
+</code></pre>
 
-<li><p>Your policy should look something like this:</p>
+<ol>
+<li>Your policy should look something like this:</li>
+</ol>
 
-<p><img src="../../images/install/awsaccount/json_policy.png" alt="jsonpolicy" /></p></li>
+<p><img src="../../images/install/awsaccount/json_policy.png" alt="jsonpolicy" /></p>
 
-<li><p>Select <strong>Review Policy</strong>.</p></li>
+<ol>
+<li>Select <strong>Review Policy</strong>.</li>
+<li>Give your policy a name and description and select <strong>Create policy</strong>.</li>
+</ol>
 
-<li><p>Give your policy a name and description and select <strong>Create policy</strong>.</p>
+<p><img src="../../images/install/awsaccount//policy_review.png" alt="policyreview" /></p>
 
-<p><img src="../../images/install/awsaccount//policy_review.png" alt="policyreview" /></p></li>
+<ol>
+<li>Click <strong>Users</strong> from the Navigation and <strong>Add user</strong>.</li>
+</ol>
 
-<li><p>Click <strong>Users</strong> from the Navigation and <strong>Add user</strong>.</p>
+<p><img src="../../images/install/awsaccount/newuser.png" alt="newuser" /></p>
 
-<p><img src="../../images/install/awsaccount/newuser.png" alt="newuser" /></p></li>
+<ol>
+<li>Select <code>Programmatic access</code> for the <strong>Access Type</strong> and Click on <strong>Next: Permission</strong> at the bottom of the page.</li>
+</ol>
 
-<li><p>Select <code>Programmatic access</code> for the <strong>Access Type</strong> and Click on <strong>Next: Permission</strong> at the bottom of the page.</p>
+<p><img src="../../images/install/awsaccount/add_user.png" alt="adduser" /></p>
 
-<p><img src="../../images/install/awsaccount/add_user.png" alt="adduser" /></p></li>
+<ol>
+<li>Create a new group for permissions by selecting <strong>Create group</strong>.</li>
+</ol>
 
-<li><p>Create a new group for permissions by selecting <strong>Create group</strong>.</p>
+<p><img src="../../images/install/awsaccount/new_group.png" alt="newgroup" /></p>
 
-<p><img src="../../images/install/awsaccount/new_group.png" alt="newgroup" /></p></li>
+<ol>
+<li>Click <strong>Refresh</strong> and search for the policy you just created <code>CS_Install_Policy</code>. Click the checkbox by the policy name and give your group a name.  Select <strong>Create Group</strong>.</li>
+</ol>
 
-<li><p>Click <strong>Refresh</strong> and search for the policy you just created <code>CS_Install_Policy</code>. Click the checkbox by the policy name and give your group a name.  Select <strong>Create Group</strong>.</p>
+<p><img src="../../images/install/awsaccount/cs_install_group.png" alt="cs_install_group" /></p>
 
-<p><img src="../../images/install/awsaccount/cs_install_group.png" alt="cs_install_group" /></p></li>
+<ol>
+<li>With group selected click <strong>Next: Tags</strong> from the Add user screen.</li>
+</ol>
 
-<li><p>With group selected click <strong>Next: Tags</strong> from the Add user screen.</p>
+<p><img src="../../images/install/awsaccount/user_next.png" alt="usernext" /></p>
 
-<p><img src="../../images/install/awsaccount/user_next.png" alt="usernext" /></p></li>
-
+<ol>
 <li><p>Add any optional tags and select <strong>Next: Review</strong>.</p></li>
 
 <li><p>Select <strong>Create user</strong> to finalize to user creation.</p></li>
 
-<li><p>The <code>Access key ID</code> and <code>Secret access key</code> will be used for the CS Installer.</p>
+<li><p>The <code>Access key ID</code> and <code>Secret access key</code> will be used for the CS Installer.</p></li>
+</ol>
 
 <p><img src="../../images/install/awsaccount/keyinfo.png" alt="keyinfo" /></p></li>
 </ol>
@@ -1105,20 +1120,20 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/labs/js/clipboard.min.js?1558358674"></script>
-    <script src="/labs/js/perfect-scrollbar.min.js?1558358674"></script>
-    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558358674"></script>
-    <script src="/labs/js/jquery.sticky.js?1558358674"></script>
-    <script src="/labs/js/featherlight.min.js?1558358674"></script>
-    <script src="/labs/js/html5shiv-printshiv.min.js?1558358674"></script>
-    <script src="/labs/js/highlight.pack.js?1558358674"></script>
+    <script src="/labs/js/clipboard.min.js?1558360777"></script>
+    <script src="/labs/js/perfect-scrollbar.min.js?1558360777"></script>
+    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558360777"></script>
+    <script src="/labs/js/jquery.sticky.js?1558360777"></script>
+    <script src="/labs/js/featherlight.min.js?1558360777"></script>
+    <script src="/labs/js/html5shiv-printshiv.min.js?1558360777"></script>
+    <script src="/labs/js/highlight.pack.js?1558360777"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/labs/js/modernizr.custom-3.6.0.js?1558358674"></script>
-    <script src="/labs/js/learn.js?1558358674"></script>
-    <script src="/labs/js/hugo-learn.js?1558358674"></script>
+    <script src="/labs/js/modernizr.custom-3.6.0.js?1558360777"></script>
+    <script src="/labs/js/learn.js?1558360777"></script>
+    <script src="/labs/js/hugo-learn.js?1558360777"></script>
 
-    <link href="/labs/mermaid/mermaid.css?1558358674" type="text/css" rel="stylesheet" />
-    <script src="/labs/mermaid/mermaid.js?1558358674"></script>
+    <link href="/labs/mermaid/mermaid.css?1558360777" type="text/css" rel="stylesheet" />
+    <script src="/labs/mermaid/mermaid.js?1558360777"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
