@@ -11,7 +11,7 @@ pre = "<i class='fas fa-toolbox'></i> &nbsp;"
 ### Getting Started
 Pre-requisites:
 
-1. A Critical Stack cluster.  You will need to know your username and password.  This lab is more interesting if you have already deployed an [app](../../featurelabs/go/hello.md) so that you can view the resources created by command line.
+1. A Critical Stack cluster.  You will need to know your username and password.  This lab is more interesting if you have already deployed an [app](../../featurelabs/go/hello) so that you can view the resources created by command line.
 
 1. kubectl installed : [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl)
 

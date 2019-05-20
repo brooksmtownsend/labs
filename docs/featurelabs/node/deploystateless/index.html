@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.55.5" />
+    <meta name="generator" content="Hugo 0.55.4" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>Deploying a NodeJS App :: Critical Stack Labs</title>
 
     
-    <link href="/labs/css/nucleus.css?1558364181" rel="stylesheet">
-    <link href="/labs/css/fontawesome-all.min.css?1558364181" rel="stylesheet">
-    <link href="/labs/css/hybrid.css?1558364181" rel="stylesheet">
-    <link href="/labs/css/featherlight.min.css?1558364181" rel="stylesheet">
-    <link href="/labs/css/perfect-scrollbar.min.css?1558364181" rel="stylesheet">
-    <link href="/labs/css/auto-complete.css?1558364181" rel="stylesheet">
-    <link href="/labs/css/atom-one-dark-reasonable.css?1558364181" rel="stylesheet">
-    <link href="/labs/css/theme.css?1558364181" rel="stylesheet">
-    <link href="/labs/css/hugo-theme.css?1558364181" rel="stylesheet">
+    <link href="/labs/css/nucleus.css?1558364307" rel="stylesheet">
+    <link href="/labs/css/fontawesome-all.min.css?1558364307" rel="stylesheet">
+    <link href="/labs/css/hybrid.css?1558364307" rel="stylesheet">
+    <link href="/labs/css/featherlight.min.css?1558364307" rel="stylesheet">
+    <link href="/labs/css/perfect-scrollbar.min.css?1558364307" rel="stylesheet">
+    <link href="/labs/css/auto-complete.css?1558364307" rel="stylesheet">
+    <link href="/labs/css/atom-one-dark-reasonable.css?1558364307" rel="stylesheet">
+    <link href="/labs/css/theme.css?1558364307" rel="stylesheet">
+    <link href="/labs/css/hugo-theme.css?1558364307" rel="stylesheet">
     
-      <link href="/labs/css/theme-cs.css?1558364181" rel="stylesheet">
+      <link href="/labs/css/theme-cs.css?1558364307" rel="stylesheet">
     
 
-    <script src="/labs/js/jquery-3.3.1.min.js?1558364181"></script>
+    <script src="/labs/js/jquery-3.3.1.min.js?1558364307"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -56,14 +56,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/labs/js/lunr.min.js?1558364181"></script>
-<script type="text/javascript" src="/labs/js/auto-complete.js?1558364181"></script>
+<script type="text/javascript" src="/labs/js/lunr.min.js?1558364307"></script>
+<script type="text/javascript" src="/labs/js/auto-complete.js?1558364307"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/criticalstack.github.io\/labs\/";
     
 </script>
-<script type="text/javascript" src="/labs/js/search.js?1558364181"></script>
+<script type="text/javascript" src="/labs/js/search.js?1558364307"></script>
 
     
   </div>
@@ -584,9 +584,8 @@
 user@testhost Development$ cd node-lab
 user@testhost node-lab$ ls
 app
-</code></pre>
+</code></pre></li>
 
-<ol>
 <li><p>Using the editor of your choice, create a file called <strong>index.js</strong> inside the <strong>app</strong> directory (resulting in <strong>app/index.js</strong>) with
 the following content:</p>
 
@@ -594,14 +593,13 @@ the following content:</p>
 var http = require('http');
 
 http.createServer(function (req, res) {
-res.writeHead(200, {'Content-Type': 'text/plain'});
-res.end('Hello from Node!\n');
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello from Node!\n');
 }).listen(3000, &quot;0.0.0.0&quot;);
 console.log('Server running on :3000');
 </code></pre></li>
 
-<li><p>Generate the app configuration with <em>npm</em> in the root of your <strong>node-lab</strong> directory.</p></li>
-</ol>
+<li><p>Generate the app configuration with <em>npm</em> in the root of your <strong>node-lab</strong> directory.</p>
 
 <p>Accept all defaults except <em>package name</em>, which should be something like <strong>hello-node</strong>, version number (this is definitely a <code>0.0.1</code> release!), and <strong>entry point</strong>, as that will be <strong>app/index.js</strong></p>
 
@@ -637,9 +635,8 @@ npm WARN hello-node@0.0.1 No repository field.
 
 up to date in 10.179s
 found 0 vulnerabilities
-</code></pre>
+</code></pre></li>
 
-<ol>
 <li><p>Create a <strong>Dockerfile</strong> to target <em>node</em> and copy the necessary files into the docker image (<em>Note to instructor</em>: explain the <strong>base image</strong> from which this image is derived). The port you choose to expose should be the same as the port on which your application server listens. Your <em>Dockerfile</em> should be in the root of your <strong>node-lab</strong> directory and have the following content:</p>
 
 <pre><code>FROM node:9
@@ -660,8 +657,7 @@ EXPOSE 3000
 CMD [&quot;node&quot;, &quot;app/index.js&quot;]
 </code></pre></li>
 
-<li><p>Build a Docker image using the <em>Dockerfile</em> with the tag <strong>hello-node</strong>:</p></li>
-</ol>
+<li><p>Build a Docker image using the <em>Dockerfile</em> with the tag <strong>hello-node</strong>:</p>
 
 <pre><code class="language-terminal">user@testhost node-lab$ docker build -t hello-node -f Dockerfile .
 Sending build context to Docker daemon  71.68kB
@@ -689,12 +685,9 @@ Hello from Node!
 42c18d268c56
 </code></pre>
 
-<p>You should see the container exit and your shell prompt return in your original terminal window.</p>
+<p>You should see the container exit and your shell prompt return in your original terminal window.</p></li>
 
-<ol>
-<li>Login to your public container registry (in this example we use <em><strong>Docker Hub</strong></em>). Note your user name as you will use this later.
-<br /></li>
-</ol>
+<li><p>Login to your public container registry (in this example we use <em><strong>Docker Hub</strong></em>). Note your user name as you will use this later.</p>
 
 <pre><code class="language-terminal">user@testhost node-lab$ docker login
 Login with your Docker ID to push and pull images from Docker Hub. If you don't
@@ -707,12 +700,9 @@ Login Succeeded
 <li><p>Add the <em><strong>tag</strong></em> to be used in the public container registry (Note to instructor: Advise on tag naming convention)</p>
 
 <pre><code class="language-terminal">user@testhost node-lab$ docker tag hello-node &lt;your-user-name&gt;/hello-node:0.0.1
-</code></pre>
+</code></pre></li>
 
-<ol>
-<li>Push the tagged image into a public container registry
-<br /></li>
-</ol>
+<li><p>Push the tagged image into a public container registry</p>
 
 <pre><code class="language-terminal">user@testhost node-lab$ docker tag hello-node &lt;your-user-name&gt;/hello-node:0.0.1
 The push refers to repository [docker.io/&lt;your-user-name&gt;/hello-node]
@@ -1101,20 +1091,20 @@ dd1eb1fd7e08: Mounted from library/node
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/labs/js/clipboard.min.js?1558364181"></script>
-    <script src="/labs/js/perfect-scrollbar.min.js?1558364181"></script>
-    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558364181"></script>
-    <script src="/labs/js/jquery.sticky.js?1558364181"></script>
-    <script src="/labs/js/featherlight.min.js?1558364181"></script>
-    <script src="/labs/js/html5shiv-printshiv.min.js?1558364181"></script>
-    <script src="/labs/js/highlight.pack.js?1558364181"></script>
+    <script src="/labs/js/clipboard.min.js?1558364307"></script>
+    <script src="/labs/js/perfect-scrollbar.min.js?1558364307"></script>
+    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558364307"></script>
+    <script src="/labs/js/jquery.sticky.js?1558364307"></script>
+    <script src="/labs/js/featherlight.min.js?1558364307"></script>
+    <script src="/labs/js/html5shiv-printshiv.min.js?1558364307"></script>
+    <script src="/labs/js/highlight.pack.js?1558364307"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/labs/js/modernizr.custom-3.6.0.js?1558364181"></script>
-    <script src="/labs/js/learn.js?1558364181"></script>
-    <script src="/labs/js/hugo-learn.js?1558364181"></script>
+    <script src="/labs/js/modernizr.custom-3.6.0.js?1558364307"></script>
+    <script src="/labs/js/learn.js?1558364307"></script>
+    <script src="/labs/js/hugo-learn.js?1558364307"></script>
 
-    <link href="/labs/mermaid/mermaid.css?1558364181" type="text/css" rel="stylesheet" />
-    <script src="/labs/mermaid/mermaid.js?1558364181"></script>
+    <link href="/labs/mermaid/mermaid.css?1558364307" type="text/css" rel="stylesheet" />
+    <script src="/labs/mermaid/mermaid.js?1558364307"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
