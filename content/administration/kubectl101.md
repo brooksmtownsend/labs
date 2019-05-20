@@ -1,7 +1,7 @@
 +++
 title = "Kubectl 101"
 date = 2019-04-23T09:43:37-04:00
-weight = 5
+weight = 6
 chapter = false
 pre = "<i class='fas fa-toolbox'></i> &nbsp;"
 +++
