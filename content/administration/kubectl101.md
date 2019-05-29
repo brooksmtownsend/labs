@@ -30,47 +30,27 @@ where `command`, `TYPE`, `NAME`, and `flags` are:
   - `command`: Specifies the operation that you want to perform on one or more resources, for example **create**, **get**, **describe**, **delete**.
   - `Type`: Specifies the [resource type](https://kubernetes.io/docs/reference/kubectl/overview/#resource-types).  Some examples are : pods, nodes, services, deployments. Resource types are case-insensitive and you can specify the singular, plural, or abbreviated forms. For example, the following commands produce the same output:
 
-  	```console
- 	 kubectl get pod pod1
- 	 kubectl get pods pod1
-  	 kubectl get po pod1
- 	```
+```console
+ kubectl get pod pod1
+ kubectl get pods pod1
+ kubectl get po pod1
+```
+
   - `NAME`:  Specifies the name of the resource. Names are case-sensitive. If the name is omitted, details for all resources are displayed.  
   - `flags`: Specifies optional flags. For example, you can use the -s or --server flags to specify the address and port of the Kubernetes API server.
 
 
 ## Connecting to your server
-1. There are a few ways to run `kubectl` commands with the Critical Stack Cluster.  You can [**ssh** into a master node](../ssh_master_node/) and download **external-admin.conf** from your cluster's S3 bucket (but is complicated to use since master nodes are not accessible directly).  For now, we recommend to SSH into a master node.
+1. There are a few ways to run `kubectl` commands with the Critical Stack Cluster.  You can [**ssh** into a master node](../ssh_master_node/) or download kubeconfig from your cluster.  For now, we recommend to SSH into a master node.
 
 1. By default `kubectl` uses the configuration in $HOME/.kube/config.  If you want to run commands against multiple servers (CS or minikube) you will need a multi config file or use **Environment** variables. 
-
-1. To view your current config you can run this command:
-
-	`kubectl config view`
-	
-	```console
-	kubectl config view
-	apiVersion: v1
-	clusters:
-	- cluster:
-      server: https://<server>
-  	  name: critical-stack
-	- cluster:
-      certificate-authority: /Users/<user>/.minikube/ca.crt
-      server: https://192.168.99.100:8443
-  	name: minikube
-	contexts:
-	- context:
-      cluster: critical-stack
-      namespace: <namespace>
-    ```
 
 ## Basic commands
 
 1. Lets test our a few commands and compare with what we see in the UI. 
 
 	`kubectl get pods`
-	
+
 	```console
 	$ kubectl get pods
 	NAME                                   READY     STATUS    RESTARTS   AGE
@@ -79,22 +59,22 @@ where `command`, `TYPE`, `NAME`, and `flags` are:
 	hello-go-deployment-85b5b5cc6f-s6htw   1/1       Running   0          5d
 	```
 
-	![getpods](../../images/getpods.png)
+	![getpods](../../images/administration/kubectl101/getpods.png)
 
-1. **Note** you will have have access to the resource types that your have permission to view/create within your namespace. If you are the cluster admin you will have permission to see all namespaces and resources.
+1. **Note** you will have have access to the resource types that you have permission to view/create within your namespace. If you are the cluster admin you will have permission to see all namespaces and resources.
 
-1.  In this example, I have 3 pods running all from one deployment.  Let's take a look at the deployment:
+1. In this example, I have 3 pods running all from one deployment.  Let's take a look at the deployment:
 
 	`kubectl get deployments`
-	
+
 	```console
 	$ kubectl get deployments
 	NAME                  DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 	hello-go-deployment   3         3         3            3           6d
 	```
-	
-	![getdeployment](../../images/getdeployment.png)
-	
+
+	![getdeployment](../../images/administration/kubectl101/getdeployment.png)
+
 1.  To view the configuration for this deployment, run this command:
 
 	`kubectl describe deployment`
@@ -117,7 +97,7 @@ where `command`, `TYPE`, `NAME`, and `flags` are:
 	   hello-go:
 	    Image:        jabbottc1/hello-go:0.0.3
 	    Port:         8080/TCP
-    ```
+	```
 
 1.  Let's change the `replicas` value of the deployment.  You could do this from the UI, but we will change this from the command line.
 
@@ -144,5 +124,5 @@ where `command`, `TYPE`, `NAME`, and `flags` are:
 You have successfully setup `kubectl` with your Critical Stack cluster and can run some basic commands to view and update existing resources.
 
 ## Notes
-Provide instructions how to use kubeconfig via bastion host and provide `generate-kubeconfig.sh` script to pull kubeconfig from S3 bucket.
+Provide instructions how to retrieve kubeconfig from the cluster (manual steps and via `generate-kubeconfig.sh` script).
 
