@@ -12,20 +12,20 @@
     <title>Kubectl 101 :: Critical Stack Labs</title>
 
     
-    <link href="/labs/css/nucleus.css?1558364520" rel="stylesheet">
-    <link href="/labs/css/fontawesome-all.min.css?1558364520" rel="stylesheet">
-    <link href="/labs/css/hybrid.css?1558364520" rel="stylesheet">
-    <link href="/labs/css/featherlight.min.css?1558364520" rel="stylesheet">
-    <link href="/labs/css/perfect-scrollbar.min.css?1558364520" rel="stylesheet">
-    <link href="/labs/css/auto-complete.css?1558364520" rel="stylesheet">
-    <link href="/labs/css/atom-one-dark-reasonable.css?1558364520" rel="stylesheet">
-    <link href="/labs/css/theme.css?1558364520" rel="stylesheet">
-    <link href="/labs/css/hugo-theme.css?1558364520" rel="stylesheet">
+    <link href="/labs/css/nucleus.css?1563561136" rel="stylesheet">
+    <link href="/labs/css/fontawesome-all.min.css?1563561136" rel="stylesheet">
+    <link href="/labs/css/hybrid.css?1563561136" rel="stylesheet">
+    <link href="/labs/css/featherlight.min.css?1563561136" rel="stylesheet">
+    <link href="/labs/css/perfect-scrollbar.min.css?1563561136" rel="stylesheet">
+    <link href="/labs/css/auto-complete.css?1563561136" rel="stylesheet">
+    <link href="/labs/css/atom-one-dark-reasonable.css?1563561136" rel="stylesheet">
+    <link href="/labs/css/theme.css?1563561136" rel="stylesheet">
+    <link href="/labs/css/hugo-theme.css?1563561136" rel="stylesheet">
     
-      <link href="/labs/css/theme-cs.css?1558364520" rel="stylesheet">
+      <link href="/labs/css/theme-cs.css?1563561136" rel="stylesheet">
     
 
-    <script src="/labs/js/jquery-3.3.1.min.js?1558364520"></script>
+    <script src="/labs/js/jquery-3.3.1.min.js?1563561136"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -56,14 +56,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/labs/js/lunr.min.js?1558364520"></script>
-<script type="text/javascript" src="/labs/js/auto-complete.js?1558364520"></script>
+<script type="text/javascript" src="/labs/js/lunr.min.js?1563561136"></script>
+<script type="text/javascript" src="/labs/js/auto-complete.js?1563561136"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/criticalstack.github.io\/labs\/";
     
 </script>
-<script type="text/javascript" src="/labs/js/search.js?1558364520"></script>
+<script type="text/javascript" src="/labs/js/search.js?1563561136"></script>
 
     
   </div>
@@ -515,10 +515,15 @@
 <li><a href="#getting-started">Getting Started</a></li>
 </ul></li>
 <li><a href="#getting-started-1">Getting Started</a></li>
-<li><a href="#connecting-to-your-server">Connecting to your server</a></li>
+<li><a href="#connecting-to-your-server">Connecting to your server</a>
+<ul>
+<li><a href="#kubectl-config-files">kubectl Config Files</a></li>
+<li><a href="#info-about-your-cluster">Info about your cluster</a></li>
+<li><a href="#your-login-info">Your login info</a></li>
+</ul></li>
+<li><a href="#using-your-cluster">Using your cluster</a></li>
 <li><a href="#basic-commands">Basic commands</a></li>
 <li><a href="#conclusion">Conclusion</a></li>
-<li><a href="#notes">Notes</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -554,68 +559,112 @@
 <p>Pre-requisites:</p>
 
 <ol>
-<li><p>A Critical Stack cluster.  You will need to know your username and password.  This lab is more interesting if you have already deployed an <a href="../../featurelabs/go/hello">app</a> so that you can view the resources created by command line.</p></li>
-
-<li><p>kubectl installed : <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl">kubectl</a></p></li>
+<li>A Critical Stack cluster.  You will need to know the admin username and password.<br /></li>
+<li>kubectl installed : <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl">kubectl</a></li>
 </ol>
 
 <h2 id="getting-started-1">Getting Started</h2>
 
-<p>Intro Lifted from <a href="https://kubernetes.io/docs/reference/kubectl/overview/">kubernetes.io</a></p>
+<p>Source material for this introduction borrowed from <a href="https://kubernetes.io/docs/reference/kubectl/overview/">kubernetes.io</a> documentation.</p>
 
 <p>Kubectl is a command line interface for running commands against Kubernetes clusters. This overview covers kubectl syntax, describes the command operations, and provides common examples. For details about each command, including all the supported flags and subcommands, see the kubectl reference documentation.</p>
 
-<p>Use the following syntax to run <code>kubectl</code> commands from your terminal window:</p>
+<p>Use the following syntax to run <strong>kubectl</strong> commands from your terminal window:</p>
 
-<p><code>kubectl [command] [TYPE] [NAME] [flags]</code></p>
+<pre><code class="language-session">kubectl [command] [TYPE] [NAME] [flags]
+</code></pre>
 
-<p>where <code>command</code>, <code>TYPE</code>, <code>NAME</code>, and <code>flags</code> are:</p>
+<p>where <strong>command</strong>, <strong>TYPE</strong>, <strong>NAME</strong>, and <strong>flags</strong> are:</p>
 
 <ul>
-<li><code>command</code>: Specifies the operation that you want to perform on one or more resources, for example <strong>create</strong>, <strong>get</strong>, <strong>describe</strong>, <strong>delete</strong>.</li>
+<li><strong>command</strong> Specifies the operation that you want to perform on one or more resources, for example <em>create</em>, <em>get</em>, <em>describe</em>, <em>delete</em>.</li>
 
-<li><p><code>Type</code>: Specifies the <a href="https://kubernetes.io/docs/reference/kubectl/overview/#resource-types">resource type</a>.  Some examples are : pods, nodes, services, deployments. Resource types are case-insensitive and you can specify the singular, plural, or abbreviated forms. For example, the following commands produce the same output:</p>
+<li><p><strong>Type</strong>: Specifies the <a href="https://kubernetes.io/docs/reference/kubectl/overview/#resource-types">resource type</a>.  Some examples are : pods, nodes, services, deployments. Resource types are case-insensitive and you can specify the singular, plural, or abbreviated forms. For example, the following commands produce the same output:</p>
 
-<pre><code class="language-console"> kubectl get pod pod1
+<pre><code class="language-session"> kubectl get pod pod1
  kubectl get pods pod1
  kubectl get po pod1
 </code></pre></li>
 
-<li><p><code>NAME</code>:  Specifies the name of the resource. Names are case-sensitive. If the name is omitted, details for all resources are displayed.</p></li>
+<li><p><strong>NAME</strong>:  Specifies the name of the resource. Names are case-sensitive. If the name is omitted, details for all resources are displayed.</p></li>
 
-<li><p><code>flags</code>: Specifies optional flags. For example, you can use the -s or &ndash;server flags to specify the address and port of the Kubernetes API server.</p></li>
+<li><p><strong>flags</strong>: Specifies optional flags. For example, you can use the -s or &ndash;server flags to specify the address and port of the Kubernetes API server.</p></li>
 </ul>
 
 <h2 id="connecting-to-your-server">Connecting to your server</h2>
 
-<ol>
-<li><p>There are a few ways to run <code>kubectl</code> commands with the Critical Stack Cluster.  You can <a href="../ssh_master_node/"><strong>ssh</strong> into a master node</a> and download <strong>external-admin.conf</strong> from your cluster&rsquo;s S3 bucket (but is complicated to use since master nodes are not accessible directly).  For now, we recommend to SSH into a master node.</p></li>
+<h3 id="kubectl-config-files">kubectl Config Files</h3>
 
-<li><p>By default <code>kubectl</code> uses the configuration in $HOME/.kube/config.  If you want to run commands against multiple servers (CS or minikube) you will need a multi config file or use <strong>Environment</strong> variables.</p></li>
+<p>A config file, typically stored in <code>~/.kube/config</code>, defines the cluster, user, and namespace to use for each <code>kubectl</code> command. This guide will walk through creating a new config file for a Critical Stack cluster.  If you are already using minikube or another kubernetes cluster, follow this guide for <a href="https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/">multiple clusters</a>.</p>
+
+<p>Create a file called <code>~/.kube/config</code>, and place this header at the top:</p>
+
+<pre><code>apiVersion: v1
+kind: Config
+preferences: {}
+</code></pre>
+
+<h3 id="info-about-your-cluster">Info about your cluster</h3>
+
+<p>On a new line, create the tag <code>clusters:</code>, and create a <code>cluster:</code> tag as a child. Name the cluster something familiar, and provide its URL as <code>server:</code> under <code>cluster:</code>.  The Secure port is <code>6443</code></p>
+
+<pre><code>apiVersion: v1
+kind: Config
+preferences: {}
+clusters:
+- cluster:
+    server: https://CS-Cluster-61010-elb-1512390147.us-east-1.elb.amazonaws.com:6443
+  name: example-cluster
+</code></pre>
+
+<h3 id="your-login-info">Your login info</h3>
+
+<p>Create a <code>users:</code> block, and a <code>user:</code> object as a child. Name that user, and provide your authentication information. You&rsquo;ll be authenticating with a token, which you can find in Critical Stack by going to the cluster admin&rsquo;s namespace (top right hand corner) then to &ldquo;Config&rdquo; then &ldquo;Secrets&rdquo;. You&rsquo;ll see a secret named <code>&lt;adminnamespace&gt;-token-&lt;random id&gt;</code>. Don&rsquo;t use the token labeled <code>default-token-&lt;random id&gt;</code>, as this token will not work. Click that token name, and you&rsquo;ll see a clipboard icon to copy <code>token</code>. This is your <code>kubectl</code> authentication token.  Copy the ca.crt content and create a new file locally.  You will reference the <code>certificate-authority</code> as well.</p>
+
+<pre><code>apiVersion: v1
+kind: Config
+preferences: {}
+clusters:
+- cluster:
+    server: https://CS-Cluster-61010-elb-1512390147.us-east-1.elb.amazonaws.com:6443
+    certificate-authority: /Users/testuser/ca.crt
+  name: example-cluster
+users:
+- name: example-user
+  user:
+    token: &lt;your token here&gt;
+</code></pre>
+
+<h2 id="using-your-cluster">Using your cluster</h2>
+
+<p>A context describes how to use your cluster. Create a <code>contexts:</code> block, then a <code>context:</code> as a child. Name the context, and provide the <code>cluster</code>, <code>namespace</code>, and <code>user</code>. Then, set your <code>current-context:</code> to the context you just created.</p>
+
+<pre><code>apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority: /Users/hee617/.ssh/cs-cluster-ca.crt
+    server: https://CS-Cluster-61010-elb-1532390197.us-east-1.elb.amazonaws.com
+  name: cs-cluster
+contexts:
+- context:
+    cluster: cs-cluster
+    user: clusteradmin
+  name: cs-cluster
+current-context: cs-cluster
+kind: Config
+preferences: {}
+users:
+- name: clusteradmin
+  user:
+    token: 
+</code></pre>
+
+<ol>
+<li><p>By default <code>kubectl</code> uses the configuration in $HOME/.kube/config.  If you want to run commands against multiple servers (CS or minikube) you will need a <a href="https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/">multi config file</a> or use <strong>Environment</strong> variables.</p></li>
 
 <li><p>To view your current config you can run this command:</p>
 
-<p><code>kubectl config view</code></p>
-
-<p>```console
-kubectl config view
-apiVersion: v1
-clusters:</p>
-
-<ul>
-<li>cluster:
-server: https://<server>
-name: critical-stack</li>
-<li>cluster:
-certificate-authority: /Users/<user>/.minikube/ca.crt
-server: <a href="https://192.168.99.100:8443">https://192.168.99.100:8443</a>
-name: minikube
-contexts:</li>
-<li>context:
-cluster: critical-stack
-namespace: <namespace>
-```</li>
-</ul></li>
+<p><code>kubectl config view</code></p></li>
 </ol>
 
 <h2 id="basic-commands">Basic commands</h2>
@@ -625,7 +674,7 @@ namespace: <namespace>
 
 <p><code>kubectl get pods</code></p>
 
-<pre><code class="language-console">$ kubectl get pods
+<pre><code>$ kubectl get pods
 NAME                                   READY     STATUS    RESTARTS   AGE
 hello-go-deployment-85b5b5cc6f-9h4wh   1/1       Running   0          4d
 hello-go-deployment-85b5b5cc6f-ccsd5   1/1       Running   0          4d
@@ -640,7 +689,7 @@ hello-go-deployment-85b5b5cc6f-s6htw   1/1       Running   0          5d
 
 <p><code>kubectl get deployments</code></p>
 
-<pre><code class="language-console">$ kubectl get deployments
+<pre><code class="language-session">$ kubectl get deployments
 NAME                  DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 hello-go-deployment   3         3         3            3           6d
 </code></pre>
@@ -651,7 +700,7 @@ hello-go-deployment   3         3         3            3           6d
 
 <p><code>kubectl describe deployment</code></p>
 
-<pre><code class="language-console">$ kubectl describe deployment
+<pre><code class="language-session">$ kubectl describe deployment
 Name:                   hello-go-deployment
 Namespace:              &lt;namespace&gt;
 CreationTimestamp:      Wed, 17 Apr 2019 10:18:24 -0400
@@ -674,7 +723,7 @@ Pod Template:
 
 <p><code>kubectl scale deployment hello-go-deployment --replicas=2</code></p>
 
-<pre><code class="language-console">$ kubectl scale deployment hello-go-deployment --replicas=2
+<pre><code class="language-session">$ kubectl scale deployment hello-go-deployment --replicas=2
 kubectl describe deployment
 Name:                   hello-go-deployment
 Namespace:              &lt;namespace&gt;
@@ -693,11 +742,7 @@ Labels:  app=hello-go
 
 <h2 id="conclusion">Conclusion</h2>
 
-<p>You have successfully setup <code>kubectl</code> with your Critical Stack cluster and can run some basic commands to view and update existing resources.</p>
-
-<h2 id="notes">Notes</h2>
-
-<p>Provide instructions how to use kubeconfig via bastion host and provide <code>generate-kubeconfig.sh</code> script to pull kubeconfig from S3 bucket.</p>
+<p>You have successfully setup <strong>kubectl</strong> with your Critical Stack cluster and can run some basic commands to view and update existing resources.</p>
 
 
 <footer class=" footline" >
@@ -1005,20 +1050,20 @@ Labels:  app=hello-go
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/labs/js/clipboard.min.js?1558364520"></script>
-    <script src="/labs/js/perfect-scrollbar.min.js?1558364520"></script>
-    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1558364520"></script>
-    <script src="/labs/js/jquery.sticky.js?1558364520"></script>
-    <script src="/labs/js/featherlight.min.js?1558364520"></script>
-    <script src="/labs/js/html5shiv-printshiv.min.js?1558364520"></script>
-    <script src="/labs/js/highlight.pack.js?1558364520"></script>
+    <script src="/labs/js/clipboard.min.js?1563561136"></script>
+    <script src="/labs/js/perfect-scrollbar.min.js?1563561136"></script>
+    <script src="/labs/js/perfect-scrollbar.jquery.min.js?1563561136"></script>
+    <script src="/labs/js/jquery.sticky.js?1563561136"></script>
+    <script src="/labs/js/featherlight.min.js?1563561136"></script>
+    <script src="/labs/js/html5shiv-printshiv.min.js?1563561136"></script>
+    <script src="/labs/js/highlight.pack.js?1563561136"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/labs/js/modernizr.custom-3.6.0.js?1558364520"></script>
-    <script src="/labs/js/learn.js?1558364520"></script>
-    <script src="/labs/js/hugo-learn.js?1558364520"></script>
+    <script src="/labs/js/modernizr.custom-3.6.0.js?1563561136"></script>
+    <script src="/labs/js/learn.js?1563561136"></script>
+    <script src="/labs/js/hugo-learn.js?1563561136"></script>
 
-    <link href="/labs/mermaid/mermaid.css?1558364520" type="text/css" rel="stylesheet" />
-    <script src="/labs/mermaid/mermaid.js?1558364520"></script>
+    <link href="/labs/mermaid/mermaid.css?1563561136" type="text/css" rel="stylesheet" />
+    <script src="/labs/mermaid/mermaid.js?1563561136"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

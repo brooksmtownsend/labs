@@ -72,10 +72,9 @@ Getting Started Before we get started, you&amp;rsquo;ll need:
       
       <guid>https://criticalstack.github.io/labs/administration/kubectl101/</guid>
       <description>Kubectl 101 Getting Started Pre-requisites:
- A Critical Stack cluster. You will need to know your username and password. This lab is more interesting if you have already deployed an app so that you can view the resources created by command line.
- kubectl installed : kubectl
-  Getting Started Intro Lifted from kubernetes.io
-Kubectl is a command line interface for running commands against Kubernetes clusters. This overview covers kubectl syntax, describes the command operations, and provides common examples.</description>
+ A Critical Stack cluster. You will need to know the admin username and password.
+ kubectl installed : kubectl  Getting Started Source material for this introduction borrowed from kubernetes.io documentation.
+Kubectl is a command line interface for running commands against Kubernetes clusters. This overview covers kubectl syntax, describes the command operations, and provides common examples. For details about each command, including all the supported flags and subcommands, see the kubectl reference documentation.</description>
     </item>
     
     <item>

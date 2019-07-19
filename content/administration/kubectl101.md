@@ -6,64 +6,118 @@ chapter = false
 pre = "<i class='fas fa-toolbox'></i> &nbsp;"
 +++
 
+
+
 ## Kubectl 101
 
 ### Getting Started
 Pre-requisites:
 
-1. A Critical Stack cluster.  You will need to know your username and password.  This lab is more interesting if you have already deployed an [app](../../featurelabs/go/hello) so that you can view the resources created by command line.
-
+1. A Critical Stack cluster.  You will need to know the admin username and password.  
 1. kubectl installed : [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl)
 
+
 ## Getting Started 
-Intro Lifted from [kubernetes.io](https://kubernetes.io/docs/reference/kubectl/overview/)
+Source material for this introduction borrowed from [kubernetes.io](https://kubernetes.io/docs/reference/kubectl/overview/) documentation.
 
 Kubectl is a command line interface for running commands against Kubernetes clusters. This overview covers kubectl syntax, describes the command operations, and provides common examples. For details about each command, including all the supported flags and subcommands, see the kubectl reference documentation. 
 
+Use the following syntax to run **kubectl** commands from your terminal window:
 
-Use the following syntax to run `kubectl` commands from your terminal window:
+```session
+kubectl [command] [TYPE] [NAME] [flags]
+```
 
-`kubectl [command] [TYPE] [NAME] [flags]`
+where **command**, **TYPE**, **NAME**, and **flags** are:
 
-where `command`, `TYPE`, `NAME`, and `flags` are:
+  - **command** Specifies the operation that you want to perform on one or more resources, for example _create_, _get_, _describe_, _delete_.
+  - **Type**: Specifies the [resource type](https://kubernetes.io/docs/reference/kubectl/overview/#resource-types).  Some examples are : pods, nodes, services, deployments. Resource types are case-insensitive and you can specify the singular, plural, or abbreviated forms. For example, the following commands produce the same output:
 
-  - `command`: Specifies the operation that you want to perform on one or more resources, for example **create**, **get**, **describe**, **delete**.
-  - `Type`: Specifies the [resource type](https://kubernetes.io/docs/reference/kubectl/overview/#resource-types).  Some examples are : pods, nodes, services, deployments. Resource types are case-insensitive and you can specify the singular, plural, or abbreviated forms. For example, the following commands produce the same output:
-
-  	```console
+  	```session
  	 kubectl get pod pod1
  	 kubectl get pods pod1
   	 kubectl get po pod1
  	```
-  - `NAME`:  Specifies the name of the resource. Names are case-sensitive. If the name is omitted, details for all resources are displayed.  
-  - `flags`: Specifies optional flags. For example, you can use the -s or --server flags to specify the address and port of the Kubernetes API server.
+
+  - **NAME**:  Specifies the name of the resource. Names are case-sensitive. If the name is omitted, details for all resources are displayed.  
+  - **flags**: Specifies optional flags. For example, you can use the -s or --server flags to specify the address and port of the Kubernetes API server.
 
 
 ## Connecting to your server
-1. There are a few ways to run `kubectl` commands with the Critical Stack Cluster.  You can [**ssh** into a master node](../ssh_master_node/) and download **external-admin.conf** from your cluster's S3 bucket (but is complicated to use since master nodes are not accessible directly).  For now, we recommend to SSH into a master node.
 
-1. By default `kubectl` uses the configuration in $HOME/.kube/config.  If you want to run commands against multiple servers (CS or minikube) you will need a multi config file or use **Environment** variables. 
+### kubectl Config Files
+
+A config file, typically stored in `~/.kube/config`, defines the cluster, user, and namespace to use for each `kubectl` command. This guide will walk through creating a new config file for a Critical Stack cluster.  If you are already using minikube or another kubernetes cluster, follow this guide for [multiple clusters](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/).  
+
+
+Create a file called `~/.kube/config`, and place this header at the top:
+```
+apiVersion: v1
+kind: Config
+preferences: {}
+```
+
+### Info about your cluster
+
+On a new line, create the tag `clusters:`, and create a `cluster:` tag as a child. Name the cluster something familiar, and provide its URL as `server:` under `cluster:`.  The Secure port is `6443`
+```
+apiVersion: v1
+kind: Config
+preferences: {}
+clusters:
+- cluster:
+    server: https://CS-Cluster-61010-elb-1512390147.us-east-1.elb.amazonaws.com:6443
+  name: example-cluster
+```
+
+### Your login info
+
+Create a `users:` block, and a `user:` object as a child. Name that user, and provide your authentication information. You'll be authenticating with a token, which you can find in Critical Stack by going to the cluster admin's namespace (top right hand corner) then to "Config" then "Secrets". You'll see a secret named `<adminnamespace>-token-<random id>`. Don't use the token labeled `default-token-<random id>`, as this token will not work. Click that token name, and you'll see a clipboard icon to copy `token`. This is your `kubectl` authentication token.  Copy the ca.crt content and create a new file locally.  You will reference the `certificate-authority` as well.
+
+```
+apiVersion: v1
+kind: Config
+preferences: {}
+clusters:
+- cluster:
+    server: https://CS-Cluster-61010-elb-1512390147.us-east-1.elb.amazonaws.com:6443
+    certificate-authority: /Users/testuser/ca.crt
+  name: example-cluster
+users:
+- name: example-user
+  user:
+    token: <your token here>
+```
+
+## Using your cluster
+A context describes how to use your cluster. Create a `contexts:` block, then a `context:` as a child. Name the context, and provide the `cluster`, `namespace`, and `user`. Then, set your `current-context:` to the context you just created.
+
+```
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority: /Users/hee617/.ssh/cs-cluster-ca.crt
+    server: https://CS-Cluster-61010-elb-1532390197.us-east-1.elb.amazonaws.com
+  name: cs-cluster
+contexts:
+- context:
+    cluster: cs-cluster
+    user: clusteradmin
+  name: cs-cluster
+current-context: cs-cluster
+kind: Config
+preferences: {}
+users:
+- name: clusteradmin
+  user:
+    token: 
+```
+
+1. By default `kubectl` uses the configuration in $HOME/.kube/config.  If you want to run commands against multiple servers (CS or minikube) you will need a [multi config file](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/) or use **Environment** variables. 
 
 1. To view your current config you can run this command:
 
 	`kubectl config view`
-	
-	```console
-	kubectl config view
-	apiVersion: v1
-	clusters:
-	- cluster:
-      server: https://<server>
-  	  name: critical-stack
-	- cluster:
-      certificate-authority: /Users/<user>/.minikube/ca.crt
-      server: https://192.168.99.100:8443
-  	name: minikube
-	contexts:
-	- context:
-      cluster: critical-stack
-      namespace: <namespace>
-    ```
 
 ## Basic commands
 
@@ -71,7 +125,7 @@ where `command`, `TYPE`, `NAME`, and `flags` are:
 
 	`kubectl get pods`
 	
-	```console
+	```
 	$ kubectl get pods
 	NAME                                   READY     STATUS    RESTARTS   AGE
 	hello-go-deployment-85b5b5cc6f-9h4wh   1/1       Running   0          4d
@@ -87,7 +141,7 @@ where `command`, `TYPE`, `NAME`, and `flags` are:
 
 	`kubectl get deployments`
 	
-	```console
+	```session
 	$ kubectl get deployments
 	NAME                  DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 	hello-go-deployment   3         3         3            3           6d
@@ -99,7 +153,7 @@ where `command`, `TYPE`, `NAME`, and `flags` are:
 
 	`kubectl describe deployment`
 	
-	```console
+	```session
 	$ kubectl describe deployment
 	Name:                   hello-go-deployment
 	Namespace:              <namespace>
@@ -123,7 +177,7 @@ where `command`, `TYPE`, `NAME`, and `flags` are:
 
 	`kubectl scale deployment hello-go-deployment --replicas=2`
 	
-	```console
+	```session
 	$ kubectl scale deployment hello-go-deployment --replicas=2
 	kubectl describe deployment
 	Name:                   hello-go-deployment
@@ -141,8 +195,6 @@ where `command`, `TYPE`, `NAME`, and `flags` are:
   	```
 
 ## Conclusion 
-You have successfully setup `kubectl` with your Critical Stack cluster and can run some basic commands to view and update existing resources.
 
-## Notes
-Provide instructions how to use kubeconfig via bastion host and provide `generate-kubeconfig.sh` script to pull kubeconfig from S3 bucket.
+You have successfully setup **kubectl** with your Critical Stack cluster and can run some basic commands to view and update existing resources.
 
